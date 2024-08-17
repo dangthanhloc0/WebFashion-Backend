@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BACKENDEMO.Migrations
 {
     /// <inheritdoc />
-    public partial class dddd : Migration
+    public partial class InitdatabaseTest : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -50,6 +50,36 @@ namespace BACKENDEMO.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ImageProducts",
+                columns: table => new
+                {
+                    ImageProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImageProducts", x => x.ImageProductId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "products",
+                columns: table => new
+                {
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    productName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    quantityMaterial = table.Column<int>(type: "int", nullable: false),
+                    quantitySellSucesss = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_products", x => x.ProductId);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,6 +207,30 @@ namespace BACKENDEMO.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "listImages",
+                columns: table => new
+                {
+                    productId = table.Column<int>(type: "int", nullable: false),
+                    imageId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_listImages", x => new { x.productId, x.imageId });
+                    table.ForeignKey(
+                        name: "FK_listImages_ImageProducts_imageId",
+                        column: x => x.imageId,
+                        principalTable: "ImageProducts",
+                        principalColumn: "ImageProductId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_listImages_products_productId",
+                        column: x => x.productId,
+                        principalTable: "products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Commentss",
                 columns: table => new
                 {
@@ -224,8 +278,8 @@ namespace BACKENDEMO.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4de669cb-2c7e-46e5-9bcf-d3b3869e42f3", null, "User", "USER" },
-                    { "8e43b6a8-5969-4792-b7ce-3ca61e08f33a", null, "Admin", "ADMIN" }
+                    { "e1ce79da-b8e3-4ff0-97d3-f59ea11baae0", null, "User", "USER" },
+                    { "eec3162f-44b5-4e9e-bc31-0f55caef0b0e", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -273,6 +327,11 @@ namespace BACKENDEMO.Migrations
                 column: "StockId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_listImages_imageId",
+                table: "listImages",
+                column: "imageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserStocks_StockId",
                 table: "UserStocks",
                 column: "StockId");
@@ -300,10 +359,19 @@ namespace BACKENDEMO.Migrations
                 name: "Commentss");
 
             migrationBuilder.DropTable(
+                name: "listImages");
+
+            migrationBuilder.DropTable(
                 name: "UserStocks");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "ImageProducts");
+
+            migrationBuilder.DropTable(
+                name: "products");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

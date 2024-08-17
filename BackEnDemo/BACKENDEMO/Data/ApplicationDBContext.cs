@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using BACKENDEMO.Entity;
@@ -25,11 +26,19 @@ namespace BACKENDEMO.Data
 
        public DbSet<UserStock> userStocks {get; set;}
 
+        public DbSet<ImageProduct> images {get; set;}
+
+        public DbSet<Product> products { get; set; }
+
+        public DbSet<listImage> listImages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.Entity<UserStock>(x => x.HasKey(p => new {p.AppUserId, p.StockId}));
+            builder.Entity<listImage>(x => x.HasKey(p => new {p.productId, p.imageId}));
+            builder.Entity<DiscountDetail>(x => x.HasKey(p => new {p.AppUserId, p.DiscountId}));
 
             builder.Entity<UserStock>()
                 .HasOne(x => x.appUser)
@@ -41,7 +50,26 @@ namespace BACKENDEMO.Data
                 .WithMany(u => u.userStocks)
                 .HasForeignKey(p => p.StockId);
 
+            builder.Entity<listImage>()
+                .HasOne(x => x.ImageProducts)
+                .WithMany(u => u.ListImages)
+                .HasForeignKey(p => p.imageId);
 
+            builder.Entity<listImage>()
+                .HasOne(x => x.products)
+                .WithMany(u => u.ListImages)
+                .HasForeignKey(p => p.productId);
+
+            builder.Entity<DiscountDetail>()
+                .HasOne(x => x.appUser)
+                .WithMany(u=> u.DiscountDetails)
+                .HasForeignKey(p=> p.AppUserId);
+
+            builder.Entity<DiscountDetail>()
+                .HasOne(x => x.appUser)
+                .WithMany(u => u.DiscountDetails)
+                .HasForeignKey(p => p.DiscountId);
+                
             List<IdentityRole> roles  = new List<IdentityRole>{
                 new IdentityRole{
                     Name = "Admin",

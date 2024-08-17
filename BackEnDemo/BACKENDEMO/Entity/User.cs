@@ -8,6 +8,10 @@ namespace BACKENDEMO.Entity
 {
     public class AppUser : IdentityUser
     {
-        public List<UserStock> userStocks {get; set;} = new List<UserStock>();
+        public ICollection<UserStock> userStocks {get; set;} 
+        public ICollection<DiscountDetail> DiscountDetails { get; set;} 
+        public ICollection<Order> orders { get; set; } 
+
+        
     }
 }

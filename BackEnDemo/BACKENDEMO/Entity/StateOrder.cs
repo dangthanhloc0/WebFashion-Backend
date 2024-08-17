@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Antiforgery;
 
 namespace BACKENDEMO.Entity
 {
-    public class StateOrderDetail
+    public class StateOrder
     {
         public int Id { get; set; }
 
         [Required]
-        // [StringLength("")]
         public  string State { get; set; }  
+
+
+        public ICollection<Order> orders { get; set;}
     }
 }

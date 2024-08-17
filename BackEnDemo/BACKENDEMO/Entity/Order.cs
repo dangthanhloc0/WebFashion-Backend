@@ -20,7 +20,13 @@ namespace BACKENDEMO.Entity
         
         [Required]
         public string Address { get; set; } = string.Empty ;
-    
 
+        public int AppUserId { get; set; }
+
+        public AppUser appUser { get; set; }
+    
+        public MethodOfPayment methodOfPayment { get; set; }
+
+        public StateOrder stateOrder { get; set; }
     }
 }

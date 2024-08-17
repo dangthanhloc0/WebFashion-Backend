@@ -11,6 +11,19 @@ namespace BACKENDEMO.Entity
         public int Id { get; set; }
 
         [Required]
-        public string Description { get; set; } = string.Empty;
+        public string DetailDiscount { get; set; } = string.Empty;
+        
+        public int numberofpercentdiscount { get; set; } = 0;
+
+
+        // Event relevant
+        public int EventId { get; set; }
+
+        public ICollection<Event> events { get; set; }
+
+        // List DiscoutDetail
+        public ICollection<DiscountDetail> DiscountDetails { get; set; }
+
+        
     }
 }

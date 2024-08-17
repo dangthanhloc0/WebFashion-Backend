@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace BACKENDEMO.Entity
     [Table("products")]
     public class Product
     {
-        public int Id { get; set; }
+        public int ProductId { get; set; }
         [Required]
         [StringLength(100,MinimumLength =5)]
         public string productName { get; set; } = string.Empty;
@@ -29,7 +30,7 @@ namespace BACKENDEMO.Entity
         public string Image {get; set;} = string.Empty;
 
 
-        
+        public ICollection<listImage> ListImages { get; set; }
 
 
     }
