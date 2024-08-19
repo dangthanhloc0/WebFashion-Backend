@@ -13,6 +13,6 @@ namespace BACKENDEMO.Entity
         [Required]
         public string MethodName { get; set; } = string.Empty;
 
-        public Order order { get; set; }
+        public ICollection<Order> order { get; set; }
     }
 }

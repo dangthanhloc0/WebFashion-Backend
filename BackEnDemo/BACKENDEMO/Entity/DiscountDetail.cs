@@ -7,7 +7,7 @@ namespace BACKENDEMO.Entity
 {
     public class DiscountDetail
     {
-        public int AppUserId { get; set; }
+        public string AppUserId { get; set; }
 
         public int DiscountId { get; set; }
 

@@ -21,7 +21,7 @@ namespace BACKENDEMO.Entity
         [Required]
         public string Address { get; set; } = string.Empty ;
 
-        public int AppUserId { get; set; }
+        public string AppUserId { get; set; }
 
         public AppUser appUser { get; set; }
     

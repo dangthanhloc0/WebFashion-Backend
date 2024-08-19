@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BACKENDEMO.Migrations
 {
     [DbContext(typeof(AppplicationDBContext))]
-    [Migration("20240812155824_Init databaseTest")]
-    partial class InitdatabaseTest
+    [Migration("20240819054213_entity")]
+    partial class entity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -90,6 +90,69 @@ namespace BACKENDEMO.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("BACKENDEMO.Entity.Discount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DetailDiscount")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("numberofpercentdiscount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("discounts");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.DiscountDetail", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("DiscountId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AppUserId", "DiscountId");
+
+                    b.HasIndex("DiscountId");
+
+                    b.ToTable("discountDetails");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.Event", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DiscountId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("operationEvent")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiscountId");
+
+                    b.ToTable("events");
+                });
+
             modelBuilder.Entity("BACKENDEMO.Entity.ImageProduct", b =>
                 {
                     b.Property<int>("ImageProductId")
@@ -105,6 +168,121 @@ namespace BACKENDEMO.Migrations
                     b.HasKey("ImageProductId");
 
                     b.ToTable("ImageProducts");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.MessageOfCustomer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("messageOfCustomers");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.MethodOfPayment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("MethodName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("methodOfPayments");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("notifications");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("methodOfPaymentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("stateOrderId")
+                        .HasColumnType("int");
+
+                    b.Property<long>("totalPrice")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("methodOfPaymentId");
+
+                    b.HasIndex("stateOrderId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.OrderDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("orderDetails");
                 });
 
             modelBuilder.Entity("BACKENDEMO.Entity.Product", b =>
@@ -138,6 +316,40 @@ namespace BACKENDEMO.Migrations
                     b.HasKey("ProductId");
 
                     b.ToTable("products");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.StateOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("stateOrders");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.StateTransport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("state")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("stateTransports");
                 });
 
             modelBuilder.Entity("BACKENDEMO.Entity.UserStock", b =>
@@ -254,13 +466,13 @@ namespace BACKENDEMO.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "eec3162f-44b5-4e9e-bc31-0f55caef0b0e",
+                            Id = "ee0739f2-a117-497c-a7db-7ccefbff4fc5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "e1ce79da-b8e3-4ff0-97d3-f59ea11baae0",
+                            Id = "5b79c589-f79f-4e28-9ff1-526f86ce4f47",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -372,6 +584,63 @@ namespace BACKENDEMO.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BACKENDEMO.Entity.DiscountDetail", b =>
+                {
+                    b.HasOne("BACKENDEMO.Entity.AppUser", "appUser")
+                        .WithMany("DiscountDetails")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BACKENDEMO.Entity.Discount", "discount")
+                        .WithMany("DiscountDetails")
+                        .HasForeignKey("DiscountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("appUser");
+
+                    b.Navigation("discount");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.Event", b =>
+                {
+                    b.HasOne("BACKENDEMO.Entity.Discount", "discounts")
+                        .WithMany("events")
+                        .HasForeignKey("DiscountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("discounts");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.Order", b =>
+                {
+                    b.HasOne("BACKENDEMO.Entity.AppUser", "appUser")
+                        .WithMany("orders")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BACKENDEMO.Entity.MethodOfPayment", "methodOfPayment")
+                        .WithMany("order")
+                        .HasForeignKey("methodOfPaymentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BACKENDEMO.Entity.StateOrder", "stateOrder")
+                        .WithMany("orders")
+                        .HasForeignKey("stateOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("appUser");
+
+                    b.Navigation("methodOfPayment");
+
+                    b.Navigation("stateOrder");
+                });
+
             modelBuilder.Entity("BACKENDEMO.Entity.UserStock", b =>
                 {
                     b.HasOne("BACKENDEMO.Entity.AppUser", "appUser")
@@ -472,7 +741,18 @@ namespace BACKENDEMO.Migrations
 
             modelBuilder.Entity("BACKENDEMO.Entity.AppUser", b =>
                 {
+                    b.Navigation("DiscountDetails");
+
+                    b.Navigation("orders");
+
                     b.Navigation("userStocks");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.Discount", b =>
+                {
+                    b.Navigation("DiscountDetails");
+
+                    b.Navigation("events");
                 });
 
             modelBuilder.Entity("BACKENDEMO.Entity.ImageProduct", b =>
@@ -480,9 +760,19 @@ namespace BACKENDEMO.Migrations
                     b.Navigation("ListImages");
                 });
 
+            modelBuilder.Entity("BACKENDEMO.Entity.MethodOfPayment", b =>
+                {
+                    b.Navigation("order");
+                });
+
             modelBuilder.Entity("BACKENDEMO.Entity.Product", b =>
                 {
                     b.Navigation("ListImages");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.StateOrder", b =>
+                {
+                    b.Navigation("orders");
                 });
 
             modelBuilder.Entity("BACKENDEMO.Models.Stocks", b =>

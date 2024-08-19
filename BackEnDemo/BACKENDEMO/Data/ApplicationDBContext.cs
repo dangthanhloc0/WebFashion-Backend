@@ -26,11 +26,32 @@ namespace BACKENDEMO.Data
 
        public DbSet<UserStock> userStocks {get; set;}
 
-        public DbSet<ImageProduct> images {get; set;}
-
         public DbSet<Product> products { get; set; }
 
         public DbSet<listImage> listImages { get; set; }
+
+        public DbSet<Discount> discounts { get; set; }
+
+        public DbSet<DiscountDetail> discountDetails { get; set; }
+        
+        public DbSet<ImageProduct> imageProducts { get; set; }
+
+        public DbSet<Order> orders { get; set; }
+        public DbSet<OrderDetail> orderDetails { get; set; }
+
+        public DbSet<StateOrder> stateOrders { get; set; }
+
+        public DbSet<StateTransport> stateTransports { get; set; }
+
+        public DbSet<Notification> notifications { get; set; } 
+
+        public DbSet<MessageOfCustomer>  messageOfCustomers { get; set; }
+
+        public DbSet<MethodOfPayment> methodOfPayments { get; set; }
+
+        public DbSet<Event> events { get; set; }
+
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -66,7 +87,7 @@ namespace BACKENDEMO.Data
                 .HasForeignKey(p=> p.AppUserId);
 
             builder.Entity<DiscountDetail>()
-                .HasOne(x => x.appUser)
+                .HasOne(x => x.discount)
                 .WithMany(u => u.DiscountDetails)
                 .HasForeignKey(p => p.DiscountId);
                 

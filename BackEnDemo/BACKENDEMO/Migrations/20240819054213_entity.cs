@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BACKENDEMO.Migrations
 {
     /// <inheritdoc />
-    public partial class InitdatabaseTest : Migration
+    public partial class entity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,6 +53,21 @@ namespace BACKENDEMO.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "discounts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DetailDiscount = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    numberofpercentdiscount = table.Column<int>(type: "int", nullable: false),
+                    EventId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_discounts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ImageProducts",
                 columns: table => new
                 {
@@ -63,6 +78,60 @@ namespace BACKENDEMO.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ImageProducts", x => x.ImageProductId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "messageOfCustomers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Message = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_messageOfCustomers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "methodOfPayments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MethodName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_methodOfPayments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "notifications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_notifications", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "orderDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    quantity = table.Column<int>(type: "int", nullable: false),
+                    price = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_orderDetails", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,6 +149,32 @@ namespace BACKENDEMO.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_products", x => x.ProductId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "stateOrders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_stateOrders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "stateTransports",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    state = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_stateTransports", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -207,6 +302,51 @@ namespace BACKENDEMO.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "discountDetails",
+                columns: table => new
+                {
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DiscountId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_discountDetails", x => new { x.AppUserId, x.DiscountId });
+                    table.ForeignKey(
+                        name: "FK_discountDetails_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_discountDetails_discounts_DiscountId",
+                        column: x => x.DiscountId,
+                        principalTable: "discounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "events",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    operationEvent = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DiscountId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_events", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_events_discounts_DiscountId",
+                        column: x => x.DiscountId,
+                        principalTable: "discounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "listImages",
                 columns: table => new
                 {
@@ -227,6 +367,42 @@ namespace BACKENDEMO.Migrations
                         column: x => x.productId,
                         principalTable: "products",
                         principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    totalPrice = table.Column<long>(type: "bigint", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    methodOfPaymentId = table.Column<int>(type: "int", nullable: false),
+                    stateOrderId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_methodOfPayments_methodOfPaymentId",
+                        column: x => x.methodOfPaymentId,
+                        principalTable: "methodOfPayments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_stateOrders_stateOrderId",
+                        column: x => x.stateOrderId,
+                        principalTable: "stateOrders",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -278,8 +454,8 @@ namespace BACKENDEMO.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "e1ce79da-b8e3-4ff0-97d3-f59ea11baae0", null, "User", "USER" },
-                    { "eec3162f-44b5-4e9e-bc31-0f55caef0b0e", null, "Admin", "ADMIN" }
+                    { "5b79c589-f79f-4e28-9ff1-526f86ce4f47", null, "User", "USER" },
+                    { "ee0739f2-a117-497c-a7db-7ccefbff4fc5", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -327,9 +503,34 @@ namespace BACKENDEMO.Migrations
                 column: "StockId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_discountDetails_DiscountId",
+                table: "discountDetails",
+                column: "DiscountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_events_DiscountId",
+                table: "events",
+                column: "DiscountId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_listImages_imageId",
                 table: "listImages",
                 column: "imageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_AppUserId",
+                table: "Orders",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_methodOfPaymentId",
+                table: "Orders",
+                column: "methodOfPaymentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_stateOrderId",
+                table: "Orders",
+                column: "stateOrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserStocks_StockId",
@@ -359,7 +560,28 @@ namespace BACKENDEMO.Migrations
                 name: "Commentss");
 
             migrationBuilder.DropTable(
+                name: "discountDetails");
+
+            migrationBuilder.DropTable(
+                name: "events");
+
+            migrationBuilder.DropTable(
                 name: "listImages");
+
+            migrationBuilder.DropTable(
+                name: "messageOfCustomers");
+
+            migrationBuilder.DropTable(
+                name: "notifications");
+
+            migrationBuilder.DropTable(
+                name: "orderDetails");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "stateTransports");
 
             migrationBuilder.DropTable(
                 name: "UserStocks");
@@ -368,10 +590,19 @@ namespace BACKENDEMO.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "discounts");
+
+            migrationBuilder.DropTable(
                 name: "ImageProducts");
 
             migrationBuilder.DropTable(
                 name: "products");
+
+            migrationBuilder.DropTable(
+                name: "methodOfPayments");
+
+            migrationBuilder.DropTable(
+                name: "stateOrders");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
