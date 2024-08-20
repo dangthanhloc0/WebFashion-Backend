@@ -51,6 +51,9 @@ namespace BACKENDEMO.Data
 
         public DbSet<Event> events { get; set; }
 
+        public DbSet<MessageDetails> messageDetails { get; set; }
+        public DbSet<NotificationDetails> notificationDetails { get; set; }
+
         
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -60,6 +63,10 @@ namespace BACKENDEMO.Data
             builder.Entity<UserStock>(x => x.HasKey(p => new {p.AppUserId, p.StockId}));
             builder.Entity<listImage>(x => x.HasKey(p => new {p.productId, p.imageId}));
             builder.Entity<DiscountDetail>(x => x.HasKey(p => new {p.AppUserId, p.DiscountId}));
+            builder.Entity<OrderDetail>(x => x.HasKey(p => new {p.productId, p.OrderId}));
+            builder.Entity<MessageDetails>(x => x.HasKey(p => new {p.productId, p.messageOfCustomerId}));
+            builder.Entity<NotificationDetails>(x => x.HasKey(p => new {p.productId, p.notificationId}));
+
 
             builder.Entity<UserStock>()
                 .HasOne(x => x.appUser)
@@ -90,6 +97,37 @@ namespace BACKENDEMO.Data
                 .HasOne(x => x.discount)
                 .WithMany(u => u.DiscountDetails)
                 .HasForeignKey(p => p.DiscountId);
+
+            builder.Entity<OrderDetail>()
+                .HasOne(x => x.order)
+                .WithMany(u => u.orderDetails)
+                .HasForeignKey(p => p.OrderId);
+
+            builder.Entity<OrderDetail>()
+                .HasOne(x => x.product)
+                .WithMany(u => u.orderDetails)
+                .HasForeignKey(p => p.productId);
+
+            builder.Entity<MessageDetails>()
+                .HasOne(x => x.product)
+                .WithMany(u => u.messageDetails)
+                .HasForeignKey(p => p.productId);
+
+            builder.Entity<MessageDetails>()
+                .HasOne(x => x.messageOfCustomer)
+                .WithMany(u => u.messageDetails)
+                .HasForeignKey(p => p.messageOfCustomerId);
+
+            builder.Entity<NotificationDetails>()
+                .HasOne(x => x.product)
+                .WithMany(u => u.notificationDetails)
+                .HasForeignKey(p => p.productId);
+
+            builder.Entity<NotificationDetails>()
+                .HasOne(x => x.notification)
+                .WithMany(u => u.notificationDetails)
+                .HasForeignKey(p => p.notificationId);
+                
                 
             List<IdentityRole> roles  = new List<IdentityRole>{
                 new IdentityRole{

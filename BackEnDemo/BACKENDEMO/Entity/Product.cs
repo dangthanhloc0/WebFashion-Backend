@@ -30,8 +30,16 @@ namespace BACKENDEMO.Entity
         public string Image {get; set;} = string.Empty;
 
 
+        public long quantityStock { get; set; } = 0;
+
+
         public ICollection<listImage> ListImages { get; set; }
 
+        public ICollection<OrderDetail> orderDetails { get; set; }
+
+        public  ICollection<MessageDetails> messageDetails { get; set; }
+
+         public ICollection<NotificationDetails> notificationDetails { get; set; }
 
     }
 }

@@ -15,5 +15,13 @@ namespace BACKENDEMO.Entity
         public string Message { get; set; } = string.Empty;
 
         public string Image { get; set; } = string.Empty;
+
+        public int MessageOfCustomerId { get; set; }
+
+        public ICollection<MessageDetails> messageDetails { get; set; }
+
+        public int appUserId { get; set; }
+
+        public AppUser appUser { get; set; }
     }
 }

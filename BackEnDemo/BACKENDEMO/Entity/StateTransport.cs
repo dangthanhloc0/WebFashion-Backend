@@ -12,5 +12,8 @@ namespace BACKENDEMO.Entity
 
         [Required]
         public string state { get; set; } = string.Empty;
+
+
+        public ICollection<Order> orders { get; set; }
     }
 }

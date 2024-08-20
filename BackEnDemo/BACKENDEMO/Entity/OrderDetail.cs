@@ -17,7 +17,13 @@ namespace BACKENDEMO.Entity
         [Range(0,100000000)]
         public double price { get; set; }
 
-        
+        public int OrderId { get; set; }
+
+        public Order order { get; set; }
+
+        public int productId { get; set; }
+        public Product product { get; set; }
+   
 
         
     }

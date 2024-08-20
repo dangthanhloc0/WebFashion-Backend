@@ -13,5 +13,7 @@ namespace BACKENDEMO.Entity
         [Required]
         [StringLength(500, MinimumLength = 10)]
         public string Description {get; set;} = string.Empty;
+        public ICollection<NotificationDetails> notificationDetails { get; set; }
+
     }
 }

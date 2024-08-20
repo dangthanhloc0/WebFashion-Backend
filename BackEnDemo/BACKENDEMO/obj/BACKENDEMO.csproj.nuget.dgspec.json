@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\BackEnDemo\\backendemo\\BACKENDEMO.csproj": {}
+    "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\BACKENDEMO.csproj": {}
   },
   "projects": {
-    "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\BackEnDemo\\backendemo\\BACKENDEMO.csproj": {
+    "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\BACKENDEMO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\BackEnDemo\\backendemo\\BACKENDEMO.csproj",
+        "projectUniqueName": "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\BACKENDEMO.csproj",
         "projectName": "BACKENDEMO",
-        "projectPath": "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\BackEnDemo\\backendemo\\BACKENDEMO.csproj",
+        "projectPath": "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\BACKENDEMO.csproj",
         "packagesPath": "C:\\Users\\huuth\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\BackEnDemo\\backendemo\\obj\\",
+        "outputPath": "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huuth\\AppData\\Roaming\\NuGet\\NuGet.Config",

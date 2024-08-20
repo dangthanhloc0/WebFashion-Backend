@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BACKENDEMO.Migrations
 {
     /// <inheritdoc />
-    public partial class entity : Migration
+    public partial class Entity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -81,20 +81,6 @@ namespace BACKENDEMO.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "messageOfCustomers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Message = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_messageOfCustomers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "methodOfPayments",
                 columns: table => new
                 {
@@ -121,20 +107,6 @@ namespace BACKENDEMO.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "orderDetails",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    quantity = table.Column<int>(type: "int", nullable: false),
-                    price = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_orderDetails", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "products",
                 columns: table => new
                 {
@@ -144,7 +116,8 @@ namespace BACKENDEMO.Migrations
                     quantityMaterial = table.Column<int>(type: "int", nullable: false),
                     quantitySellSucesss = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    quantityStock = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -302,6 +275,28 @@ namespace BACKENDEMO.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "messageOfCustomers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Message = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MessageOfCustomerId = table.Column<int>(type: "int", nullable: false),
+                    appUserId = table.Column<int>(type: "int", nullable: false),
+                    appUserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_messageOfCustomers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_messageOfCustomers_AspNetUsers_appUserId1",
+                        column: x => x.appUserId1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "discountDetails",
                 columns: table => new
                 {
@@ -371,6 +366,30 @@ namespace BACKENDEMO.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "notificationDetails",
+                columns: table => new
+                {
+                    productId = table.Column<int>(type: "int", nullable: false),
+                    notificationId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_notificationDetails", x => new { x.productId, x.notificationId });
+                    table.ForeignKey(
+                        name: "FK_notificationDetails_notifications_notificationId",
+                        column: x => x.notificationId,
+                        principalTable: "notifications",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_notificationDetails_products_productId",
+                        column: x => x.productId,
+                        principalTable: "products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -381,7 +400,9 @@ namespace BACKENDEMO.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     methodOfPaymentId = table.Column<int>(type: "int", nullable: false),
-                    stateOrderId = table.Column<int>(type: "int", nullable: false)
+                    stateOrderId = table.Column<int>(type: "int", nullable: false),
+                    stateTransports = table.Column<int>(type: "int", nullable: false),
+                    stateTransportId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -402,6 +423,12 @@ namespace BACKENDEMO.Migrations
                         name: "FK_Orders_stateOrders_stateOrderId",
                         column: x => x.stateOrderId,
                         principalTable: "stateOrders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_stateTransports_stateTransportId",
+                        column: x => x.stateTransportId,
+                        principalTable: "stateTransports",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -449,13 +476,65 @@ namespace BACKENDEMO.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "messageDetails",
+                columns: table => new
+                {
+                    messageOfCustomerId = table.Column<int>(type: "int", nullable: false),
+                    productId = table.Column<int>(type: "int", nullable: false),
+                    Time = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_messageDetails", x => new { x.productId, x.messageOfCustomerId });
+                    table.ForeignKey(
+                        name: "FK_messageDetails_messageOfCustomers_messageOfCustomerId",
+                        column: x => x.messageOfCustomerId,
+                        principalTable: "messageOfCustomers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_messageDetails_products_productId",
+                        column: x => x.productId,
+                        principalTable: "products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "orderDetails",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    productId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    quantity = table.Column<int>(type: "int", nullable: false),
+                    price = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_orderDetails", x => new { x.productId, x.OrderId });
+                    table.ForeignKey(
+                        name: "FK_orderDetails_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_orderDetails_products_productId",
+                        column: x => x.productId,
+                        principalTable: "products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "5b79c589-f79f-4e28-9ff1-526f86ce4f47", null, "User", "USER" },
-                    { "ee0739f2-a117-497c-a7db-7ccefbff4fc5", null, "Admin", "ADMIN" }
+                    { "64e39a90-45a7-4e83-9b5b-6c0edb950000", null, "Admin", "ADMIN" },
+                    { "c7b8a503-dc1a-40c8-bbe1-fe73f7bb645d", null, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -518,6 +597,26 @@ namespace BACKENDEMO.Migrations
                 column: "imageId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_messageDetails_messageOfCustomerId",
+                table: "messageDetails",
+                column: "messageOfCustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_messageOfCustomers_appUserId1",
+                table: "messageOfCustomers",
+                column: "appUserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_notificationDetails_notificationId",
+                table: "notificationDetails",
+                column: "notificationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_orderDetails_OrderId",
+                table: "orderDetails",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_AppUserId",
                 table: "Orders",
                 column: "AppUserId");
@@ -531,6 +630,11 @@ namespace BACKENDEMO.Migrations
                 name: "IX_Orders_stateOrderId",
                 table: "Orders",
                 column: "stateOrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_stateTransportId",
+                table: "Orders",
+                column: "stateTransportId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserStocks_StockId",
@@ -569,19 +673,13 @@ namespace BACKENDEMO.Migrations
                 name: "listImages");
 
             migrationBuilder.DropTable(
-                name: "messageOfCustomers");
+                name: "messageDetails");
 
             migrationBuilder.DropTable(
-                name: "notifications");
+                name: "notificationDetails");
 
             migrationBuilder.DropTable(
                 name: "orderDetails");
-
-            migrationBuilder.DropTable(
-                name: "Orders");
-
-            migrationBuilder.DropTable(
-                name: "stateTransports");
 
             migrationBuilder.DropTable(
                 name: "UserStocks");
@@ -596,7 +694,22 @@ namespace BACKENDEMO.Migrations
                 name: "ImageProducts");
 
             migrationBuilder.DropTable(
+                name: "messageOfCustomers");
+
+            migrationBuilder.DropTable(
+                name: "notifications");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
                 name: "products");
+
+            migrationBuilder.DropTable(
+                name: "Stockss");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "methodOfPayments");
@@ -605,10 +718,7 @@ namespace BACKENDEMO.Migrations
                 name: "stateOrders");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Stockss");
+                name: "stateTransports");
         }
     }
 }

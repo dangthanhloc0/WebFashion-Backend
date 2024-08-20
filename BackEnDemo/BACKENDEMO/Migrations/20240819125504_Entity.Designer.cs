@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BACKENDEMO.Migrations
 {
     [DbContext(typeof(AppplicationDBContext))]
-    [Migration("20240819054213_entity")]
-    partial class entity
+    [Migration("20240819125504_Entity")]
+    partial class Entity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -170,6 +170,24 @@ namespace BACKENDEMO.Migrations
                     b.ToTable("ImageProducts");
                 });
 
+            modelBuilder.Entity("BACKENDEMO.Entity.MessageDetails", b =>
+                {
+                    b.Property<int>("productId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("messageOfCustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("productId", "messageOfCustomerId");
+
+                    b.HasIndex("messageOfCustomerId");
+
+                    b.ToTable("messageDetails");
+                });
+
             modelBuilder.Entity("BACKENDEMO.Entity.MessageOfCustomer", b =>
                 {
                     b.Property<int>("Id")
@@ -187,7 +205,18 @@ namespace BACKENDEMO.Migrations
                         .HasMaxLength(5000)
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("MessageOfCustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("appUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("appUserId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("appUserId1");
 
                     b.ToTable("messageOfCustomers");
                 });
@@ -227,6 +256,21 @@ namespace BACKENDEMO.Migrations
                     b.ToTable("notifications");
                 });
 
+            modelBuilder.Entity("BACKENDEMO.Entity.NotificationDetails", b =>
+                {
+                    b.Property<int>("productId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("notificationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("productId", "notificationId");
+
+                    b.HasIndex("notificationId");
+
+                    b.ToTable("notificationDetails");
+                });
+
             modelBuilder.Entity("BACKENDEMO.Entity.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -252,6 +296,12 @@ namespace BACKENDEMO.Migrations
                     b.Property<int>("stateOrderId")
                         .HasColumnType("int");
 
+                    b.Property<int>("stateTransportId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("stateTransports")
+                        .HasColumnType("int");
+
                     b.Property<long>("totalPrice")
                         .HasColumnType("bigint");
 
@@ -263,16 +313,21 @@ namespace BACKENDEMO.Migrations
 
                     b.HasIndex("stateOrderId");
 
+                    b.HasIndex("stateTransportId");
+
                     b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("BACKENDEMO.Entity.OrderDetail", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("productId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<double>("price")
                         .HasColumnType("float");
@@ -280,7 +335,9 @@ namespace BACKENDEMO.Migrations
                     b.Property<int>("quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("productId", "OrderId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("orderDetails");
                 });
@@ -312,6 +369,9 @@ namespace BACKENDEMO.Migrations
 
                     b.Property<int>("quantitySellSucesss")
                         .HasColumnType("int");
+
+                    b.Property<long>("quantityStock")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ProductId");
 
@@ -466,13 +526,13 @@ namespace BACKENDEMO.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ee0739f2-a117-497c-a7db-7ccefbff4fc5",
+                            Id = "64e39a90-45a7-4e83-9b5b-6c0edb950000",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "5b79c589-f79f-4e28-9ff1-526f86ce4f47",
+                            Id = "c7b8a503-dc1a-40c8-bbe1-fe73f7bb645d",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -614,6 +674,53 @@ namespace BACKENDEMO.Migrations
                     b.Navigation("discounts");
                 });
 
+            modelBuilder.Entity("BACKENDEMO.Entity.MessageDetails", b =>
+                {
+                    b.HasOne("BACKENDEMO.Entity.MessageOfCustomer", "messageOfCustomer")
+                        .WithMany("messageDetails")
+                        .HasForeignKey("messageOfCustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BACKENDEMO.Entity.Product", "product")
+                        .WithMany("messageDetails")
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("messageOfCustomer");
+
+                    b.Navigation("product");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.MessageOfCustomer", b =>
+                {
+                    b.HasOne("BACKENDEMO.Entity.AppUser", "appUser")
+                        .WithMany("messageOfCustomers")
+                        .HasForeignKey("appUserId1");
+
+                    b.Navigation("appUser");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.NotificationDetails", b =>
+                {
+                    b.HasOne("BACKENDEMO.Entity.Notification", "notification")
+                        .WithMany("notificationDetails")
+                        .HasForeignKey("notificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BACKENDEMO.Entity.Product", "product")
+                        .WithMany("notificationDetails")
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("notification");
+
+                    b.Navigation("product");
+                });
+
             modelBuilder.Entity("BACKENDEMO.Entity.Order", b =>
                 {
                     b.HasOne("BACKENDEMO.Entity.AppUser", "appUser")
@@ -634,11 +741,38 @@ namespace BACKENDEMO.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BACKENDEMO.Entity.StateTransport", "stateTransport")
+                        .WithMany("orders")
+                        .HasForeignKey("stateTransportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("appUser");
 
                     b.Navigation("methodOfPayment");
 
                     b.Navigation("stateOrder");
+
+                    b.Navigation("stateTransport");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.OrderDetail", b =>
+                {
+                    b.HasOne("BACKENDEMO.Entity.Order", "order")
+                        .WithMany("orderDetails")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BACKENDEMO.Entity.Product", "product")
+                        .WithMany("orderDetails")
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("order");
+
+                    b.Navigation("product");
                 });
 
             modelBuilder.Entity("BACKENDEMO.Entity.UserStock", b =>
@@ -743,6 +877,8 @@ namespace BACKENDEMO.Migrations
                 {
                     b.Navigation("DiscountDetails");
 
+                    b.Navigation("messageOfCustomers");
+
                     b.Navigation("orders");
 
                     b.Navigation("userStocks");
@@ -760,17 +896,43 @@ namespace BACKENDEMO.Migrations
                     b.Navigation("ListImages");
                 });
 
+            modelBuilder.Entity("BACKENDEMO.Entity.MessageOfCustomer", b =>
+                {
+                    b.Navigation("messageDetails");
+                });
+
             modelBuilder.Entity("BACKENDEMO.Entity.MethodOfPayment", b =>
                 {
                     b.Navigation("order");
                 });
 
+            modelBuilder.Entity("BACKENDEMO.Entity.Notification", b =>
+                {
+                    b.Navigation("notificationDetails");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.Order", b =>
+                {
+                    b.Navigation("orderDetails");
+                });
+
             modelBuilder.Entity("BACKENDEMO.Entity.Product", b =>
                 {
                     b.Navigation("ListImages");
+
+                    b.Navigation("messageDetails");
+
+                    b.Navigation("notificationDetails");
+
+                    b.Navigation("orderDetails");
                 });
 
             modelBuilder.Entity("BACKENDEMO.Entity.StateOrder", b =>
+                {
+                    b.Navigation("orders");
+                });
+
+            modelBuilder.Entity("BACKENDEMO.Entity.StateTransport", b =>
                 {
                     b.Navigation("orders");
                 });

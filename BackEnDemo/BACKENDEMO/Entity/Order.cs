@@ -28,5 +28,11 @@ namespace BACKENDEMO.Entity
         public MethodOfPayment methodOfPayment { get; set; }
 
         public StateOrder stateOrder { get; set; }
+
+        public ICollection<OrderDetail> orderDetails { get; set; }
+
+        public int stateTransports { get; set; }
+
+        public StateTransport stateTransport { get; set; }
     }
 }
