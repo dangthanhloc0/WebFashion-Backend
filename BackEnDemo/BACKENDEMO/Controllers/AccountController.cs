@@ -93,7 +93,7 @@ namespace BACKENDEMO.Controllers
                     return StatusCode(500, createUser.Errors);
                 }
             }catch(Exception e){
-              return    StatusCode(500,e);
+              return StatusCode(500,e);
             }
         }
     }

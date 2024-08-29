@@ -54,6 +54,8 @@ namespace BACKENDEMO.Data
         public DbSet<MessageDetails> messageDetails { get; set; }
         public DbSet<NotificationDetails> notificationDetails { get; set; }
 
+        public DbSet<Category> categories { get; set; }
+
         
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -140,6 +142,8 @@ namespace BACKENDEMO.Data
                 }
             };
             builder.Entity<IdentityRole>().HasData(roles);
+
+          
         }
 
     }

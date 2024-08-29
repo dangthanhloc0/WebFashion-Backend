@@ -13,6 +13,19 @@ using Microsoft.OpenApi.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy.AllowAnyOrigin()    
+                  .AllowAnyHeader()    
+                  .AllowAnyMethod();   
+        });
+});
+
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -87,6 +100,8 @@ builder.Services.AddAuthentication(Options => {
 }
 );
 
+
+
 builder.Services.AddScoped<IstockRepository , StockRepository>();
 
 builder.Services.AddScoped<ICommentRepository , CommentRepository>();
@@ -94,6 +109,10 @@ builder.Services.AddScoped<ICommentRepository , CommentRepository>();
 builder.Services.AddScoped<ITokenService , TokenService>();
 
 builder.Services.AddScoped<IStockUserRepository , StockUserRepository>();
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+
 
 var app = builder.Build();
 
@@ -105,6 +124,8 @@ if (app.Environment.IsDevelopment())
 }
     
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAll");
 
 app.UseAuthentication();
  

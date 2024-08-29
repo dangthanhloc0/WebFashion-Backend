@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BACKENDEMO.Controllers
 {
-    [Route("v1/api/stock")]
+    [Route("Test/api/stock")]
     [ApiController]
     [Authorize]
     public class StocksController : ControllerBase

@@ -10,5 +10,7 @@ namespace BACKENDEMO.Entity
         public int Id { get; set; }
         
         public string  CategorName { get; set; } = string.Empty;
+
+        public ICollection<Product> products { get; set; }
     }
 }
