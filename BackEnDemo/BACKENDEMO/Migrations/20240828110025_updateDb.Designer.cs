@@ -4,6 +4,7 @@ using BACKENDEMO.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BACKENDEMO.Migrations
 {
     [DbContext(typeof(AppplicationDBContext))]
-    partial class AppplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240828110025_updateDb")]
+    partial class updateDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -548,13 +551,13 @@ namespace BACKENDEMO.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f7dd3913-9454-4260-a62f-d0eb5c51cb29",
+                            Id = "f55889ed-52fe-40ac-8a09-dd835963153f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "f2acc5fe-9aa8-49d8-b1a5-2dcb2373104b",
+                            Id = "87ff0c45-98ff-47e5-8bef-d8344d0ea0ca",
                             Name = "User",
                             NormalizedName = "USER"
                         });

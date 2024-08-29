@@ -32,6 +32,12 @@ namespace BACKENDEMO.Entity
 
         public long quantityStock { get; set; } = 0;
 
+        [Required]
+        public double Price { get; set; } =0;
+
+        public int CategoryId { get; set; }
+
+        public Category category { get; set; }
 
         public ICollection<listImage> ListImages { get; set; }
 
@@ -39,7 +45,10 @@ namespace BACKENDEMO.Entity
 
         public  ICollection<MessageDetails> messageDetails { get; set; }
 
-         public ICollection<NotificationDetails> notificationDetails { get; set; }
+        public ICollection<NotificationDetails> notificationDetails { get; set; }
 
+
+
+        
     }
 }

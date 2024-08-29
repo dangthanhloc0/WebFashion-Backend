@@ -32,7 +32,7 @@ namespace BACKENDEMO.Mappers
                 purchase=StockModel.purchase,
                 lastdiv=StockModel.lastdiv,
                 Industry=StockModel.Industry,
-               maketcap=StockModel.maketcap
+                maketcap=StockModel.maketcap
             };
         }
     }
