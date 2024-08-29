@@ -1,0 +1,285 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\backendemo.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\backendemo.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\repositoory\\stockuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\repositoory\\stockuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\service\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\service\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\backendemo.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\backendemo.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\backendemo.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\backendemo.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\dtos\\user\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\dtos\\user\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\migrations\\appplicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\migrations\\appplicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\mappers\\stockmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\mappers\\stockmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\mappers\\commentmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\mappers\\commentmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|d:\\doanchuyennganh\\doanchuyennghanh\\backendemo\\backendemo\\repositoory\\commentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD7E6B99-1D58-4949-A284-1F51FF2CA93F}|BACKENDEMO\\BACKENDEMO.csproj|solutionrelative:backendemo\\repositoory\\commentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 11,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "StockUserRepository.cs",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Repositoory\\StockUserRepository.cs",
+              "RelativeDocumentMoniker": "BACKENDEMO\\Repositoory\\StockUserRepository.cs",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Repositoory\\StockUserRepository.cs",
+              "RelativeToolTip": "BACKENDEMO\\Repositoory\\StockUserRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-29T06:06:28.664Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "BACKENDEMO\\Controllers\\AccountController.cs",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "BACKENDEMO\\Controllers\\AccountController.cs",
+              "ViewState": "AQIAADwAAAAAAAAAAAAowFIAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T12:20:21.81Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Dtos\\User\\LoginDto.cs",
+              "RelativeDocumentMoniker": "BACKENDEMO\\Dtos\\User\\LoginDto.cs",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Dtos\\User\\LoginDto.cs",
+              "RelativeToolTip": "BACKENDEMO\\Dtos\\User\\LoginDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T12:20:11.356Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BACKENDEMO.csproj",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\BACKENDEMO.csproj",
+              "RelativeDocumentMoniker": "BACKENDEMO\\BACKENDEMO.csproj",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\BACKENDEMO.csproj",
+              "RelativeToolTip": "BACKENDEMO\\BACKENDEMO.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-08-24T03:49:31.291Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BACKENDEMO.http",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\BACKENDEMO.http",
+              "RelativeDocumentMoniker": "BACKENDEMO\\BACKENDEMO.http",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\BACKENDEMO.http",
+              "RelativeToolTip": "BACKENDEMO\\BACKENDEMO.http",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-08-24T03:46:32.371Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\appsettings.json",
+              "RelativeDocumentMoniker": "BACKENDEMO\\appsettings.json",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\appsettings.json",
+              "RelativeToolTip": "BACKENDEMO\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-08-24T03:46:20.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Program.cs",
+              "RelativeDocumentMoniker": "BACKENDEMO\\Program.cs",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Program.cs",
+              "RelativeToolTip": "BACKENDEMO\\Program.cs",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAwwG4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T03:46:29.253Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "BACKENDEMO\\appsettings.Development.json",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\appsettings.Development.json",
+              "RelativeToolTip": "BACKENDEMO\\appsettings.Development.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-08-28T10:26:51.374Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Service\\TokenService.cs",
+              "RelativeDocumentMoniker": "BACKENDEMO\\Service\\TokenService.cs",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Service\\TokenService.cs",
+              "RelativeToolTip": "BACKENDEMO\\Service\\TokenService.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABIAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T03:46:17.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BACKENDEMO",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\BACKENDEMO.csproj",
+              "RelativeDocumentMoniker": "BACKENDEMO\\BACKENDEMO.csproj",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\BACKENDEMO.csproj",
+              "RelativeToolTip": "BACKENDEMO\\BACKENDEMO.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-08-28T09:59:55.313Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CommentController.cs",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Controllers\\CommentController.cs",
+              "RelativeDocumentMoniker": "BACKENDEMO\\Controllers\\CommentController.cs",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Controllers\\CommentController.cs",
+              "RelativeToolTip": "BACKENDEMO\\Controllers\\CommentController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-28T09:59:52.492Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AppplicationDBContextModelSnapshot.cs",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Migrations\\AppplicationDBContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "BACKENDEMO\\Migrations\\AppplicationDBContextModelSnapshot.cs",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Migrations\\AppplicationDBContextModelSnapshot.cs",
+              "RelativeToolTip": "BACKENDEMO\\Migrations\\AppplicationDBContextModelSnapshot.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-28T10:31:08.411Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CommentRepository.cs",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Repositoory\\CommentRepository.cs",
+              "RelativeDocumentMoniker": "BACKENDEMO\\Repositoory\\CommentRepository.cs",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Repositoory\\CommentRepository.cs",
+              "RelativeToolTip": "BACKENDEMO\\Repositoory\\CommentRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T12:27:50.79Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CommentMapper.cs",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Mappers\\CommentMapper.cs",
+              "RelativeDocumentMoniker": "BACKENDEMO\\Mappers\\CommentMapper.cs",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Mappers\\CommentMapper.cs",
+              "RelativeToolTip": "BACKENDEMO\\Mappers\\CommentMapper.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T12:27:55.274Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "StockMapper.cs",
+              "DocumentMoniker": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Mappers\\StockMapper.cs",
+              "RelativeDocumentMoniker": "BACKENDEMO\\Mappers\\StockMapper.cs",
+              "ToolTip": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\Mappers\\StockMapper.cs",
+              "RelativeToolTip": "BACKENDEMO\\Mappers\\StockMapper.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T12:27:56.739Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -13,6 +13,19 @@ using Microsoft.OpenApi.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -52,48 +65,50 @@ builder.Services.AddControllers().AddNewtonsoftJson(Options => {
 });
 
 
-builder.Services.AddDbContext<AppplicationDBContext>(options=>{
+builder.Services.AddDbContext<AppplicationDBContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddIdentity<AppUser , IdentityRole>(Options => {
+builder.Services.AddIdentity<AppUser, IdentityRole>(Options => {
     Options.Password.RequireDigit = true;
     Options.Password.RequireLowercase = true;
     Options.Password.RequireUppercase = true;
-    Options.Password.RequireNonAlphanumeric =true;
+    Options.Password.RequireNonAlphanumeric = true;
     Options.Password.RequiredLength = 12;
 })
 .AddEntityFrameworkStores<AppplicationDBContext>();
 
 builder.Services.AddAuthentication(Options => {
-    Options.DefaultAuthenticateScheme = 
+    Options.DefaultAuthenticateScheme =
     Options.DefaultChallengeScheme =
     Options.DefaultForbidScheme =
     Options.DefaultScheme =
     Options.DefaultSignInScheme =
-    Options.DefaultSignOutScheme =JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer( Options => {
-    Options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidIssuer = builder.Configuration["JWT:Issuer"],
-        ValidateAudience = true,
-        ValidAudience = builder.Configuration["JWT:Audience"],
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(
-            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:Signingkey"])
+    Options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(Options => {
+Options.TokenValidationParameters = new TokenValidationParameters
+{
+    ValidateIssuer = true,
+    ValidIssuer = builder.Configuration["JWT:Issuer"],
+    ValidateAudience = true,
+    ValidAudience = builder.Configuration["JWT:Audience"],
+    ValidateIssuerSigningKey = true,
+    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:Signingkey"])
         )
-    };
+};
 }
 );
 
-builder.Services.AddScoped<IstockRepository , StockRepository>();
 
-builder.Services.AddScoped<ICommentRepository , CommentRepository>();
 
-builder.Services.AddScoped<ITokenService , TokenService>();
+builder.Services.AddScoped<IstockRepository, StockRepository>();
 
-builder.Services.AddScoped<IStockUserRepository , StockUserRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+builder.Services.AddScoped<IStockUserRepository, StockUserRepository>();
+
 
 var app = builder.Build();
 
@@ -103,15 +118,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-    
+
 app.UseHttpsRedirection();
 
+app.UseCors("AllowAll");
+
 app.UseAuthentication();
- 
-app.UseAuthorization(); 
+
+app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
-
-

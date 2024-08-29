@@ -46,6 +46,5 @@ namespace BACKENDEMO.Service
             return tokenHandler.WriteToken(token);
         }
 
-        
     }
 }
