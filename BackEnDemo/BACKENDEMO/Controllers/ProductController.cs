@@ -8,6 +8,8 @@ using BACKENDEMO.Mappers;
 using BACKENDEMO.Repositoory;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 
 namespace BACKENDEMO.Controllers
@@ -66,14 +68,55 @@ namespace BACKENDEMO.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var newproducts = ProductMapper.ToCreateNewProductDto(ProductDto);
-            var product = await _product.CreateProduct(newproducts);
 
-            if(product == null){
-                return BadRequest("Duplicate product by name = "+ProductDto.productName);
+            var ExsitProduct = await _product.CheckProductExsitByName(ProductDto.productName);
+
+            if(ExsitProduct){
+                return Ok("Product Exist by name " + ProductDto.productName);
             }
 
+            var ExsitCategory = await _context.categories.AnyAsync(x => x.Id == ProductDto.CategoryId);
+
+            if(!ExsitCategory){
+                return Ok("Category not found by id =" + ProductDto.CategoryId);
+            }
+
+            var newproducts = ProductDto.ToCreateNewProductDto();
+            var product = await _product.CreateProduct(newproducts);
+
             return Ok(product);
+        }
+
+        [HttpPost]
+        [Route("{id:int}")]
+        public async Task<IActionResult> UpdateProduct([FromRoute] int id,[FromBody]UpdateProduct updateProduct){
+            if (!ModelState.IsValid)
+            {
+                return( BadRequest(ModelState) );
+            }
+            var product = updateProduct.ToUpdateProduct();
+            var result = _product.UpdatePRoduct(id,product);
+
+            if(result != null){
+                return Ok("Update product successed");
+            }
+
+            return BadRequest("Update product failed by id =" + id);
+
+        }
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> DeleteProduct([FromRoute,FromBody]int id)
+        {
+            
+            bool result = await _product.DeleteProduct(id);
+
+            if(!result)
+            {
+                return BadRequest("Product not found or exception");
+            }
+
+            return Ok("Delete sucessed");
         }
     }
 }

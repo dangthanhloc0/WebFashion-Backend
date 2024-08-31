@@ -23,7 +23,7 @@ namespace BACKENDEMO.Dtos
 
         public double Price { get; set; } =0;
 
-        public Category category { get; set; }
+        public Category ? category { get; set; }
 
         // public ICollection<listImage> ListImages { get; set; }
 

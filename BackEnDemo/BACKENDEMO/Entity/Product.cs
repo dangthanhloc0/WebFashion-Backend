@@ -4,7 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using System.Linq;
+
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace BACKENDEMO.Entity
 {
@@ -19,7 +21,7 @@ namespace BACKENDEMO.Entity
         [Required]
         [Range(0,10000000)]
         public int quantityMaterial { get; set; }
-        
+        [JsonIgnore]
         public int quantitySellSucesss {get; set;} =  0;
 
         [Required]
@@ -29,7 +31,7 @@ namespace BACKENDEMO.Entity
         [Required]
         public string Image {get; set;} = string.Empty;
 
-
+        [JsonIgnore]
         public long quantityStock { get; set; } = 0;
 
         [Required]
@@ -37,15 +39,15 @@ namespace BACKENDEMO.Entity
 
         public int CategoryId { get; set; }
 
-        public Category category { get; set; }
-
-        public ICollection<listImage> ListImages { get; set; }
-
-        public ICollection<OrderDetail> orderDetails { get; set; }
-
-        public  ICollection<MessageDetails> messageDetails { get; set; }
-
-        public ICollection<NotificationDetails> notificationDetails { get; set; }
+        public Category ? category { get; set; }
+        [JsonIgnore]
+        public ICollection<listImage> ? ListImages { get; set; }
+        [JsonIgnore]
+        public ICollection<OrderDetail> ?  orderDetails { get; set; }
+        [JsonIgnore]
+        public  ICollection<MessageDetails> ? messageDetails { get; set; }
+        [JsonIgnore]
+        public ICollection<NotificationDetails> ? notificationDetails { get; set; }
 
 
 

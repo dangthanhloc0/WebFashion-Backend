@@ -53,7 +53,33 @@ namespace BACKENDEMO.Mappers
 
                 Price = newproduct.Price,
 
-                category = newproduct.category,
+                CategoryId = newproduct.CategoryId,
+
+                // ListImages = product.ListImages.ToList(),
+
+                // orderDetails = product.orderDetails.ToList(),
+
+                // messageDetails = product.messageDetails.ToList(),
+                
+                // notificationDetails = product.notificationDetails.ToList(),
+
+            };
+        }
+
+        public static Product ToUpdateProduct(this UpdateProduct updateProduct){
+            return new Product
+            {
+                productName = updateProduct.productName,
+        
+                Description = updateProduct.Description,
+
+                Image       = updateProduct.Image,
+
+                quantityStock = updateProduct.quantityStock,
+
+                Price = updateProduct.Price,
+
+                CategoryId = updateProduct.CategoryId,
 
                 // ListImages = product.ListImages.ToList(),
 

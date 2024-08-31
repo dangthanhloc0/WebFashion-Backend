@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using BACKENDEMO.Controllers;
 using BACKENDEMO.Data;
 using BACKENDEMO.Entity;
 using BACKENDEMO.Helps;
@@ -13,31 +14,21 @@ namespace BACKENDEMO.Repositoory
     {
 
         private readonly AppplicationDBContext _context;
+        private readonly ILogger<ProductRepository> _logger;
 
-        public ProductRepository(AppplicationDBContext appplicationDBContext)
+        public ProductRepository(AppplicationDBContext appplicationDBContext, ILogger<ProductRepository> logger)
         {
             _context = appplicationDBContext;
+            _logger  = logger;
         }
 
-        public async Task<bool> CheckProductExsit(string ProductName)
+        public async Task<Boolean> CheckProductExsitByName(string ProductName)
         {
-             var ExsitProduct = await _context.products.FirstOrDefaultAsync(x => x.productName == ProductName);
-
-            if(ExsitProduct == null ) {
-                return false;
-            }
-
-            return true;
+             return await _context.products.AnyAsync(x => x.productName == ProductName);
         }
 
         public async Task<Product> CreateProduct(Product product)
         {
-            var ExsitProduct = await _context.products.FirstOrDefaultAsync(x => x.productName == product.productName);
-
-            if(ExsitProduct == null ) {
-                return null;
-            }
-
             await _context.products.AddAsync(product);
             await _context.SaveChangesAsync();
 
@@ -52,27 +43,60 @@ namespace BACKENDEMO.Repositoory
                 return false;
             }
 
-            _context.products.Remove(ExsitProduct);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.products.Remove(ExsitProduct);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Can't delete product");
+                return false;
+            }
+
             return true;
         }
 
         public async Task<List<Product>> GetAllProductsByQuery(QueryProduct query)
         {
-           var products = _context.products.Include(p => p.category).AsQueryable();
-            if(!string.IsNullOrWhiteSpace(query.productName)){
-                products = products.Where(s => s.productName.Contains(query.productName));
+            var products = _context.products.Include(p => p.category).AsQueryable();
+
+            if(products == null)
+            {
+                return null;
+            }
+            else
+            {
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(query.productName))
+                    {
+                        products = products.Where(s => s.productName.Contains(query.productName));
+                    }
+
+                    if (query.IsDecsendingByPrice != null)
+                    {
+                        if (query.IsDecsendingByPrice == true)
+                        {
+                            products = products.OrderByDescending(p => p.Price);
+                        }
+                        else
+                        {
+                            products = products.OrderBy(p => p.Price);
+                        }
+                    }
+
+                    if (query.categoryId != 0)
+                    {
+                        products = products.Where(p => p.CategoryId == query.categoryId);
+                    }
+                }catch(Exception ex)
+                {
+                    _logger.LogError(ex,"Query faild");
+                    return null;
+                }
             }
 
-            if(!string.IsNullOrWhiteSpace(query.price)){
-                if(query.bigger == true){
-                    products = products.Where(s => s.Price < int.Parse(query.price));
-                }
-                else{
-                    products = products.Where(s => s.Price > int.Parse(query.price));
-                }
-                
-            }
 
             var skipnumber = (query.pageNumber -1)  * query.pageSize;
 
@@ -90,15 +114,36 @@ namespace BACKENDEMO.Repositoory
             return ExsitProduct;
         }
 
-        public async Task<Product> UpdatePRoduct(int id, Product product)
+        public async Task<Boolean> UpdatePRoduct(int id, Product product)
         {
             var ExsitProduct = await _context.products.FirstOrDefaultAsync(x => x.ProductId == id);
 
             if(ExsitProduct == null ) {
-                return  null ;
+                return  false ;
+            }
+            try
+            {
+                ExsitProduct.productName = product.productName;
+
+                ExsitProduct.Description = product.Description;
+
+                ExsitProduct.Image = product.Image;
+
+                ExsitProduct.quantityStock = product.quantityStock;
+
+                ExsitProduct.Price = product.Price;
+
+                ExsitProduct.CategoryId = product.CategoryId;
+            }
+            catch(Exception ex)
+            {
+                return false ;  
             }
 
-            return ExsitProduct;
+            _context.products.Update(ExsitProduct);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

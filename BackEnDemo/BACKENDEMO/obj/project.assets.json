@@ -5166,25 +5166,26 @@
       "Microsoft.EntityFrameworkCore.Design >= 8.0.7",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.7",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.7",
+      "Microsoft.Extensions.DependencyInjection >= 8.0.0",
       "Microsoft.Extensions.Identity.Core >= 8.0.7",
       "Newtonsoft.Json >= 13.0.3",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\trant\\.nuget\\packages\\": {}
+    "C:\\Users\\huuth\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\BACKENDEMO.csproj",
+      "projectUniqueName": "c:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\BACKENDEMO.csproj",
       "projectName": "BACKENDEMO",
-      "projectPath": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\BACKENDEMO.csproj",
-      "packagesPath": "C:\\Users\\trant\\.nuget\\packages\\",
-      "outputPath": "D:\\DOANCHUYENNGANH\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\obj\\",
+      "projectPath": "c:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\BACKENDEMO.csproj",
+      "packagesPath": "C:\\Users\\huuth\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\BackEnDemo\\BACKENDEMO\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\trant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\huuth\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5192,7 +5193,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5205,11 +5205,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -5256,6 +5251,10 @@
             "target": "Package",
             "version": "[8.0.7, )"
           },
+          "Microsoft.Extensions.DependencyInjection": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
           "Microsoft.Extensions.Identity.Core": {
             "target": "Package",
             "version": "[8.0.7, )"
@@ -5288,7 +5287,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

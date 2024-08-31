@@ -11,6 +11,6 @@ namespace BACKENDEMO.Entity
         
         public string  CategorName { get; set; } = string.Empty;
 
-        public ICollection<Product> products { get; set; }
+        public ICollection<Product> ? products { get; set; }
     }
 }

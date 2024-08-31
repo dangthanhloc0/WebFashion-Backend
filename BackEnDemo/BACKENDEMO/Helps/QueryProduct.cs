@@ -7,14 +7,11 @@ namespace BACKENDEMO.Helps
 {
     public class QueryProduct
     {
-        public String? productName {get; set;} = null;
+        public string? productName {get; set;} = null;
 
-        public String? price {get; set;} = null;
-        public String? shortBy {get; set;} = null;
+        public bool? IsDecsendingByPrice { get; set; }
 
-        public bool bigger { get; set; } = false;
-
-        // public bool IsDecsending {get; set;} = false;
+        public int categoryId { get; set; } = 0;
 
         public int pageNumber {get; set;} = 1;
 
