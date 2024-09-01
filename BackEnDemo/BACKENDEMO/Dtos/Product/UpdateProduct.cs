@@ -9,7 +9,6 @@ namespace BACKENDEMO.Dtos.Product
     {
         public string productName { get; set; } = string.Empty;
         
-        public int quantitySellSucesss {get; set;} =  0;
         public string Description {get; set;} =  string.Empty;
 
         public string Image {get; set;} = string.Empty;

@@ -27,7 +27,7 @@ namespace BACKENDEMO.Mappers
 
                 Price = product.Price,
 
-                category = product.category,
+                categoryName  = product.category.CategorName,
 
                 // ListImages = product.ListImages.ToList(),
 

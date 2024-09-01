@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 
 namespace BACKENDEMO.Controllers
 {
-    [Route("v3/account")]
+    [Route("v1/account")]
     [ApiController]
     public class AccountController : ControllerBase
     {

@@ -23,7 +23,7 @@ namespace BACKENDEMO.Dtos.Product
         public string Image {get; set;} = string.Empty;
 
         public long quantityStock { get; set; } = 0;
-       [Required]
+        [Required]
         public double Price { get; set; } =0;
 
         public int CategoryId { get; set; }

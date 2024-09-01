@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BACKENDEMO.Controllers
 {
-    [Route("v2/api/Comment")]
+    [Route("test1/api/Comment")]
     [ApiController]
     public class CommentController : ControllerBase
     {

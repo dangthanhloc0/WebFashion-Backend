@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BACKENDEMO.Controllers
 {
-    [Route("v20/api/Product")]
+    [Route("v2/api/Product")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -29,9 +29,9 @@ namespace BACKENDEMO.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetProduct([FromQuery]QueryProduct query){
-            Boolean Success = false;
-            
+            Boolean Success = false;           
             var productQuery = await _product.GetAllProductsByQuery(query);
+
             try{
                 var products = productQuery.Select(s => s.ToProductDto());
                 if(products==null){
@@ -95,11 +95,11 @@ namespace BACKENDEMO.Controllers
                 return( BadRequest(ModelState) );
             }
             var product = updateProduct.ToUpdateProduct();
-            var result = _product.UpdatePRoduct(id,product);
+            bool result = await _product.UpdatePRoduct(id,product);
 
-            if(result != null){
+           if(result){
                 return Ok("Update product successed");
-            }
+           }
 
             return BadRequest("Update product failed by id =" + id);
 

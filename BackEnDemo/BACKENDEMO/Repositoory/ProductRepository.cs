@@ -99,6 +99,12 @@ namespace BACKENDEMO.Repositoory
 
 
             var skipnumber = (query.pageNumber -1)  * query.pageSize;
+            // pageNumber=2
+            // pageSize=3
+            // => skipnumber =3
+            // products {1 , 10, 32, 4, ,5 }=> skipnumber=3 , pageSize=3
+            //  products.Skip(skipnumber).Take(query.pageSize).ToListAsync();
+            // => products {4, ,5, "null"}
 
             return await products.Skip(skipnumber).Take(query.pageSize).ToListAsync();
 
@@ -134,15 +140,14 @@ namespace BACKENDEMO.Repositoory
                 ExsitProduct.Price = product.Price;
 
                 ExsitProduct.CategoryId = product.CategoryId;
+
+                _context.products.Update(ExsitProduct);
+                await _context.SaveChangesAsync();
             }
             catch(Exception ex)
             {
                 return false ;  
             }
-
-            _context.products.Update(ExsitProduct);
-            await _context.SaveChangesAsync();
-
             return true;
         }
     }

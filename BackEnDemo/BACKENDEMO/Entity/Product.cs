@@ -15,12 +15,15 @@ namespace BACKENDEMO.Entity
     public class Product
     {
         public int ProductId { get; set; }
+        // Tên s?n ph?m
         [Required]
         [StringLength(100,MinimumLength =5)]
         public string productName { get; set; } = string.Empty;
         [Required]
         [Range(0,10000000)]
+        // s? l??ng t?n kho
         public int quantityMaterial { get; set; }
+        // s? l??ng bán thành công
         [JsonIgnore]
         public int quantitySellSucesss {get; set;} =  0;
 
