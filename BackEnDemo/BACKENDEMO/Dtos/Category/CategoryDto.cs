@@ -4,15 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BACKENDEMO.Entity
+namespace BACKENDEMO.Dtos.Comment
 {
-    public class Category
+    public class CategoryDto
     {
         public int Id { get; set; }
 
         [Required]
-        public string  CategorName { get; set; } = string.Empty;
-
-        public ICollection<Product> ? products { get; set; }
+        public string CategorName { get; set; } = string.Empty;
     }
 }

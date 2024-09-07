@@ -8,7 +8,6 @@ namespace BACKENDEMO.Entity
 {
     public class AppUser : IdentityUser
     {
-        public ICollection<UserStock> userStocks {get; set;} 
         public ICollection<DiscountDetail> DiscountDetails { get; set;} 
         public ICollection<Order> orders { get; set; } 
         public ICollection<MessageOfCustomer> messageOfCustomers { get; set; }

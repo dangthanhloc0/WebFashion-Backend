@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using BACKENDEMO.Entity;
-using BACKENDEMO.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -18,15 +17,7 @@ namespace BACKENDEMO.Data
         {
             
         }
-
-
-       public DbSet<Stocks> stock {get; set;}
-
-       public DbSet<Comments> comments {get; set;}
-
-       public DbSet<UserStock> userStocks {get; set;}
-
-        public DbSet<Product> products { get; set; }
+       public DbSet<Product> products { get; set; }
 
         public DbSet<listImage> listImages { get; set; }
 
@@ -62,7 +53,7 @@ namespace BACKENDEMO.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<UserStock>(x => x.HasKey(p => new {p.AppUserId, p.StockId}));
+        
             builder.Entity<listImage>(x => x.HasKey(p => new {p.productId, p.imageId}));
             builder.Entity<DiscountDetail>(x => x.HasKey(p => new {p.AppUserId, p.DiscountId}));
             builder.Entity<OrderDetail>(x => x.HasKey(p => new {p.productId, p.OrderId}));
@@ -70,16 +61,7 @@ namespace BACKENDEMO.Data
             builder.Entity<NotificationDetails>(x => x.HasKey(p => new {p.productId, p.notificationId}));
 
 
-            builder.Entity<UserStock>()
-                .HasOne(x => x.appUser)
-                .WithMany(u => u.userStocks)
-                .HasForeignKey(p => p.AppUserId);
-
-            builder.Entity<UserStock>()
-                .HasOne(x => x.Stocks)
-                .WithMany(u => u.userStocks)
-                .HasForeignKey(p => p.StockId);
-
+   
             builder.Entity<listImage>()
                 .HasOne(x => x.ImageProducts)
                 .WithMany(u => u.ListImages)

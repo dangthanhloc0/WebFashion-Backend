@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using BACKENDEMO.Dtos.Comment;
-using BACKENDEMO.Models;
+
 
 namespace BACKENDEMO.Dtos.Stock
 {
@@ -25,6 +25,6 @@ namespace BACKENDEMO.Dtos.Stock
 
         public long maketcap { get; set; }
 
-        public  List<CommentDto> Comments{get; set;}
+        public  List<CategoryDto> Comments{get; set;}
     }
 }

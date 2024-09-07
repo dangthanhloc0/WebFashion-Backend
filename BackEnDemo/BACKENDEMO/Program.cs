@@ -104,15 +104,14 @@ builder.Services.AddAuthentication(Options => {
 
 
 
-builder.Services.AddScoped<IstockRepository , StockRepository>();
-
-builder.Services.AddScoped<ICommentRepository , CommentRepository>();
-
 builder.Services.AddScoped<ITokenService , TokenService>();
 
-builder.Services.AddScoped<IStockUserRepository , StockUserRepository>();
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 

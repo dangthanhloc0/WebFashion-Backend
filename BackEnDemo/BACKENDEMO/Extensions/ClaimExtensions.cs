@@ -10,7 +10,13 @@ namespace BACKENDEMO.Extensions
     {
         public static string GetUserName(this ClaimsPrincipal user)
         {
-            return user.Claims.SingleOrDefault(x => x.Type.Equals(" http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givename")).Value;
+            if (user == null || !user.Identity.IsAuthenticated)
+            {
+                throw new ArgumentNullException(nameof(user), "User cannot be null or unauthenticated.");
+            }
+
+            var givenNameClaim = user.Claims.SingleOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givename");
+            return givenNameClaim?.Value ?? string.Empty;
         }
     }
 }
