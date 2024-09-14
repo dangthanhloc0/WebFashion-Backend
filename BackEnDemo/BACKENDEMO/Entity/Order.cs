@@ -24,14 +24,16 @@ namespace BACKENDEMO.Entity
         public string AppUserId { get; set; }
 
         public AppUser appUser { get; set; }
-    
+
+        public int methodOfPaymentId { get; set; }
         public MethodOfPayment methodOfPayment { get; set; }
 
+        public int stateOrderId { get; set; }
         public StateOrder stateOrder { get; set; }
 
         public ICollection<OrderDetail> orderDetails { get; set; }
 
-        public int stateTransports { get; set; }
+        public int stateTransportId { get; set; }
 
         public StateTransport stateTransport { get; set; }
     }

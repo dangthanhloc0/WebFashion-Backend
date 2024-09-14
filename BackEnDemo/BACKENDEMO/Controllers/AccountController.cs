@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BACKENDEMO.Dtos.User;
 using BACKENDEMO.Entity;
 using BACKENDEMO.interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

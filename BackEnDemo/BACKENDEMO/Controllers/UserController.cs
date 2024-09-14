@@ -15,6 +15,7 @@ namespace BACKENDEMO.Controllers
 {
     [Route("v3/api/user")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
 
@@ -52,7 +53,6 @@ namespace BACKENDEMO.Controllers
             return Ok(Appuser.ToUserDto()); 
         }
 
-        [Authorize]
         [HttpPut("ChangePassWord")]
         public async Task<IActionResult> ChnagePassWordUser([FromBody] ChangePassWordDto changePassWordDto)
         {

@@ -113,6 +113,10 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
+builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
 
 
 var app = builder.Build();

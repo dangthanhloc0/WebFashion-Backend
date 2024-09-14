@@ -56,10 +56,12 @@ namespace BACKENDEMO.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetProductById([FromRoute] int id){
             var Product = await _product.GetProductById(id);
-            if(Product == null){
+            var result = Product.ToProductDto();
+
+            if (result == null){
                 return BadRequest("not found product by id=" + id);
             }
-            return Ok(Product);
+            return Ok(result);
         }
 
         [HttpPost]

@@ -112,7 +112,7 @@ namespace BACKENDEMO.Repositoory
 
         public async Task<Product>? GetProductById(int id)
         {
-            var ExsitProduct = await _context.products.FirstOrDefaultAsync(x => x.ProductId == id);
+            var ExsitProduct = await _context.products.Include(x => x.category).FirstOrDefaultAsync(x => x.ProductId == id);
 
             if(ExsitProduct == null ) {
                 return  null ;

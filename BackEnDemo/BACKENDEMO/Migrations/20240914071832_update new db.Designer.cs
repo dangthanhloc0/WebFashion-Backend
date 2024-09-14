@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BACKENDEMO.Migrations
 {
     [DbContext(typeof(AppplicationDBContext))]
-    [Migration("20240829062505_newdatabase")]
-    partial class newdatabase
+    [Migration("20240914071832_update new db")]
+    partial class updatenewdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -316,9 +316,6 @@ namespace BACKENDEMO.Migrations
                     b.Property<int>("stateTransportId")
                         .HasColumnType("int");
 
-                    b.Property<int>("stateTransports")
-                        .HasColumnType("int");
-
                     b.Property<long>("totalPrice")
                         .HasColumnType("bigint");
 
@@ -337,13 +334,16 @@ namespace BACKENDEMO.Migrations
 
             modelBuilder.Entity("BACKENDEMO.Entity.OrderDetail", b =>
                 {
-                    b.Property<int>("productId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("productId")
                         .HasColumnType("int");
 
                     b.Property<double>("price")
@@ -352,9 +352,11 @@ namespace BACKENDEMO.Migrations
                     b.Property<int>("quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("productId", "OrderId");
+                    b.HasKey("Id", "OrderId", "productId");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("productId");
 
                     b.ToTable("orderDetails");
                 });
@@ -437,21 +439,6 @@ namespace BACKENDEMO.Migrations
                     b.ToTable("stateTransports");
                 });
 
-            modelBuilder.Entity("BACKENDEMO.Entity.UserStock", b =>
-                {
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("StockId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AppUserId", "StockId");
-
-                    b.HasIndex("StockId");
-
-                    b.ToTable("UserStocks");
-                });
-
             modelBuilder.Entity("BACKENDEMO.Entity.listImage", b =>
                 {
                     b.Property<int>("productId")
@@ -465,61 +452,6 @@ namespace BACKENDEMO.Migrations
                     b.HasIndex("imageId");
 
                     b.ToTable("listImages");
-                });
-
-            modelBuilder.Entity("BACKENDEMO.Models.Comments", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<int?>("IdStock")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StockId")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("StockId");
-
-                    b.ToTable("Commentss");
-                });
-
-            modelBuilder.Entity("BACKENDEMO.Models.Stocks", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Industry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("company")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("lastdiv")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<long>("maketcap")
-                        .HasColumnType("bigint");
-
-                    b.Property<decimal>("purchase")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("symbol")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Stockss");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -551,13 +483,13 @@ namespace BACKENDEMO.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f7dd3913-9454-4260-a62f-d0eb5c51cb29",
+                            Id = "412f27e1-18f5-4c01-a980-809eb8192a90",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "f2acc5fe-9aa8-49d8-b1a5-2dcb2373104b",
+                            Id = "3097ac07-2646-435e-821a-4679f9a9123c",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -811,25 +743,6 @@ namespace BACKENDEMO.Migrations
                     b.Navigation("category");
                 });
 
-            modelBuilder.Entity("BACKENDEMO.Entity.UserStock", b =>
-                {
-                    b.HasOne("BACKENDEMO.Entity.AppUser", "appUser")
-                        .WithMany("userStocks")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BACKENDEMO.Models.Stocks", "Stocks")
-                        .WithMany("userStocks")
-                        .HasForeignKey("StockId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Stocks");
-
-                    b.Navigation("appUser");
-                });
-
             modelBuilder.Entity("BACKENDEMO.Entity.listImage", b =>
                 {
                     b.HasOne("BACKENDEMO.Entity.ImageProduct", "ImageProducts")
@@ -847,15 +760,6 @@ namespace BACKENDEMO.Migrations
                     b.Navigation("ImageProducts");
 
                     b.Navigation("products");
-                });
-
-            modelBuilder.Entity("BACKENDEMO.Models.Comments", b =>
-                {
-                    b.HasOne("BACKENDEMO.Models.Stocks", "Stock")
-                        .WithMany("comments")
-                        .HasForeignKey("StockId");
-
-                    b.Navigation("Stock");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -916,8 +820,6 @@ namespace BACKENDEMO.Migrations
                     b.Navigation("messageOfCustomers");
 
                     b.Navigation("orders");
-
-                    b.Navigation("userStocks");
                 });
 
             modelBuilder.Entity("BACKENDEMO.Entity.Category", b =>
@@ -976,13 +878,6 @@ namespace BACKENDEMO.Migrations
             modelBuilder.Entity("BACKENDEMO.Entity.StateTransport", b =>
                 {
                     b.Navigation("orders");
-                });
-
-            modelBuilder.Entity("BACKENDEMO.Models.Stocks", b =>
-                {
-                    b.Navigation("comments");
-
-                    b.Navigation("userStocks");
                 });
 #pragma warning restore 612, 618
         }

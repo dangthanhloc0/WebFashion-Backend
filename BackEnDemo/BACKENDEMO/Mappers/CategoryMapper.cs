@@ -27,7 +27,7 @@ namespace BACKENDEMO.Mappers
             };
         }
 
-        public static Category ToCategory(this NewCategory newCategory)
+        public static Category ToNewCategory(this NewCategory newCategory)
         {
             return new Category
             {

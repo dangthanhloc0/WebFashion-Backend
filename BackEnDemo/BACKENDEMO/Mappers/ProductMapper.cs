@@ -12,7 +12,7 @@ namespace BACKENDEMO.Mappers
 {
     public static class ProductMapper
     {
-       public static ProductDto  ToProductDto(this Product product){
+       public static ProductDto ToProductDto(this Product product){
             return new ProductDto
             {
                 ProductId = product.ProductId,

@@ -56,7 +56,8 @@ namespace BACKENDEMO.Data
         
             builder.Entity<listImage>(x => x.HasKey(p => new {p.productId, p.imageId}));
             builder.Entity<DiscountDetail>(x => x.HasKey(p => new {p.AppUserId, p.DiscountId}));
-            builder.Entity<OrderDetail>(x => x.HasKey(p => new {p.productId, p.OrderId}));
+            builder.Entity<OrderDetail>(x => x.HasKey(p => new {p.Id, p.OrderId, p.productId }));
+            builder.Entity<OrderDetail>().Property(p => p.Id).ValueGeneratedOnAdd(); // Configures auto-increment
             builder.Entity<MessageDetails>(x => x.HasKey(p => new {p.productId, p.messageOfCustomerId}));
             builder.Entity<NotificationDetails>(x => x.HasKey(p => new {p.productId, p.notificationId}));
 
@@ -123,9 +124,14 @@ namespace BACKENDEMO.Data
                     NormalizedName = "USER"
                 }
             };
-            builder.Entity<IdentityRole>().HasData(roles);
+     
 
-          
+            builder.Entity<IdentityRole>().HasData(roles);
+         
+
+
+
+
         }
 
     }
