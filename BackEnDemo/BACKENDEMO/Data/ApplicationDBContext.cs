@@ -60,6 +60,7 @@ namespace BACKENDEMO.Data
             builder.Entity<OrderDetail>().Property(p => p.Id).ValueGeneratedOnAdd(); // Configures auto-increment
             builder.Entity<MessageDetails>(x => x.HasKey(p => new {p.productId, p.messageOfCustomerId}));
             builder.Entity<NotificationDetails>(x => x.HasKey(p => new {p.productId, p.notificationId}));
+            builder.Entity<ImageProduct>().Property(p => p.ImageProductId).ValueGeneratedOnAdd();   
 
 
    

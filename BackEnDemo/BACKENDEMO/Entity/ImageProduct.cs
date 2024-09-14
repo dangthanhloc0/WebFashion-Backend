@@ -10,6 +10,8 @@ namespace BACKENDEMO.Entity
     [Table("ImageProducts")]
     public class ImageProduct
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ImageProductId { get; set; }
 
         [Required]

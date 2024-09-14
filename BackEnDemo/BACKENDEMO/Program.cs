@@ -117,6 +117,10 @@ builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
+builder.Services.AddScoped<IImageRepository, ImageRepository>();
+
+builder.Services.AddScoped<IListImageRepository, ListImageRepository>();
+
 
 
 var app = builder.Build();

@@ -71,6 +71,12 @@ namespace BACKENDEMO.Controllers
                     UserName = registerDto.Username,
                     Email = registerDto.EmailAddress
                 };
+                // check user name exsit 
+                var  CheckEmailExsit = _useManager.FindByEmailAsync(appuser.Email); 
+/*                var  CheckUserNameExsit = _useManager.FindByNameAsync(appuser.UserName);*/
+                if(CheckEmailExsit != null) {
+                    return BadRequest("Your eamil exist");
+                }
 
                 var createUser = await _useManager.CreateAsync(appuser, registerDto.Password);
             
