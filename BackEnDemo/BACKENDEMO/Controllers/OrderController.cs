@@ -75,8 +75,32 @@ namespace BACKENDEMO.Controllers
             return BadRequest("Create failed");
         }
 
+        [HttpGet]
+        public async Task<ActionResult> GetAllOrderByUserIdAsync()
+        {
 
-       
+            try {
+                // find user 
+                var emailClaim = User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+                var CurrentUser = await _userManager.FindByEmailAsync(emailClaim);
+                if (CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+
+                var ListOrder = await _order.GetAllOrderByUserId(CurrentUser.Id);
+
+                if(ListOrder == null)
+                {
+                    return Ok(new { status = true, message = "User don't have any order" });
+                }
+                return Ok(new { status = true, message = "Get all order success", Data = ListOrder.Select(s => s.ToOrderDto()) });
+            } catch(Exception e) { 
+                return Ok(new { status = false , message =  e.Message });
+            }
+        }
+
+    
 
     }
 }

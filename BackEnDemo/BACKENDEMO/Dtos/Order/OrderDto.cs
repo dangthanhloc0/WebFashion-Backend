@@ -9,15 +9,11 @@ namespace BACKENDEMO.Dtos
 {
     public class OrderDto
     {
-        public int Id { get; set; }
         public DateTime Date { get; set; }
         public long totalPrice { get; set; }
         public string Address { get; set; } = string.Empty;
-        public string AppUserId { get; set; }
+        public string stateOrder { get; set; } = string.Empty;
+        public string stateTransport { get; set; } = string.Empty;
 
-        public String UserName { get; set; }
-        public String stateOrder { get; set; }
-        public ICollection<OrderDetail> orderDetails { get; set; }
-        public String stateTransport { get; set; }
     }
 }

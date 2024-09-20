@@ -29,9 +29,9 @@ namespace BACKENDEMO.Repositoory
             return order;
         }
 
-        public async Task<List<Order>> GetAllOrderAsync()
+        public async Task<List<Order>> GetAllOrderAsync(string UserId)
         {
-            return await _context.orders.ToListAsync();
+            return await _context.orders.Where(p => p.AppUserId == UserId).ToListAsync();
         }
 
         public async Task<List<Order>>? GetAllOrderByUserId(String IdUser)

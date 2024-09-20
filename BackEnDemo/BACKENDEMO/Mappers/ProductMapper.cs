@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BACKENDEMO.Dtos;
+using BACKENDEMO.Dtos.Comment;
 using BACKENDEMO.Dtos.Product;
 using BACKENDEMO.Entity;
 
@@ -12,29 +13,29 @@ namespace BACKENDEMO.Mappers
 {
     public static class ProductMapper
     {
-       public static ProductDto ToProductDto(this Product product){
+       public static ProductDto ToProductDto(this Product product, List<string> listImages){
             return new ProductDto
             {
                 ProductId = product.ProductId,
 
                 productName = product.productName,
-        
+
                 Description = product.Description,
 
-                Image       = product.Image,
+                Image = product.Image,
 
                 quantityStock = product.quantityStock,
 
                 Price = product.Price,
 
-                categoryName  = product.category.CategorName,
+                categoryName = product.category.CategorName,
 
-                // ListImages = product.ListImages.ToList(),
+                ListStringImage = listImages,
 
                 // orderDetails = product.orderDetails.ToList(),
 
                 // messageDetails = product.messageDetails.ToList(),
-                
+
                 // notificationDetails = product.notificationDetails.ToList(),
 
             };

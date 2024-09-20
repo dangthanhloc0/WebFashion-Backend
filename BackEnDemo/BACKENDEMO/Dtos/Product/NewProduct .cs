@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using BACKENDEMO.Dtos.Comment;
 using BACKENDEMO.Entity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BACKENDEMO.Dtos.Product
 {
@@ -27,8 +29,7 @@ namespace BACKENDEMO.Dtos.Product
         public double Price { get; set; } =0;
 
         public int CategoryId { get; set; }
-
-        // public ICollection<listImage> ListImages { get; set; }
+        public ImageDto ListStringImage { get; set; }
 
         // public ICollection<OrderDetail> orderDetails { get; set; }
 

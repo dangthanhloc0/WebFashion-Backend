@@ -7,7 +7,7 @@ namespace BACKENDEMO.interfaces
 {
     public interface IListImageRepository
     {
-        Task<List<listImage>> GetAllListImageAsyncByProductId(int productId);
+        Task<List<String>> ? GetAllListImageAsyncByProductId(int productId);
 
         Task<bool> SaveListImageAsync(listImage listImage);
      

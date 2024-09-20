@@ -1,15 +1,20 @@
 
 using BACKENDEMO.Data;
+using BACKENDEMO.Dtos.Comment;
 using BACKENDEMO.Dtos.Product;
+using BACKENDEMO.Dtos.Sessions;
 using BACKENDEMO.Entity;
 using BACKENDEMO.Helps;
 using BACKENDEMO.interfaces;
 using BACKENDEMO.Mappers;
 using BACKENDEMO.Repositoory;
-
+using BACKENDEMO.Sessions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json;
 
 
 namespace BACKENDEMO.Controllers
@@ -18,13 +23,26 @@ namespace BACKENDEMO.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
+
+        const string SessionKeyProduct = "SessionsProduct";
+        public string? SessionInfo_SessionTime { get; private set; }
+        private readonly ISessions _Sessions;
         private readonly AppplicationDBContext _context ;
         private readonly IProductRepository _product;
-        public ProductController(AppplicationDBContext context, IProductRepository productRepository)
+        private readonly IImageRepository _image;
+        private readonly IListImageRepository _Listimage;
+        private readonly ILogger<ProductController> _logger;
+        private readonly IHttpContextAccessor _contx;
+        public ProductController(AppplicationDBContext context, IProductRepository productRepository, IImageRepository image, IListImageRepository listImage
+           , ISessions sessios, ILogger<ProductController> logger, IHttpContextAccessor contx)
         {
             _context = context;
             _product = productRepository;
-
+            _image = image;
+            _Listimage = listImage;
+            _Sessions = sessios;
+            _logger = logger;
+            _contx = contx;
         }
 
         [HttpGet]
@@ -33,7 +51,7 @@ namespace BACKENDEMO.Controllers
             var productQuery = await _product.GetAllProductsByQuery(query);
 
             try{
-                var products = productQuery.Select(s => s.ToProductDto());
+                var products = productQuery.Select(s => s.ToProductDto(null));
                 if(products==null){
                     Success = false;
                 }
@@ -56,16 +74,24 @@ namespace BACKENDEMO.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetProductById([FromRoute] int id){
             var Product = await _product.GetProductById(id);
-            var result = Product.ToProductDto();
-
-            if (result == null){
+            if (Product == null){
                 return BadRequest("not found product by id=" + id);
+            } else
+            {
+                var GetListImageProduct = await _Listimage.GetAllListImageAsyncByProductId(id);
+                if (GetListImageProduct.Count == 0)
+                {
+                    return BadRequest("Image not found");
+                }
+                var result = Product.ToProductDto(GetListImageProduct);
+                return Ok(result);
             }
-            return Ok(result);
+         
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody]NewProduct ProductDto){
+        public async Task<IActionResult> CreateProduct([FromBody]NewProduct ProductDto)
+        {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -85,9 +111,38 @@ namespace BACKENDEMO.Controllers
 
             var newproducts = ProductDto.ToCreateNewProductDto();
             var product = await _product.CreateProduct(newproducts);
+            var ListStringImage = ProductDto.ListStringImage;
+            var id = newproducts.ProductId;
+            // create list image 
+            if (ListStringImage == null && ListStringImage.imageUrl.Count == 0)
+            {
+                return BadRequest("Image not found");
+            }
+            int count = 0;
+            foreach (var image in ListStringImage.imageUrl)
+            {
+                var imageProduct = new ImageProduct
+                {
+                    ImageUrl = image
+                };
+                var IdImage = await _image.SaveImageAsync(imageProduct);
+                var ListImage = new listImage
+                {
+                    productId = id,
+                    imageId = IdImage
+                };
+                var createListImage = _Listimage.SaveListImageAsync(ListImage);
+                count++;
+            }
 
+            if (count != ListStringImage.imageUrl.Count)
+            {
+                return BadRequest("Create something image faild");
+            }
             return Ok(product);
         }
+
+
 
         [HttpPost]
         [Route("{id:int}")]
@@ -120,5 +175,98 @@ namespace BACKENDEMO.Controllers
 
             return Ok("Delete sucessed");
         }
+
+        [HttpPost("sessions")]
+        public IActionResult SaveSessionProduct([FromBody] ItemProduct item)
+        {
+            List<ItemProduct> cart = new List<ItemProduct>();
+            var cartJson = HttpContext.Session.GetString("Cart");
+            if (string.IsNullOrEmpty(cartJson))
+            {
+                cart.Add(item);
+                var convert = JsonConvert.SerializeObject(cart);
+                HttpContext.Session.SetString("Cart", convert);
+                return Ok(convert);
+            }
+            try
+            {
+                cart = JsonConvert.DeserializeObject<List<ItemProduct>>(cartJson);
+                {
+                    var checkExist = cart.SingleOrDefault(p => p.ProductId == item.ProductId);
+                    if(checkExist != null) {
+                        checkExist.Quantity += item.Quantity;
+                       
+                    } else
+                    {
+                        cart.Add(item);
+                    }
+                    var convert = JsonConvert.SerializeObject(cart);
+                    
+                    HttpContext.Session.SetString("Cart", convert);
+                    return Ok(convert);
+                }
+            }
+            catch(JsonException ex)
+            {
+                return BadRequest("Exception when try get cart data in sessions");
+            }           
+           
+        }
+
+        [HttpGet("GetAllSessions")]
+        public IActionResult GetAllSessionProduct()
+        {
+            var cartJson = HttpContext.Session.GetString("Cart");
+            if (string.IsNullOrEmpty(cartJson))
+            {
+                return BadRequest("No cart data in sessions");
+            }
+            try
+            {
+                var cart = JsonConvert.DeserializeObject<List<ItemProduct>>(cartJson);
+                if (cart != null)
+                {                
+                    var convert = JsonConvert.SerializeObject(cart);
+                    HttpContext.Session.SetString("Cart", convert);                  
+                    return Ok(convert);
+                }
+            }
+            catch (JsonException ex)
+            {
+                return BadRequest("Exception when try get cart data in sessions");
+            }
+
+            return BadRequest("Not found item in cart");
+        }
+
+        [HttpGet]
+        [Route("AddToCart")]
+        public IActionResult AddToCart()
+        {
+            List<Task<Product>> products = new List<Task<Product>>();   
+            try
+            {
+                string Value = HttpContext.Request.Cookies["Cart"];
+                string[] ListIdProduct = Value.Split(",");
+                foreach(var item in ListIdProduct)
+                {
+                    int id = Int32.Parse(item);
+                    var product = _product.GetProductById(id);
+                    if(product != null)
+                    {
+                        products.Add(product); 
+                    }
+
+                }
+
+                return Ok(new { status = true, message = "GetDataSuccess", Data = products });
+            } catch(Exception e)
+            {
+                return Ok(new { status = false, message = e.Message });
+            }
+
+            
+        }
     }
+    
 }

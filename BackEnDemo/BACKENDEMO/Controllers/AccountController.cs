@@ -1,11 +1,16 @@
-using System;
+ using System;
 using System.Collections.Generic;
 
 using System.Linq;
+using System.Net.WebSockets;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using BACKENDEMO.Dtos.User;
 using BACKENDEMO.Entity;
 using BACKENDEMO.interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -103,5 +108,46 @@ namespace BACKENDEMO.Controllers
               return StatusCode(500,e);
             }
         }
+
+        [HttpGet]
+        [Route("signin-google")]
+        public IActionResult SignInWithGoogle()
+        {
+            var redirectUrl = Url.Action("GoogleResponse", "Account");
+            var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
+            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+        }
+        [HttpGet]
+        [Route("TestAbc")]
+        public ActionResult testAbc()
+        {
+            try {
+                List<string> testList = new List<string>();
+                if (testList.Count == 0) {
+                    return Ok(new { status = false, message = "Error" });
+                }
+                return Ok(new { status = true, message = "", data = testList });
+            }catch(Exception e)
+            {
+                return Ok(new { status = false, message = e.Message });
+            }
+           
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GoogleResponse()
+        {
+            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            if (!result.Succeeded)
+            {
+                return BadRequest();
+            }
+
+            var claims = result.Principal.Identities.FirstOrDefault().Claims;
+            // Use claims for login or registration
+            return Ok(claims);
+        }
+
     }
 }

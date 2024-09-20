@@ -10,12 +10,17 @@ namespace BACKENDEMO.Mappers
 {
     public static class OrderMapper
     {
-        public static CategoryDto ToOrderDto(this Category category ){
-            return new CategoryDto{
-                Id = category.Id,
-                CategorName = category.CategorName,
-            
-            };
+        public static OrderDto ToOrderDto(this Order order)
+        {
+            return new OrderDto
+            {
+                Date = order.Date,
+                totalPrice = 0,
+                Address = order.Address,
+                stateOrder = order.stateOrder.State,
+                stateTransport = order.stateTransport.state,
+
+    };
         }
 
         public static Order ToNewOrder(this newOrder newOrder,String UserId)

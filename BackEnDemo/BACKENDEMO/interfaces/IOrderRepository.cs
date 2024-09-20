@@ -12,13 +12,10 @@ namespace BACKENDEMO.interfaces
 {
     public interface IOrderRepository
     {
-        Task<List<Order>> GetAllOrderAsync();
+        Task<List<Order>> GetAllOrderAsync(string UserId);
 
         Task<Order>? CreateOrder(Order Order);
-
-       /* Task<bool> DeleteCategory(int id);*/
-
-       /* Task<Category> UpdateCategory(int id, NewCategory newCategory);*/
+  
 
         Task<List<Order>>? GetAllOrderByUserId(String IdUser);
      

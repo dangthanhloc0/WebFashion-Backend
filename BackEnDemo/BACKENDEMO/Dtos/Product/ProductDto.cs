@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BACKENDEMO.Dtos.Comment;
 using BACKENDEMO.Entity;
 
 namespace BACKENDEMO.Dtos
@@ -25,7 +26,7 @@ namespace BACKENDEMO.Dtos
 
         public String categoryName { get; set; } = null;
 
-        // public ICollection<listImage> ListImages { get; set; }
+        public List<string> ListStringImage { get; set; }
 
         // public ICollection<OrderDetail> orderDetails { get; set; }
 

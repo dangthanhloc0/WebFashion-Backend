@@ -23,9 +23,18 @@ namespace BACKENDEMO.Repositoory
             _context = context;
         }
 
-        public async Task<List<listImage>> GetAllListImageAsyncByProductId(int productId)
+        public async Task<List<String>> ?  GetAllListImageAsyncByProductId(int productId)
         {
-           return await _context.listImages.Where(p => p.productId == productId).ToListAsync();
+            var ListImage = new List<String>();
+            var resutl = await _context.listImages.Include(p => p.ImageProducts).Where(p => p.productId == productId).ToListAsync();
+            if(resutl.Count <= 0) {
+                return ListImage;   
+            }         
+           foreach (var image in resutl) {
+                ListImage.Add(image.ImageProducts.ImageUrl);
+           }
+
+           return ListImage;    
         }
 
         public async Task<bool> SaveListImageAsync(listImage listImage)

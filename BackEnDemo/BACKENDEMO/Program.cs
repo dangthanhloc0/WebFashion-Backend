@@ -3,13 +3,15 @@ using BACKENDEMO.Entity;
 using BACKENDEMO.interfaces;
 using BACKENDEMO.Repositoory;
 using BACKENDEMO.Service;
+using BACKENDEMO.Sessions;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ServiceStack.Text;
 
 
 var AllowAll = "AllowAll";
@@ -26,6 +28,29 @@ builder.Services.AddCors(options =>
                           .AllowAnyMethod();    // Allow any HTTP methods (GET, POST, etc.)
                 });
 });
+
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+})
+.AddCookie()
+.AddGoogle(options =>
+{
+    options.ClientId = "503398515807-l1f0qncmcvuqiol4r60789eemiu05nm0.apps.googleusercontent.com";
+    options.ClientSecret = "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";
+    options.CallbackPath = "/signin-google";
+    /*    options.Events.OnAuthenticationFailed = context =>
+            {
+                context.Response.Redirect("/Account/Login");
+                context.HandleResponse(); // Suppress the exception
+                return Task.CompletedTask;
+            };*/
+});
+
+
 
 
 builder.Services.AddControllers();
@@ -106,7 +131,6 @@ builder.Services.AddAuthentication(Options => {
 
 builder.Services.AddScoped<ITokenService , TokenService>();
 
-
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -120,6 +144,21 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IImageRepository, ImageRepository>();
 
 builder.Services.AddScoped<IListImageRepository, ListImageRepository>();
+
+builder.Services.AddSingleton<ISessions, ProcessSessions>();
+
+// build session for website 
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+
+builder.Services.AddControllersWithViews();
 
 
 
@@ -143,8 +182,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-
-
+app.UseSession();
 
 app.Run();
 

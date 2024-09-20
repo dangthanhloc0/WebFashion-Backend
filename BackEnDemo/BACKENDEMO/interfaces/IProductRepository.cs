@@ -18,7 +18,7 @@ namespace BACKENDEMO.interfaces
 
         Task<Boolean> UpdatePRoduct(int id, Product product);
 
-        Task<Product>? GetProductById(int id);
+        Task<Product> GetProductById(int id);
 
         Task<Boolean> CheckProductExsitByName(string ProductName);
 

@@ -39,9 +39,9 @@ namespace BACKENDEMO.Controllers
             }
             return Ok(result);  
         }
-/*
+
         [HttpPost]
-        [Route("{id:int}")]*/
+        [Route("{id:int}")]
         public async Task<IActionResult> CreateListImage([FromRoute] int id, [FromBody]ImageDto ListStringImage)
         {
             if(ListStringImage == null && ListStringImage.imageUrl.Count == 0) {

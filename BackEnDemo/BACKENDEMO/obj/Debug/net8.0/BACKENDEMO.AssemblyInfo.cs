@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BACKENDEMO")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+711707896cd486fc11e9a4028337131b6de1dd3f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66e979709bb4ea9fa44dafe9a37e2ea2991849a1")]
 [assembly: System.Reflection.AssemblyProductAttribute("BACKENDEMO")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BACKENDEMO")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
