@@ -8,7 +8,9 @@ namespace BACKENDEMO.Dtos.Sessions
         [JsonProperty("ProductId")]
         public int ProductId { get; set; }
         [JsonProperty("Quantity")]
-        public int Quantity { get; set; }   
+        public int Quantity { get; set; }
+        [JsonProperty("price")]
+        public double price { get; set; }
 
     }
 }

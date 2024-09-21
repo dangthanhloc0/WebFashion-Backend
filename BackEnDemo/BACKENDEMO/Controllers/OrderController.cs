@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using BACKENDEMO.Dtos;
+using BACKENDEMO.Dtos.Sessions;
 using BACKENDEMO.Dtos.User;
 using BACKENDEMO.Entity;
 using BACKENDEMO.interfaces;
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
+using Newtonsoft.Json;
 
 namespace BACKENDEMO.Controllers
 {
@@ -33,13 +35,13 @@ namespace BACKENDEMO.Controllers
 
 
 
-        public OrderController(UserManager<AppUser> userManager,ITokenService tokenService,SignInManager<AppUser> signInManager,
+        public OrderController(UserManager<AppUser> userManager, ITokenService tokenService, SignInManager<AppUser> signInManager,
                                 IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository
         )
         {
-            _userManager = userManager ;
-             _Itonkenserice= tokenService;
-             _signInManager = signInManager;
+            _userManager = userManager;
+            _Itonkenserice = tokenService;
+            _signInManager = signInManager;
             _order = orderRepository;
             _orderdetail = orderDetailRepository;
         }
@@ -53,26 +55,44 @@ namespace BACKENDEMO.Controllers
                 return BadRequest(ModelState);
             }
             // User's email
-            var emailClaim = User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email)?.Value; 
+            var emailClaim = User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
 
             var CurrentUser = await _userManager.FindByEmailAsync(emailClaim);
             if (CurrentUser == null)
             {
                 return Unauthorized();
             }
-
-            var userId = CurrentUser.Id;
-            var order = newOrder.ToNewOrder(userId);
-            var createOrder = await _order.CreateOrder(order);
-            var orderDetails = newOrder.OrdertailDto.Select(s => s.ToNewOrderDetail()).ToList();
-            var createListOrder = await _orderdetail.CreateListOrderDetail(orderDetails, createOrder);
-
-            if (createListOrder == true)
+            var cartJson = HttpContext.Session.GetString("Cart");
+            if (string.IsNullOrEmpty(cartJson))
             {
-                return Ok("Create list Order Successfully");
+                Ok(new { Status = true, message = "No data in cart" });
+            }
+            try
+            {
+                var cart = JsonConvert.DeserializeObject<List<ItemProduct>>(cartJson);
+                if (cart == null)
+                {
+                    return Ok(new { Status = true, message = "No product exsist" });
+                }
+                var userId = CurrentUser.Id;
+                var order = newOrder.ToNewOrder(userId);
+                var createOrder = await _order.CreateOrder(order);
+                var orderDetails = cart.Select(s => s.ToNewOrderDetail()).ToList();
+                var createListOrder = await _orderdetail.CreateListOrderDetail(orderDetails, createOrder);
+
+                if (createListOrder == true)
+                {
+                    return Ok(new { Status = true, message = "Create successfully" });
+                }
+
+                return Ok(new { Status = false, message = "Create faild" });
+
+            }
+            catch (JsonException e)
+            {
+                return BadRequest(new { Status = false, message = e.Message });
             }
 
-            return BadRequest("Create failed");
         }
 
         [HttpGet]
@@ -90,13 +110,32 @@ namespace BACKENDEMO.Controllers
 
                 var ListOrder = await _order.GetAllOrderByUserId(CurrentUser.Id);
 
-                if(ListOrder == null)
+                if (ListOrder == null)
                 {
                     return Ok(new { status = true, message = "User don't have any order" });
                 }
                 return Ok(new { status = true, message = "Get all order success", Data = ListOrder.Select(s => s.ToOrderDto()) });
-            } catch(Exception e) { 
-                return Ok(new { status = false , message =  e.Message });
+            } catch (Exception e) {
+                return Ok(new { status = false, message = e.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<IActionResult> GetOrderDetailsByOrderIdAsync([FromRoute] int id)
+        {
+            try
+            {
+                var result = await _orderdetail.GetOrderByOrderId(id);
+                if(result == null) {
+                    return Ok(new { status = true, message = "You don't have any order"});
+                }
+
+                return Ok(new { status = true, message = "", Data = result.Select(s => s.toOrderDetailsDto()).ToList() });
+            }
+            catch(Exception e)
+            {
+                return BadRequest(new { status = false, message = e.Message });
             }
         }
 

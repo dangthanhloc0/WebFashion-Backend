@@ -19,7 +19,7 @@ namespace BACKENDEMO.interfaces
         Task<bool> UpdateOrderDetailByUserId(Order order, OrderDetail orderDetail);
 
 
-        Task<OrderDetail>? GetOrderById(int id);
+        Task<List<OrderDetail>>? GetOrderByOrderId(int id);
      
     }
 }

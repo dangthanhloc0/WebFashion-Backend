@@ -9,6 +9,7 @@ namespace BACKENDEMO.Dtos
 {
     public class OrderDto
     {
+        public int Id  { get; set; } 
         public DateTime Date { get; set; }
         public long totalPrice { get; set; }
         public string Address { get; set; } = string.Empty;

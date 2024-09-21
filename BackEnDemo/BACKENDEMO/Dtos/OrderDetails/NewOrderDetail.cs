@@ -7,14 +7,13 @@ using BACKENDEMO.Entity;
 
 namespace BACKENDEMO.Dtos
 {
-    public class newOrder
+    public class NewOrderDetail
     {
-    
- 
-        public string Address { get; set; } = string.Empty;
 
+        public int quantity { get; set; }
 
-        public int methodOfPaymentId { get; set; }  
-        public int stateOrderId  { get; set; }
+        public double price { get; set; }
+
+        public int productId { get; set; }
     }
 }

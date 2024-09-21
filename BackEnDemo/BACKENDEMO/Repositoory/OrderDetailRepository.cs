@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using BACKENDEMO.Data;
-using BACKENDEMO.Dtos.Comment;
-using BACKENDEMO.Entity;
-using BACKENDEMO.Helps;
+﻿
 
+
+using BACKENDEMO.Data;
+using BACKENDEMO.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace BACKENDEMO.interfaces
 {
@@ -81,9 +77,11 @@ namespace BACKENDEMO.interfaces
             throw new NotImplementedException();
         }
 
-        Task<OrderDetail>? IOrderDetailRepository.GetOrderById(int id)
+ 
+
+        public async Task<List<OrderDetail>>? GetOrderByOrderId(int id)
         {
-            throw new NotImplementedException();
+            return await _context.orderDetails.Include(p => p.product).Where(p => p.OrderId == id).ToListAsync();
         }
     }
 }

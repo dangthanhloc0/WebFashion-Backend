@@ -14,6 +14,7 @@ namespace BACKENDEMO.Mappers
         {
             return new OrderDto
             {
+                Id = order.Id,  
                 Date = order.Date,
                 totalPrice = 0,
                 Address = order.Address,
@@ -33,7 +34,7 @@ namespace BACKENDEMO.Mappers
                 AppUserId = UserId,
                 methodOfPaymentId = newOrder.methodOfPaymentId,
                 stateOrderId = newOrder.stateOrderId,
-                stateTransportId = newOrder.stateTransportId,
+                stateTransportId = 1,
 
 
             };
