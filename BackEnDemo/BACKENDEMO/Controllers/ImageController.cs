@@ -40,7 +40,7 @@ namespace BACKENDEMO.Controllers
             return Ok(result);  
         }
 
-        [HttpPost]
+/*        [HttpPost]
         [Route("{id:int}")]
         public async Task<IActionResult> CreateListImage([FromRoute] int id, [FromBody]ImageDto ListStringImage)
         {
@@ -72,6 +72,6 @@ namespace BACKENDEMO.Controllers
                 return BadRequest("Create failed");
             }
     
-        }
+        }*/
     } 
 }

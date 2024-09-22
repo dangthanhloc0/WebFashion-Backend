@@ -131,7 +131,14 @@ namespace BACKENDEMO.Controllers
                     productId = id,
                     imageId = IdImage
                 };
-                var createListImage = _Listimage.SaveListImageAsync(ListImage);
+                try
+                {
+                    _Listimage.SaveListImageAsync(ListImage);
+                } catch(Exception e)
+                {
+                    return Ok(new { status = false, message = "Create image found by image =" + image });
+                }
+
                 count++;
             }
 

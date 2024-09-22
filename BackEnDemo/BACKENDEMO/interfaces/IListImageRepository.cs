@@ -9,7 +9,7 @@ namespace BACKENDEMO.interfaces
     {
         Task<List<String>> ? GetAllListImageAsyncByProductId(int productId);
 
-        Task<bool> SaveListImageAsync(listImage listImage);
+         void SaveListImageAsync(listImage listImage);
      
     }
 }

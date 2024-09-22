@@ -37,18 +37,11 @@ namespace BACKENDEMO.Repositoory
            return ListImage;    
         }
 
-        public async Task<bool> SaveListImageAsync(listImage listImage)
+        public void SaveListImageAsync(listImage listImage)
         {
-            try
-            {
-                await _context.listImages.AddAsync(listImage);  
-                await _context.SaveChangesAsync();
-                return true;
-            }catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
-            }
+           _context.listImages.Add(listImage);  
+            _context.SaveChanges();
+
         }
     }
 }
