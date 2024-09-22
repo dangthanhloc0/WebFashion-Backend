@@ -65,7 +65,7 @@ namespace BACKENDEMO.Controllers
             var cartJson = HttpContext.Session.GetString("Cart");
             if (string.IsNullOrEmpty(cartJson))
             {
-                Ok(new { Status = true, message = "No data in cart" });
+                return Ok(new { Status = true, message = "No data in cart" });
             }
             try
             {
