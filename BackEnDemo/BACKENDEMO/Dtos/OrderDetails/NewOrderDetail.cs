@@ -12,7 +12,7 @@ namespace BACKENDEMO.Dtos
 
         public int quantity { get; set; }
 
-        public double price { get; set; }
+        public long price { get; set; }
 
         public int productId { get; set; }
     }

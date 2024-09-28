@@ -27,7 +27,7 @@ namespace BACKENDEMO.Controllers
         const string SessionKeyProduct = "SessionsProduct";
         public string? SessionInfo_SessionTime { get; private set; }
         private readonly ISessions _Sessions;
-        private readonly AppplicationDBContext _context ;
+        private readonly AppplicationDBContext _context;
         private readonly IProductRepository _product;
         private readonly IImageRepository _image;
         private readonly IListImageRepository _Listimage;
@@ -46,35 +46,35 @@ namespace BACKENDEMO.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProduct([FromQuery]QueryProduct query){
-            Boolean Success = false;           
+        public async Task<IActionResult> GetProduct([FromQuery] QueryProduct query) {
+            Boolean Success = false;
             var productQuery = await _product.GetAllProductsByQuery(query);
 
-            try{
+            try {
                 var products = productQuery.Select(s => s.ToProductDto(null));
-                if(products==null){
+                if (products == null) {
                     Success = false;
                 }
-                else{
-                    Success = true ;
+                else {
+                    Success = true;
                 }
-                            
-                if(Success == true){
+
+                if (Success == true) {
                     return Ok(products);
                 }
 
-            }catch(Exception ex){
-                return NotFound();  
+            } catch (Exception ex) {
+                return NotFound();
             }
-    
+
 
             return BadRequest("not found");
         }
 
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetProductById([FromRoute] int id){
+        public async Task<IActionResult> GetProductById([FromRoute] int id) {
             var Product = await _product.GetProductById(id);
-            if (Product == null){
+            if (Product == null) {
                 return BadRequest("not found product by id=" + id);
             } else
             {
@@ -86,26 +86,26 @@ namespace BACKENDEMO.Controllers
                 var result = Product.ToProductDto(GetListImageProduct);
                 return Ok(result);
             }
-         
+
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody]NewProduct ProductDto)
+        public async Task<IActionResult> CreateProduct([FromBody] NewProduct ProductDto)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
             var ExsitProduct = await _product.CheckProductExsitByName(ProductDto.productName);
 
-            if(ExsitProduct){
+            if (ExsitProduct) {
                 return Ok("Product Exist by name " + ProductDto.productName);
             }
 
             var ExsitCategory = await _context.categories.AnyAsync(x => x.Id == ProductDto.CategoryId);
 
-            if(!ExsitCategory){
+            if (!ExsitCategory) {
                 return Ok("Category not found by id =" + ProductDto.CategoryId);
             }
 
@@ -134,7 +134,7 @@ namespace BACKENDEMO.Controllers
                 try
                 {
                     _Listimage.SaveListImageAsync(ListImage);
-                } catch(Exception e)
+                } catch (Exception e)
                 {
                     return Ok(new { status = false, message = "Create image found by image =" + image });
                 }
@@ -153,29 +153,29 @@ namespace BACKENDEMO.Controllers
 
         [HttpPost]
         [Route("{id:int}")]
-        public async Task<IActionResult> UpdateProduct([FromRoute] int id,[FromBody]UpdateProduct updateProduct){
+        public async Task<IActionResult> UpdateProduct([FromRoute] int id, [FromBody] UpdateProduct updateProduct) {
             if (!ModelState.IsValid)
             {
-                return( BadRequest(ModelState) );
+                return (BadRequest(ModelState));
             }
             var product = updateProduct.ToUpdateProduct();
-            bool result = await _product.UpdatePRoduct(id,product);
+            bool result = await _product.UpdatePRoduct(id, product);
 
-           if(result){
+            if (result) {
                 return Ok("Update product successed");
-           }
+            }
 
             return BadRequest("Update product failed by id =" + id);
 
         }
         [HttpDelete]
         [Route("{id:int}")]
-        public async Task<IActionResult> DeleteProduct([FromRoute,FromBody]int id)
+        public async Task<IActionResult> DeleteProduct([FromRoute, FromBody] int id)
         {
-            
+
             bool result = await _product.DeleteProduct(id);
 
-            if(!result)
+            if (!result)
             {
                 return BadRequest("Product not found or exception");
             }
@@ -200,28 +200,28 @@ namespace BACKENDEMO.Controllers
                 cart = JsonConvert.DeserializeObject<List<ItemProduct>>(cartJson);
                 {
                     var checkExist = cart.SingleOrDefault(p => p.ProductId == item.ProductId);
-                    if(checkExist != null) {
+                    if (checkExist != null) {
                         checkExist.Quantity += item.Quantity;
-                       
+
                     } else
                     {
                         cart.Add(item);
                     }
                     var convert = JsonConvert.SerializeObject(cart);
-                    
+
                     HttpContext.Session.SetString("Cart", convert);
                     return Ok(convert);
                 }
             }
-            catch(JsonException ex)
+            catch (JsonException ex)
             {
                 return BadRequest("Exception when try get cart data in sessions");
-            }           
-           
+            }
+
         }
 
         [HttpGet("GetAllSessions")]
-        public IActionResult GetAllSessionProduct()
+        public async Task<IActionResult> GetAllSessionProduct()
         {
             var cartJson = HttpContext.Session.GetString("Cart");
             if (string.IsNullOrEmpty(cartJson))
@@ -231,19 +231,55 @@ namespace BACKENDEMO.Controllers
             try
             {
                 var cart = JsonConvert.DeserializeObject<List<ItemProduct>>(cartJson);
-                if (cart != null)
-                {                
-                    var convert = JsonConvert.SerializeObject(cart);
-                    HttpContext.Session.SetString("Cart", convert);                  
-                    return Ok(convert);
+                var listProduct = await _product.GetListProductByListId(cart);
+                if (listProduct == null)
+                {
+                    return Ok(new { Status = true, message = "Not found product" });
                 }
+
+                return Ok(new { Status = true, message = "Ok", Data = listProduct });
             }
             catch (JsonException ex)
             {
-                return BadRequest("Exception when try get cart data in sessions");
+                return Ok(new { Status = false, message = ex.Message });
             }
 
-            return BadRequest("Not found item in cart");
+        }
+
+
+        [HttpDelete]
+        [Route("Remove/{id:int}")]
+        public async Task<IActionResult> RemoveFormCartAsync([FromRoute] int id)
+        {
+            var cartJson = HttpContext.Session.GetString("Cart");
+            if (string.IsNullOrEmpty(cartJson))
+            {
+                return BadRequest("No cart data in sessions");
+            }
+            try
+            {
+                var cart = JsonConvert.DeserializeObject<List<ItemProduct>>(cartJson);
+                foreach(var item in cart)
+                {
+                    if(item.ProductId == id) {
+                        cart.Remove(item); 
+                        break;
+                    }
+                }
+                var convert = JsonConvert.SerializeObject(cart);
+                HttpContext.Session.SetString("Cart", convert);
+                var listProduct = await _product.GetListProductByListId(cart);
+                if (listProduct == null)
+                {
+                    return Ok(new { Status = true, message = "Not found product" });
+                }
+
+                return Ok(new { Status = true, message = "Ok", Data = listProduct });
+            }
+            catch (JsonException ex)
+            {
+                return Ok(new { Status = false, message = ex.Message });
+            }
         }
 
         [HttpGet]

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BACKENDEMO.Dtos;
 using BACKENDEMO.Dtos.Comment;
+using BACKENDEMO.Dtos.Sessions;
 using BACKENDEMO.Entity;
 
 namespace BACKENDEMO.Mappers
@@ -24,12 +25,12 @@ namespace BACKENDEMO.Mappers
     };
         }
 
-        public static Order ToNewOrder(this newOrder newOrder,String UserId)
+        public static Order ToNewOrder(this newOrder newOrder,String UserId,long price)
         {
             return new Order
             {
                 Date = DateTime.Now,
-                totalPrice = 0,
+                totalPrice = price,
                 Address = newOrder.Address,
                 AppUserId = UserId,
                 methodOfPaymentId = newOrder.methodOfPaymentId,
@@ -39,6 +40,8 @@ namespace BACKENDEMO.Mappers
 
             };
         }
+
+
 
         public static Category ToCategory(this NewCategory newCategory)
         {

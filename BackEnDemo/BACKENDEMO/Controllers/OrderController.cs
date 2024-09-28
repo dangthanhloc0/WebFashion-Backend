@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 
 using System.Linq;
+using System.Numerics;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using BACKENDEMO.Dtos;
@@ -74,14 +75,21 @@ namespace BACKENDEMO.Controllers
                 {
                     return Ok(new { Status = true, message = "No product exsist" });
                 }
-                var userId = CurrentUser.Id;
-                var order = newOrder.ToNewOrder(userId);
-                var createOrder = await _order.CreateOrder(order);
                 var orderDetails = cart.Select(s => s.ToNewOrderDetail()).ToList();
+                var userId = CurrentUser.Id;
+                long  totaPrice = 0;
+                foreach(var item in orderDetails)
+                {
+                    totaPrice += item.price;
+                }
+                var order = newOrder.ToNewOrder(userId, totaPrice);
+                var createOrder = await _order.CreateOrder(order);
+            
                 var createListOrder = await _orderdetail.CreateListOrderDetail(orderDetails, createOrder);
 
                 if (createListOrder == true)
                 {
+                    HttpContext.Session.Remove("Cart");
                     return Ok(new { Status = true, message = "Create successfully" });
                 }
 
@@ -90,7 +98,7 @@ namespace BACKENDEMO.Controllers
             }
             catch (JsonException e)
             {
-                return BadRequest(new { Status = false, message = e.Message });
+                return Ok(new { Status = false, message = e.Message });
             }
 
         }
@@ -138,6 +146,9 @@ namespace BACKENDEMO.Controllers
                 return BadRequest(new { status = false, message = e.Message });
             }
         }
+
+
+
 
     
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
+using BACKENDEMO.Dtos.Product;
+using BACKENDEMO.Dtos.Sessions;
 using BACKENDEMO.Entity;
 using BACKENDEMO.Helps;
 
@@ -22,9 +24,12 @@ namespace BACKENDEMO.interfaces
 
         Task<Boolean> CheckProductExsitByName(string ProductName);
 
+        Task<List<ProductOrder>> GetListProductByListId(List<ItemProduct> itemproduct);
 
- 
 
-    
+
+
+
+
     }
 }

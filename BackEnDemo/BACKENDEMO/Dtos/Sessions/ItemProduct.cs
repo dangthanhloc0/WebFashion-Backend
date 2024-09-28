@@ -10,7 +10,7 @@ namespace BACKENDEMO.Dtos.Sessions
         [JsonProperty("Quantity")]
         public int Quantity { get; set; }
         [JsonProperty("price")]
-        public double price { get; set; }
+        public long price { get; set; }
 
     }
 }

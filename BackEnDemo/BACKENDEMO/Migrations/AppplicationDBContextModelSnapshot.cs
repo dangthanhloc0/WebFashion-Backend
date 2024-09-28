@@ -343,8 +343,8 @@ namespace BACKENDEMO.Migrations
                     b.Property<int>("productId")
                         .HasColumnType("int");
 
-                    b.Property<double>("price")
-                        .HasColumnType("float");
+                    b.Property<long>("price")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("quantity")
                         .HasColumnType("int");
@@ -480,13 +480,13 @@ namespace BACKENDEMO.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5d1dade5-63a2-4eaa-9094-7a29b6692cc0",
+                            Id = "5b8306c8-d3d0-4bef-8e61-aa62cdc82c51",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "8c33ad6f-11e4-489f-b3a3-0090447113ba",
+                            Id = "2869d3a2-dc54-4972-a1ac-0d986aedff09",
                             Name = "User",
                             NormalizedName = "USER"
                         });

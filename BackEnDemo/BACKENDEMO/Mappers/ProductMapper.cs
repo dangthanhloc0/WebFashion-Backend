@@ -92,5 +92,18 @@ namespace BACKENDEMO.Mappers
 
             };
         }
+
+        public static ProductOrder toProductOrder (this Product product,int quantity)
+        {
+            return new ProductOrder
+            {
+                ProductId = product.ProductId,
+                productName = product.productName,
+                Description = product.Description,
+                Image = product.Image,
+                Price = product.Price,
+                Quantity = quantity,
+            };
+        }
     }
 }

@@ -16,5 +16,7 @@ namespace BACKENDEMO.Dtos
 
         public int methodOfPaymentId { get; set; }  
         public int stateOrderId  { get; set; }
+
+
     }
 }

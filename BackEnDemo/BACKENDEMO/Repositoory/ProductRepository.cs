@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using BACKENDEMO.Controllers;
 using BACKENDEMO.Data;
+using BACKENDEMO.Dtos.Product;
+using BACKENDEMO.Dtos.Sessions;
 using BACKENDEMO.Entity;
 using BACKENDEMO.Helps;
 using BACKENDEMO.interfaces;
+using BACKENDEMO.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -108,6 +111,21 @@ namespace BACKENDEMO.Repositoory
 
             return await products.Skip(skipnumber).Take(query.pageSize).ToListAsync();
 
+        }
+
+        public async Task<List<ProductOrder>> GetListProductByListId(List<ItemProduct> itemproduct)
+        {
+            var products = new List<ProductOrder>(); 
+            foreach(var item in itemproduct) { 
+                var product = await _context.products.SingleOrDefaultAsync(p => p.ProductId == item.ProductId);   
+                if(product != null) {
+                    product.Price = item.price;             
+                    products.Add(product.toProductOrder(item.Quantity));
+                }
+            }
+
+            return products;
+            
         }
 
         public async Task<Product> GetProductById(int id)
