@@ -1,6 +1,0 @@
-@BACKENDEMO_HostAddress = http://localhost:5152
-
-GET {{BACKENDEMO_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
