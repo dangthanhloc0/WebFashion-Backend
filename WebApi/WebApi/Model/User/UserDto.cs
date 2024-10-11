@@ -15,8 +15,11 @@ namespace WebApi.Model.User
         [EmailAddress]
         public string ? EmailAddress {get; set;} 
 
-        [Required]
-        public string ? Password {get; set;} 
-    
+        public string ? Image { get; set;}
+
+        public DateTime birthDay { get ; set;}
+
+        public string? Password { get; set; }
+
     }
 }

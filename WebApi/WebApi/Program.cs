@@ -119,6 +119,7 @@ builder.Services.AddAuthentication(Options => {
 
 
 builder.Services.AddTransient<SellService>();
+builder.Services.AddTransient<FinanceService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>(); 
 builder.Services.AddScoped<IToken, TokenRepository>(); 

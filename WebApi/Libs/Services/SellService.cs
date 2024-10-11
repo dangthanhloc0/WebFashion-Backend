@@ -29,14 +29,14 @@ namespace Libs.Services
             this.dbContext.SaveChanges();
         }
         public async Task<List<Order>> getOrderList() {
-
-            return await orderRepository.GetAllAsync();
-      
+            var Orders = await dbContext.orders.Include(x => x.stateOrder).Include(p => p.stateTransport)
+                               .Include(t => t.methodOfPayment).ToListAsync();
+            return Orders;
         }
 
         public async Task<List<OrderDetail>> GetAllOrderDetailByOrderId(Guid orderId)
         {
-            return await dbContext.orderDetails.Include(p => p.product).Where(p => p.OrderId == orderId).ToListAsync();
+            return await orderDetailRepository.GetAllOrderDetailByOrderId(orderId);  
         }
 
 

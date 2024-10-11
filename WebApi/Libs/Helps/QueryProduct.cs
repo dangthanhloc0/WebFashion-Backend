@@ -13,7 +13,7 @@ namespace Libs.Helps
         // null không làm gì
         // true gi?m d?n
         // false t?ng d?n
-        public bool? IsDecsendingByPrice { get; set; }
+        public bool? IsDecsendingByPrice { get; set; } = false;
 
         // l?y t?t c? s?n ph?m thu?c 1 category
         public Guid? categoryId { get; set; } = null;

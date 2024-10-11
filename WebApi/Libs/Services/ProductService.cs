@@ -19,7 +19,7 @@ namespace Libs.Services
         private ApplicationDbContext _dbContext;
         private ICategoryRepository  _categoty;
         private IProductRepository _product;
-          private IImageRepository _image;
+         private IImageRepository _image;
 
         public ProductService(ApplicationDbContext dbContext, ICategoryRepository categoty,IProductRepository product )
         {

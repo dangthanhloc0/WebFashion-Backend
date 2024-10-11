@@ -147,6 +147,25 @@ namespace WebApi.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Admin")]
+        public async Task<IActionResult> GetAllOrderByAdmin()
+        {
+            try
+            {
+                var result = await _sell.getOrderList();
+                if(result == null)
+                {
+                    return Ok(new { status = true, message = "not found order" });
+                }
+
+                return Ok(new { status = true, message = "GetAllOrder", data = result.Select(s => s.ToOrderDto()).ToList() });
+            }catch(Exception e)
+            {
+                return Ok(new { status = false,messgae = e.Message});   
+            }
+        }
+
 
 
 
