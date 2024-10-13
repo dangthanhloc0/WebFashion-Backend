@@ -8,7 +8,6 @@ namespace WebApi.Model.User
 {
     public class UserDto
     {   
-        [Required]
         public string ? Username {get; set;}      
 
         [Required]
@@ -17,7 +16,7 @@ namespace WebApi.Model.User
 
         public string ? Image { get; set;}
 
-        public DateTime birthDay { get ; set;}
+        public string ? birthDay { get ; set;}
 
         public string? Password { get; set; }
 

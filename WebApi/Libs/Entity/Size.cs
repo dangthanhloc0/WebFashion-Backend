@@ -8,8 +8,12 @@ namespace Libs.Entity
 {
     public class Size
     {
-        public int Guid { get; set; }
+        public int Id { get; set; }
         [Required]
         public string sizeName { get; set; } = string.Empty;
+ 
+
+        public ICollection<SizeDetail> ? sizeDetails { get; set; }
+
     }
 }

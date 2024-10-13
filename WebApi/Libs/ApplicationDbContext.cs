@@ -43,6 +43,7 @@ namespace Libs
         public DbSet<NotificationDetail> notificationDetails { get; set; }
 
         public DbSet<Category> categories { get; set; }
+        public DbSet<SizeDetail> sizeDetails { get; set; }  
 
 
 
@@ -52,10 +53,12 @@ namespace Libs
             builder.Entity<listImage>(x => x.HasKey(p => new { p.productId, p.imageId }));
             builder.Entity<DiscountDetail>(x => x.HasKey(p => new { p.AppUserId, p.DiscountId }));
             builder.Entity<OrderDetail>(x => x.HasKey(p => new { p.Id, p.OrderId, p.productId }));
-            builder.Entity<OrderDetail>().Property(p => p.Id).ValueGeneratedOnAdd(); // Configures auto-increment
+            // Configures auto-increment
+            builder.Entity<OrderDetail>().Property(p => p.Id).ValueGeneratedOnAdd(); 
             builder.Entity<MessageDetail>(x => x.HasKey(p => new { p.productId, p.messageOfCustomerId }));
             builder.Entity<NotificationDetail>(x => x.HasKey(p => new { p.productId, p.notificationId }));
             builder.Entity<Image>().Property(p => p.Id).ValueGeneratedOnAdd();
+            builder.Entity<SizeDetail>(x => x.HasKey(p => new { p.sizeId, p.ProductId }));
 
 
 
@@ -109,6 +112,16 @@ namespace Libs
                 .WithMany(u => u.notificationDetails)
                 .HasForeignKey(p => p.notificationId);
 
+            builder.Entity<SizeDetail>()
+                .HasOne(x => x.size)
+                .WithMany(u => u.sizeDetails)
+                .HasForeignKey(p => p.sizeId);
+
+
+            builder.Entity<SizeDetail>()
+                .HasOne(x => x.product)
+                .WithMany(u => u.sizeDetails)
+                .HasForeignKey(p => p.ProductId);
 
             List<IdentityRole> roles = new List<IdentityRole>{
                 new IdentityRole{

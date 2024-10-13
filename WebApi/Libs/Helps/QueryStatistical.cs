@@ -10,8 +10,7 @@ namespace Libs.Helps
     {
         public int start { get; set; } = 1;
         public int end { get; set; } = 12;
-        public float totalMin { get; set; } = 0;
-        public float totalMax { get; set; } = 99999999;
+        public int year { get; set; } = DateTime.Now.Year;
         public bool IsDecsendingByPrice { get; set; } = false;
     }
 }

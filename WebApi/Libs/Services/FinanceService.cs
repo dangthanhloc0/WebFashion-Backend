@@ -35,6 +35,10 @@ namespace Libs.Services
                 }
                 else
                 {
+                    if (query.year != DateTime.Now.Year)
+                    {
+                        orders = orders.Where(s => s.Date.Year == query.year);
+                    }
 
                     if (query.start != 0)
                     {

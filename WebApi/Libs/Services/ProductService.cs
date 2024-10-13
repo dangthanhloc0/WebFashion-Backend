@@ -245,6 +245,17 @@ namespace Libs.Services
             return await _image.GetAllListImageAsyncByProductId(productId);
         }
 
+        public async Task<List<SizeDetail>> GetAllSizeByProduct(Guid productId)
+        {
+            return await _dbContext.sizeDetails.Include(x => x.size).ToListAsync();
+        }
+
+        public async void AddSizeDetial(SizeDetail sizeDetail)
+        {
+            _dbContext.sizeDetails.Add(sizeDetail); 
+            Save(); 
+        }
+
     }
 
 }

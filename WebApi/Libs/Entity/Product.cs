@@ -29,7 +29,7 @@ namespace Libs.Entity
         public int quantitySellSucesss {get; set;} =  0;
 
         [Required]
-        [StringLength(200 ,MinimumLength =0)]
+        [StringLength(5000 ,MinimumLength =0)]
         public string Description {get; set;} =  string.Empty;
 
         [Required]
@@ -52,6 +52,8 @@ namespace Libs.Entity
         public  ICollection<MessageDetail> ? messageDetails { get; set; }
         [JsonIgnore]
         public ICollection<NotificationDetail> ? notificationDetails { get; set; }
+
+        public ICollection<SizeDetail> ? sizeDetails { get; set; }  
 
 
 

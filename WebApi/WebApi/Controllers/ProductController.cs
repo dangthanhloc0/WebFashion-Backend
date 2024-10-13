@@ -289,6 +289,24 @@ namespace BACKENDEMO.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetAllSize/{id:Guid}")]
+        public async Task<IActionResult> GetAllSizeByProductId(Guid id)
+        {
+            try
+            {
+                var result = await _productService.GetAllSizeByProduct(id);
+                if(result == null)
+                {
+                    return Ok(new { Status = false, message = "not found size" });
+                }    
+  
+                return Ok(new { Status = false, message = "", Data = result.Select(s=> s.toSizeDetailUi()) });
+            } catch(Exception ex) {
+                return Ok(new { Status = false, message = ex.Message });
+            }
+        }
+
 /*        [HttpGet]
         [Route("AddToCart")]
         public IActionResult AddToCart()

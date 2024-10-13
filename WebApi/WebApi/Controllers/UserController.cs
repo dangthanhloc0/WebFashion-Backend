@@ -55,31 +55,41 @@ namespace WebApi.Controllers
 
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UserDto UserDto)
+        public async Task<IActionResult> Update([FromBody] UserInformation userInformation)
         {
+            if (!ModelState.IsValid)
+            {
+                return Ok(new { status = false, messgae = ModelState });
+            } 
             try
             {
+                // User's email
+                var emailClaim = User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
 
-                if (!string.IsNullOrEmpty(UserDto.Username))
+                var CurrentUser = await _userManager.FindByEmailAsync(emailClaim);
+                if (CurrentUser == null)
                 {
-                    var User = await _userManager.FindByNameAsync(UserDto.Username);
-                    if (User == null)
-                    {
-                        return Ok(new { status = false, message = "not found user" + UserDto.Username });
-                    }
-                    if (!string.IsNullOrEmpty(UserDto.Image))
-                    {
-                        User.Image = UserDto.Image;
-                    }
-                    if (UserDto.birthDay != null)
-                    {
-                        User.birthDay = UserDto.birthDay;
-                    }
-                    var result = await _userManager.UpdateAsync(User);
-                    return Ok(new { status = true, message = "Update Success", data = User.ToUserDto() });
-
+                    return Unauthorized();
                 }
-                return Ok(new { status = false, message = "Username is having issue" });
+
+              /*  if (!string.IsNullOrEmpty(UserDto.Username))
+                {
+                    
+                }*/
+
+                if (!string.IsNullOrEmpty(userInformation.Image))
+                {
+                    CurrentUser.Image = userInformation.Image;
+                }
+
+                string birthDay = userInformation.Day + "/" + userInformation.Month + "/" + userInformation.Year;   
+                if (birthDay != null)
+                {
+                    CurrentUser.birthDay = birthDay;
+                }
+                var result = await _userManager.UpdateAsync(CurrentUser);
+                return Ok(new { status = true, message = "Update Success", data = CurrentUser.ToUserDto() });
+          
 
             }
             catch(Exception e)

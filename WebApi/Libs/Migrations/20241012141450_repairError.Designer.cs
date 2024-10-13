@@ -4,6 +4,7 @@ using Libs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Libs.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241012141450_repairError")]
+    partial class repairError
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,8 +80,8 @@ namespace Libs.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("birthDay")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("birthDay")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -394,41 +397,6 @@ namespace Libs.Migrations
                     b.ToTable("products");
                 });
 
-            modelBuilder.Entity("Libs.Entity.Size", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("sizeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Size");
-                });
-
-            modelBuilder.Entity("Libs.Entity.SizeDetail", b =>
-                {
-                    b.Property<int>("sizeId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("sizeId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("sizeDetails");
-                });
-
             modelBuilder.Entity("Libs.Entity.StateOrder", b =>
                 {
                     b.Property<int>("Id")
@@ -507,13 +475,13 @@ namespace Libs.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cf87dd26-c8d0-405b-8afd-4a767baf14b2",
+                            Id = "a8e5ebce-1d86-4b38-8a20-269e6efde61b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "8a228235-ef2b-4c55-b382-8bf128aad4eb",
+                            Id = "993a8446-f66d-4781-af82-acee1d76353b",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -765,25 +733,6 @@ namespace Libs.Migrations
                     b.Navigation("category");
                 });
 
-            modelBuilder.Entity("Libs.Entity.SizeDetail", b =>
-                {
-                    b.HasOne("Libs.Entity.Product", "product")
-                        .WithMany("sizeDetails")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Libs.Entity.Size", "size")
-                        .WithMany("sizeDetails")
-                        .HasForeignKey("sizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("product");
-
-                    b.Navigation("size");
-                });
-
             modelBuilder.Entity("Libs.Entity.listImage", b =>
                 {
                     b.HasOne("Libs.Entity.Image", "ImageProducts")
@@ -909,13 +858,6 @@ namespace Libs.Migrations
                     b.Navigation("notificationDetails");
 
                     b.Navigation("orderDetails");
-
-                    b.Navigation("sizeDetails");
-                });
-
-            modelBuilder.Entity("Libs.Entity.Size", b =>
-                {
-                    b.Navigation("sizeDetails");
                 });
 
             modelBuilder.Entity("Libs.Entity.StateOrder", b =>

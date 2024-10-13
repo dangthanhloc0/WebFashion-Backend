@@ -15,7 +15,10 @@ namespace WebApi.Mappers
             {
                 Username = AppUser.UserName,    
                 Password = AppUser.PasswordHash,
-                EmailAddress = AppUser.Email
+                EmailAddress = AppUser.Email,
+                Image = AppUser.Image,
+                birthDay = AppUser.birthDay,
+                
             };
         }
 
