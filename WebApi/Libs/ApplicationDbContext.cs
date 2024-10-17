@@ -134,6 +134,34 @@ namespace Libs
                 }
             };
 
+            List<Size> sizes = new List<Size> {
+                 new Size
+                 {
+                    sizeName = "XS",
+                 },
+                 new Size
+                 {
+                    sizeName = "S",
+                 },
+                 new Size
+                 {
+                    sizeName = "M"
+                 } ,
+                 new Size
+                 {
+                    sizeName = "L",
+                 },
+                  new Size
+                 {
+                    sizeName = "XL",
+                 },
+                 new Size
+                 {
+                    sizeName = "XXL",
+                 },
+                 
+            };
+
 
             builder.Entity<IdentityRole>().HasData(roles);
 
