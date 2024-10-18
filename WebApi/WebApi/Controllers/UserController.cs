@@ -130,5 +130,28 @@ namespace WebApi.Controllers
 
         }
 
+        [HttpGet("GetCurrentUser")]
+        [Authorize]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            try
+            {
+                // User's email
+                var emailClaim = User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+
+                var CurrentUser = await _userManager.FindByEmailAsync(emailClaim);
+                if (CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+
+                return Ok(new { status = true, message = "", data = CurrentUser.ToUserDto() });
+            }
+            catch (Exception e)
+            {
+                return Ok(new { status = false, message = e.Message });
+            }
+        }
+
     }
 }
