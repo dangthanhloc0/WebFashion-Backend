@@ -11,9 +11,7 @@ namespace WebApi.Model.User
 
         public string ? Image { get; set;}
 
-        public string ? Year { get ; set;}
-        public string ? Month { get; set; }
-        public string ? Day { get; set; }
+        public DateTime ? BirthDay { get ; set;}
 
 
     }

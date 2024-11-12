@@ -14,6 +14,6 @@ namespace Libs.Entity
 
         public string ? Image { get ; set; }  
 
-        public string ? birthDay { get; set; }
+        public DateTime ? birthDay { get; set; }
     }
 }

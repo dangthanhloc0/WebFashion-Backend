@@ -82,10 +82,10 @@ namespace WebApi.Controllers
                     CurrentUser.Image = userInformation.Image;
                 }
 
-                string birthDay = userInformation.Day + "/" + userInformation.Month + "/" + userInformation.Year;   
-                if (birthDay != null)
+
+                if (userInformation.BirthDay != null)
                 {
-                    CurrentUser.birthDay = birthDay;
+                    CurrentUser.birthDay = userInformation.BirthDay;
                 }
                 var result = await _userManager.UpdateAsync(CurrentUser);
                 return Ok(new { status = true, message = "Update Success", data = CurrentUser.ToUserDto() });

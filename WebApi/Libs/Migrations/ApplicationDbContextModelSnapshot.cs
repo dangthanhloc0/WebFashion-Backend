@@ -77,8 +77,8 @@ namespace Libs.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("birthDay")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("birthDay")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -507,13 +507,13 @@ namespace Libs.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "732ab23e-5545-4021-9a35-975d2f80814b",
+                            Id = "91cf7211-0cc3-4943-9fe0-9c7d9eed35c6",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "224c9da3-ddaf-4760-a638-cf4ba6324d2b",
+                            Id = "6cb9eb01-e72e-43c7-a39c-c1d4b8aeaf21",
                             Name = "User",
                             NormalizedName = "USER"
                         });

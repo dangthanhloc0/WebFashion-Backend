@@ -84,6 +84,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     //options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
 }, ServiceLifetime.Transient);
+
+// Identity service
 builder.Services.AddIdentity<AppUser , IdentityRole>(Options => {
     Options.Password.RequireDigit = true;
     Options.Password.RequireLowercase = true;
