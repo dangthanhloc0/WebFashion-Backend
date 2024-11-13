@@ -16,12 +16,9 @@ namespace Libs.Entity
 
         public string Image { get; set; } = string.Empty;
 
-        public Guid MessageOfCustomerId { get; set; }
-
         public ICollection<MessageDetail> messageDetails { get; set; }
 
         public string UserId { get; set; }
-
         public AppUser appUser { get; set; }
     }
 }

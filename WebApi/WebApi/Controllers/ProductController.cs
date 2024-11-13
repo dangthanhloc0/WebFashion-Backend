@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
+using System.Net.WebSockets;
+using System.Security.Claims;
 using WebApi.Mappers;
 using WebApi.Model.Product;
 using WebApi.Model.Sessions;
@@ -37,12 +39,15 @@ namespace BACKENDEMO.Controllers
 
         private readonly ProductService _productService;
 
- 
-        public ProductController(TokenService token, IHttpContextAccessor contx, ProductService productService)
+        private readonly UserManager<AppUser> _userManager;
+
+
+        public ProductController(UserManager<AppUser> userManager, TokenService token, IHttpContextAccessor contx, ProductService productService)
         {
             _token = token;
             _contx = contx;
             _productService = productService;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -75,7 +80,8 @@ namespace BACKENDEMO.Controllers
                     {
                         return Ok(new { status = true, message = "not found image" ,data= Product.toProduct() });
                     }
-                    var result = Product.toProduct(GetListImageProduct);
+                    var GetSizeDetails = await _productService.GetAllSizeByProduct(id);
+                    var result = Product.toProduct(GetListImageProduct, GetSizeDetails);
                     return Ok(new { status = true, message = "", data = result });
                 }
             }
@@ -111,7 +117,18 @@ namespace BACKENDEMO.Controllers
                 }
                 var product = newProduct.ToCreateNewProductDto();
                 var ListStringImage = newProduct.imageUrls;
-                var message =_productService.CreateProduct(product, ListStringImage);
+                List<SizeDetail> sizeDetails = new List<SizeDetail>();
+                foreach (var item in newProduct.sizeDetails)
+                {
+                    SizeDetail SD = new SizeDetail
+                    {
+                        ProductId = product.Id,
+                        Quantity = item.quantity,
+                        sizeId = item.sizeId,
+                    };
+                    sizeDetails.Add(SD);
+                }
+                var message =_productService.CreateProduct(product, ListStringImage,sizeDetails);
                 if(message == "Ok")
                 {
                     return RedirectToAction("GetProduct", null);
@@ -305,6 +322,28 @@ namespace BACKENDEMO.Controllers
             } catch(Exception ex) {
                 return Ok(new { Status = false, message = ex.Message });
             }
+        }
+
+        [HttpPost]
+        [Route("addMessage/{id:Guid}")]
+        public async Task<IActionResult> AddMessage(Guid id,string message,string Image)
+        {
+            try
+            {
+                var emailClaim = User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+                var CurrentUser = await _userManager.FindByEmailAsync(emailClaim);
+                if (CurrentUser == null)
+                {
+                    return Unauthorized();
+                }
+                _productService.AddMessage(message, Image, CurrentUser, id);
+                return Ok(new { Status = true, message = "Ok"  });
+            }
+            catch (Exception e)
+            {
+                return Ok(new { Status = false, message = e.Message });
+            }
+
         }
 
 /*        [HttpGet]

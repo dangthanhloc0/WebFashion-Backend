@@ -21,6 +21,6 @@ namespace Libs.Helps
         // s? trang : ví d? trang 1 ,trang  2
         public int pageNumber {get; set;} = 1;
         // s? l??ng ph?n t? có trong trang
-        public int pageSize {get; set;} = 10;   
+        public int pageSize {get; set;} = 1000;   
     }
 }

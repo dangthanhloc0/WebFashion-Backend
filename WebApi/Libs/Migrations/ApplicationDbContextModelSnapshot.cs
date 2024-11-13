@@ -215,13 +215,6 @@ namespace Libs.Migrations
                         .HasMaxLength(5000)
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("MessageOfCustomerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("appUserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -507,13 +500,13 @@ namespace Libs.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "91cf7211-0cc3-4943-9fe0-9c7d9eed35c6",
+                            Id = "74a3ba9b-f994-4db4-b3ad-865e0914c7dc",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "6cb9eb01-e72e-43c7-a39c-c1d4b8aeaf21",
+                            Id = "44b5f26e-bd82-444f-9cb5-11c9006bdfc3",
                             Name = "User",
                             NormalizedName = "USER"
                         });

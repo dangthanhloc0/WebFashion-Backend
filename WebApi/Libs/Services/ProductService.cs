@@ -58,7 +58,7 @@ namespace Libs.Services
             return _product.Any(filer);
         }
 
-        public string CreateProduct(Product product,List<string> imageUrls)
+        public string CreateProduct(Product product,List<string> imageUrls,List<SizeDetail> sizeDetails)
         {
             try
             {
@@ -81,6 +81,13 @@ namespace Libs.Services
                             imageId = image.Id
                         };
                         _dbContext.listImages.Add(listImage);
+                    }
+                }
+                if(sizeDetails.Count > 0)
+                {
+                    foreach(var item in sizeDetails)
+                    {
+                        _dbContext.sizeDetails.Add(item);
                     }
                 }
             }
@@ -254,6 +261,41 @@ namespace Libs.Services
         {
             _dbContext.sizeDetails.Add(sizeDetail); 
             Save(); 
+        }
+
+
+        public Product calculatorQuantitySuccess(Guid Id,int quantity)
+        {
+            var product = _dbContext.products.FirstOrDefault(x => x.Id == Id);
+            if(product == null)
+            {
+                return null;
+            }
+            product.quantitySellSucesss = product.quantitySellSucesss + quantity;
+            _dbContext.SaveChanges();
+            return product;
+        }
+
+        public void AddMessage(string message,string url,AppUser user,Guid productId)
+        {
+            var messageOfCustommer = new MessageOfCustomer
+            {
+                Id = Guid.NewGuid(),
+                Image = url,
+                Message = message,
+                UserId = user.Id
+
+            };
+            _dbContext.messageOfCustomers.Add(messageOfCustommer);
+            var messageDetail = new MessageDetail
+            {
+                messageOfCustomerId = messageOfCustommer.Id,
+                productId = productId,
+                Time = DateTime.Now,
+
+            };
+            _dbContext.messageDetails.Add(messageDetail);
+            _dbContext.SaveChanges();
         }
 
     }

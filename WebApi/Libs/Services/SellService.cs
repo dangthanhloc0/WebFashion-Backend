@@ -40,6 +40,18 @@ namespace Libs.Services
         }
 
 
+        public Product calculatorQuantitySuccess(Guid Id, int quantity)
+        {
+            var product = dbContext.products.FirstOrDefault(x => x.Id == Id);
+            if (product == null)
+            {
+                return null;
+            }
+            product.quantitySellSucesss = product.quantitySellSucesss + quantity;
+            dbContext.SaveChanges();
+            return product;
+        }
+
 
         public String CreateBillSellProdcut(IEnumerable<OrderDetail> listOrderDetial, Order order)
         {
@@ -54,6 +66,7 @@ namespace Libs.Services
                     orderDetail.OrderId = IdOrder;
                     orderDetailRepository.Add(orderDetail);
                     totalPrice += orderDetail.quantity * orderDetail.price;
+                    calculatorQuantitySuccess(orderDetail.productId, orderDetail.quantity);
                 }
                 order.totalPrice = totalPrice;
             }catch(Exception e)

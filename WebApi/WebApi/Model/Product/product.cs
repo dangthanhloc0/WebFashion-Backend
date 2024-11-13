@@ -1,5 +1,7 @@
 
 
+using WebApi.Model.SizeDetail;
+
 namespace WebApi.Model.Product
 {
     public class product
@@ -22,6 +24,8 @@ namespace WebApi.Model.Product
         public String categoryName { get; set; } = null;
 
         public List<string> ListStringImage { get; set; }
+
+        public List<SizeDetailUi> sizeDetails { get; set; }
 
     }
 }

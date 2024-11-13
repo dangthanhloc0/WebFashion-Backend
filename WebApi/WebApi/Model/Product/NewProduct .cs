@@ -1,6 +1,9 @@
 
+using Libs.Entity;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 using WebApi.Model.Image;
+using WebApi.Model.SizeDetail;
 
 
 namespace WebApi.Model.Product
@@ -27,6 +30,8 @@ namespace WebApi.Model.Product
         [Required]
         public Guid CategoryId { get; set; }
         public List<string> ? imageUrls { get; set; }
+
+        public List<SizeDetailCreate> sizeDetails { get; set; } 
 
         // public ICollection<OrderDetail> orderDetails { get; set; }
 
