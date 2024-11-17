@@ -3689,19 +3689,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\huuth\\.nuget\\packages\\": {}
+    "C:\\Users\\trant\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\huuth\\Desktop\\Loc\\WebApi\\Libs\\Libs.csproj",
+      "projectUniqueName": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Libs.csproj",
       "projectName": "Libs",
-      "projectPath": "C:\\Users\\huuth\\Desktop\\Loc\\WebApi\\Libs\\Libs.csproj",
-      "packagesPath": "C:\\Users\\huuth\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\huuth\\Desktop\\Loc\\WebApi\\Libs\\obj\\",
+      "projectPath": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Libs.csproj",
+      "packagesPath": "C:\\Users\\trant\\.nuget\\packages\\",
+      "outputPath": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\huuth\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\trant\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3721,6 +3721,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3780,7 +3785,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }

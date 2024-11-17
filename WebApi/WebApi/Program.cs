@@ -1,6 +1,7 @@
 using Libs;
 using Libs.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.FileProviders;
 
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -117,9 +118,6 @@ builder.Services.AddAuthentication(Options => {
 }
 );
 
-
-
-
 builder.Services.AddTransient<SellService>();
 builder.Services.AddTransient<FinanceService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -149,6 +147,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles(); 
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(@"D:\DACN\DoAnChuyenNghanh\WebApi\WebApi\images"),
+    RequestPath = "/images"
+});
+
 
 app.UseCors("AllowAll");
 
