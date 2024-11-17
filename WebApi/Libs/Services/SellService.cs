@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Query.Internal;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace Libs.Services
         }
 
 
-        public Product calculatorQuantitySuccess(Guid Id, int quantity)
+        public Product calculatorQuantitySuccess(Guid Id, int quantity,int sizeId)
         {
             var product = dbContext.products.FirstOrDefault(x => x.Id == Id);
             if (product == null)
@@ -48,9 +49,17 @@ namespace Libs.Services
                 return null;
             }
             product.quantitySellSucesss = product.quantitySellSucesss + quantity;
+            product.quantityMaterial--;
+            var sizeDetails = dbContext.sizeDetails.FirstOrDefault(x => x.ProductId == Id && x.sizeId == sizeId);
+            if (sizeDetails == null)
+            {
+                return null;
+            }
+            sizeDetails.Quantity--;
             dbContext.SaveChanges();
             return product;
         }
+
 
 
         public String CreateBillSellProdcut(IEnumerable<OrderDetail> listOrderDetial, Order order)
@@ -66,7 +75,7 @@ namespace Libs.Services
                     orderDetail.OrderId = IdOrder;
                     orderDetailRepository.Add(orderDetail);
                     totalPrice += orderDetail.quantity * orderDetail.price;
-                    calculatorQuantitySuccess(orderDetail.productId, orderDetail.quantity);
+                    calculatorQuantitySuccess(orderDetail.productId, orderDetail.quantity, orderDetail.sizeId);
                 }
                 order.totalPrice = totalPrice;
             }catch(Exception e)
@@ -97,6 +106,8 @@ namespace Libs.Services
             return result;
         }
 
+
+ 
    
 
 

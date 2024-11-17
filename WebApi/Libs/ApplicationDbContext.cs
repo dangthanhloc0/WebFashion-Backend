@@ -59,6 +59,7 @@ namespace Libs
             builder.Entity<NotificationDetail>(x => x.HasKey(p => new { p.productId, p.notificationId }));
             builder.Entity<Image>().Property(p => p.Id).ValueGeneratedOnAdd();
             builder.Entity<SizeDetail>(x => x.HasKey(p => new { p.sizeId, p.ProductId }));
+            builder.Entity<MessageDetail>(x => x.HasKey(p => new { p.productId, p.messageOfCustomerId }));
 
 
 
@@ -122,6 +123,16 @@ namespace Libs
                 .HasOne(x => x.product)
                 .WithMany(u => u.sizeDetails)
                 .HasForeignKey(p => p.ProductId);
+
+            builder.Entity<MessageDetail>()
+                .HasOne(x => x.product)
+                .WithMany(u => u.messageDetails)
+                .HasForeignKey(p => p.productId);
+
+            builder.Entity<MessageDetail>()
+                .HasOne(x => x.messageOfCustomer)
+                .WithMany(u => u.messageDetails)
+                .HasForeignKey(p => p.messageOfCustomerId);
 
             List<IdentityRole> roles = new List<IdentityRole>{
                 new IdentityRole{

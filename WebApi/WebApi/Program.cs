@@ -151,7 +151,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles(); 
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(@"D:\DACN\DoAnChuyenNghanh\WebApi\WebApi\images"),
+    FileProvider = new PhysicalFileProvider(@"C:\Users\huuth\Desktop\DoAnChuyenNghanh\WebApi\WebApi\images"),
     RequestPath = "/images"
 });
 

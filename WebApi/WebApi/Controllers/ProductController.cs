@@ -336,7 +336,8 @@ namespace BACKENDEMO.Controllers
                 {
                     return Unauthorized();
                 }
-                _productService.AddMessage(message, Image, CurrentUser, id);
+                var userId = CurrentUser.Id;
+                _productService.AddMessage(message, Image, userId, id);
                 return Ok(new { Status = true, message = "Ok"  });
             }
             catch (Exception e)

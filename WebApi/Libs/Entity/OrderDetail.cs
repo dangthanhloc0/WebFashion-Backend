@@ -25,6 +25,9 @@ namespace Libs.Entity
 
         public Guid productId { get; set; }
         public Product product { get; set; }
+
+        public int sizeId { get; set; } 
+        public Size ? size { get; set; }
    
 
         

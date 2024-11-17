@@ -32,6 +32,8 @@ namespace WebApi.Mappers
                 price = itemProduct.price,
 
                 productId = itemProduct.ProductId,
+                sizeId = itemProduct.sizeId,
+
 
             };
         }

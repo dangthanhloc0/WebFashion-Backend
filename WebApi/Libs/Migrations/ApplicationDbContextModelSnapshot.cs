@@ -215,6 +215,10 @@ namespace Libs.Migrations
                         .HasMaxLength(5000)
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("appUserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -336,11 +340,16 @@ namespace Libs.Migrations
                     b.Property<int>("quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("sizeId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id", "OrderId", "productId");
 
                     b.HasIndex("OrderId");
 
                     b.HasIndex("productId");
+
+                    b.HasIndex("sizeId");
 
                     b.ToTable("orderDetails");
                 });
@@ -500,13 +509,13 @@ namespace Libs.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "74a3ba9b-f994-4db4-b3ad-865e0914c7dc",
+                            Id = "1c118efb-bd7c-458e-952f-4c426cdacf38",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "44b5f26e-bd82-444f-9cb5-11c9006bdfc3",
+                            Id = "00a1f99a-5c29-41c0-8120-cfdea1634260",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -742,9 +751,17 @@ namespace Libs.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Libs.Entity.Size", "size")
+                        .WithMany("orderDetails")
+                        .HasForeignKey("sizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("order");
 
                     b.Navigation("product");
+
+                    b.Navigation("size");
                 });
 
             modelBuilder.Entity("Libs.Entity.Product", b =>
@@ -908,6 +925,8 @@ namespace Libs.Migrations
 
             modelBuilder.Entity("Libs.Entity.Size", b =>
                 {
+                    b.Navigation("orderDetails");
+
                     b.Navigation("sizeDetails");
                 });
 

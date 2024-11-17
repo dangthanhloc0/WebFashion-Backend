@@ -19,6 +19,6 @@ namespace Libs.Entity
         public ICollection<MessageDetail> messageDetails { get; set; }
 
         public string UserId { get; set; }
-        public AppUser appUser { get; set; }
+        public AppUser  appUser { get; set; }
     }
 }

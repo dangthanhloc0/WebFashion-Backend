@@ -12,5 +12,7 @@ namespace WebApi.Model.Sessions
         [JsonProperty("price")]
         public float price { get; set; }
 
+        public int sizeId { get; set; }
+
     }
 }

@@ -276,20 +276,21 @@ namespace Libs.Services
             return product;
         }
 
-        public void AddMessage(string message,string url,AppUser user,Guid productId)
+        public async void AddMessage(string message,string url,String userID,Guid productId)
         {
+            var ID = Guid.NewGuid();
             var messageOfCustommer = new MessageOfCustomer
             {
-                Id = Guid.NewGuid(),
+                Id = ID,
                 Image = url,
                 Message = message,
-                UserId = user.Id
+                UserId = userID
 
             };
             _dbContext.messageOfCustomers.Add(messageOfCustommer);
             var messageDetail = new MessageDetail
             {
-                messageOfCustomerId = messageOfCustommer.Id,
+                messageOfCustomerId = ID,
                 productId = productId,
                 Time = DateTime.Now,
 

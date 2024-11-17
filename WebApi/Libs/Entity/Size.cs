@@ -15,5 +15,7 @@ namespace Libs.Entity
 
         public ICollection<SizeDetail> ? sizeDetails { get; set; }
 
+        public ICollection<OrderDetail> ? orderDetails { get; set; }    
+
     }
 }
