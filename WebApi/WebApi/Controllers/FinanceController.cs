@@ -1,12 +1,14 @@
 ﻿using Libs.Helps;
 using Libs.Repositories;
 using Libs.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
     [Route("v6/api/Finance")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class FinanceController : ControllerBase
     {
         private FinanceService _fi;

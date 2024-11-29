@@ -12,7 +12,7 @@ namespace WebApi.Controllers
 {
     [Route("v3/api/user")]
     [ApiController]
-    [Authorize]
+    
     public class UserController : ControllerBase
     {
 
@@ -23,6 +23,7 @@ namespace WebApi.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {

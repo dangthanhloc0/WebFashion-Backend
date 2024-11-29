@@ -3,36 +3,32 @@
   "WorkspaceRootPath": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|d:\\dacn\\doanchuyennghanh\\webapi\\webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|solutionrelative:webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|d:\\dacn\\doanchuyennghanh\\webapi\\webapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|solutionrelative:webapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|d:\\dacn\\doanchuyennghanh\\webapi\\webapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|solutionrelative:webapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|d:\\dacn\\doanchuyennghanh\\webapi\\webapi\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|solutionrelative:webapi\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|d:\\dacn\\doanchuyennghanh\\webapi\\webapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|solutionrelative:webapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|d:\\dacn\\doanchuyennghanh\\webapi\\webapi\\mappers\\messagedetailmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|solutionrelative:webapi\\mappers\\messagedetailmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B962FB36-BE1F-4237-9DEE-6C1FDA217F49}|Libs\\Libs.csproj|d:\\dacn\\doanchuyennghanh\\webapi\\libs\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B962FB36-BE1F-4237-9DEE-6C1FDA217F49}|Libs\\Libs.csproj|solutionrelative:libs\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|d:\\dacn\\doanchuyennghanh\\webapi\\webapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|solutionrelative:webapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|d:\\dacn\\doanchuyennghanh\\webapi\\webapi\\mappers\\productmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{741AF315-7318-4F49-83AA-76D441B82731}|WebApi\\WebApi.csproj|solutionrelative:webapi\\mappers\\productmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B962FB36-BE1F-4237-9DEE-6C1FDA217F49}|Libs\\Libs.csproj|d:\\dacn\\doanchuyennghanh\\webapi\\libs\\entity\\messagedetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B962FB36-BE1F-4237-9DEE-6C1FDA217F49}|Libs\\Libs.csproj|solutionrelative:libs\\entity\\messagedetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B962FB36-BE1F-4237-9DEE-6C1FDA217F49}|Libs\\Libs.csproj|d:\\dacn\\doanchuyennghanh\\webapi\\libs\\entity\\messageofcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B962FB36-BE1F-4237-9DEE-6C1FDA217F49}|Libs\\Libs.csproj|solutionrelative:libs\\entity\\messageofcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B962FB36-BE1F-4237-9DEE-6C1FDA217F49}|Libs\\Libs.csproj|d:\\dacn\\doanchuyennghanh\\webapi\\libs\\entity\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B962FB36-BE1F-4237-9DEE-6C1FDA217F49}|Libs\\Libs.csproj|solutionrelative:libs\\entity\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B962FB36-BE1F-4237-9DEE-6C1FDA217F49}|Libs\\Libs.csproj|d:\\dacn\\doanchuyennghanh\\webapi\\libs\\entity\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B962FB36-BE1F-4237-9DEE-6C1FDA217F49}|Libs\\Libs.csproj|solutionrelative:libs\\entity\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -70,77 +66,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\appsettings.json",
-              "RelativeDocumentMoniker": "WebApi\\appsettings.json",
-              "ToolTip": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\appsettings.json",
-              "RelativeToolTip": "WebApi\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-16T06:23:10.928Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "OrderController.cs",
-              "DocumentMoniker": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\Controllers\\OrderController.cs",
-              "RelativeDocumentMoniker": "WebApi\\Controllers\\OrderController.cs",
-              "ToolTip": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\Controllers\\OrderController.cs",
-              "RelativeToolTip": "WebApi\\Controllers\\OrderController.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAxwCQAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T06:23:04.628Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ProductController.cs",
-              "DocumentMoniker": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\Controllers\\ProductController.cs",
-              "RelativeDocumentMoniker": "WebApi\\Controllers\\ProductController.cs",
-              "ToolTip": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\Controllers\\ProductController.cs",
-              "RelativeToolTip": "WebApi\\Controllers\\ProductController.cs",
-              "ViewState": "AgIAAEYBAAAAAAAAAAAAAE4BAAAoAAAAAAAAAA==",
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "WebApi\\Controllers\\CategoryController.cs",
+              "ToolTip": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "WebApi\\Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAG0AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T06:23:04.667Z",
+              "WhenOpened": "2024-11-29T11:10:31.351Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Order.cs",
-              "DocumentMoniker": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Entity\\Order.cs",
-              "RelativeDocumentMoniker": "Libs\\Entity\\Order.cs",
-              "ToolTip": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Entity\\Order.cs",
-              "RelativeToolTip": "Libs\\Entity\\Order.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAkwBcAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "WebApi\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\Controllers\\UserController.cs",
+              "RelativeToolTip": "WebApi\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAwwBoAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T06:23:04.671Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "User.cs",
-              "DocumentMoniker": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Entity\\User.cs",
-              "RelativeDocumentMoniker": "Libs\\Entity\\User.cs",
-              "ToolTip": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Entity\\User.cs",
-              "RelativeToolTip": "Libs\\Entity\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T06:23:04.674Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MessageDetail.cs",
-              "DocumentMoniker": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Entity\\MessageDetail.cs",
-              "RelativeDocumentMoniker": "Libs\\Entity\\MessageDetail.cs",
-              "ToolTip": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Entity\\MessageDetail.cs",
-              "RelativeToolTip": "Libs\\Entity\\MessageDetail.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA0AAAATAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T06:23:04.677Z"
+              "WhenOpened": "2024-11-28T14:09:00.84Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -150,21 +98,57 @@
               "RelativeDocumentMoniker": "Libs\\Services\\ProductService.cs",
               "ToolTip": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Services\\ProductService.cs",
               "RelativeToolTip": "Libs\\Services\\ProductService.cs",
-              "ViewState": "AQIAAAoBAAAAAAAAAAAzwBYBAAAeAAAA",
+              "ViewState": "AgIAAA0BAAAAAAAAAAAEwCEBAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T06:23:04.681Z"
+              "WhenOpened": "2024-11-28T12:59:39.481Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MessageDetailMapper.cs",
+              "DocumentMoniker": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\Mappers\\MessageDetailMapper.cs",
+              "RelativeDocumentMoniker": "WebApi\\Mappers\\MessageDetailMapper.cs",
+              "ToolTip": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\Mappers\\MessageDetailMapper.cs",
+              "RelativeToolTip": "WebApi\\Mappers\\MessageDetailMapper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T12:24:11.664Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "WebApi\\Controllers\\ProductController.cs",
+              "ToolTip": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "WebApi\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAAF0BAAAAAAAAAAAAAG0BAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T11:50:23.68Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MessageDetail.cs",
+              "DocumentMoniker": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Entity\\MessageDetail.cs",
+              "RelativeDocumentMoniker": "Libs\\Entity\\MessageDetail.cs",
+              "ToolTip": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Entity\\MessageDetail.cs",
+              "RelativeToolTip": "Libs\\Entity\\MessageDetail.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA4AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T11:43:51.689Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "MessageOfCustomer.cs",
-              "DocumentMoniker": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Entity\\MessageOfCustomer.cs",
-              "RelativeDocumentMoniker": "Libs\\Entity\\MessageOfCustomer.cs",
-              "ToolTip": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Entity\\MessageOfCustomer.cs",
-              "RelativeToolTip": "Libs\\Entity\\MessageOfCustomer.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABEAAAAAAAAA",
+              "Title": "ProductMapper.cs",
+              "DocumentMoniker": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\Mappers\\ProductMapper.cs",
+              "RelativeDocumentMoniker": "WebApi\\Mappers\\ProductMapper.cs",
+              "ToolTip": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\Mappers\\ProductMapper.cs",
+              "RelativeToolTip": "WebApi\\Mappers\\ProductMapper.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAxwCAAAABZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T06:23:04.684Z"
+              "WhenOpened": "2024-11-28T11:37:02.301Z"
             }
           ]
         }

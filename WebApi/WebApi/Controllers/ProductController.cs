@@ -1,8 +1,9 @@
-
+﻿
 using Libs.Entity;
 using Libs.Helps;
 using Libs.Service;
 using Libs.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +18,7 @@ using System.Security.Claims;
 using WebApi.Mappers;
 using WebApi.Model.Product;
 using WebApi.Model.Sessions;
+using WebApi.Model.SizeDetail;
 using static System.Net.Mime.MediaTypeNames;
 
 
@@ -34,7 +36,7 @@ namespace BACKENDEMO.Controllers
         private readonly TokenService _token;
 
         private readonly SignInManager<AppUser> _signInManager;
- 
+
         private readonly IHttpContextAccessor _contx;
 
         private readonly ProductService _productService;
@@ -51,21 +53,27 @@ namespace BACKENDEMO.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProduct([FromQuery] QueryProduct query) {
-            try {
+        public async Task<IActionResult> GetProduct([FromQuery] QueryProduct query)
+        {
+            try
+            {
                 var productQuery = await _productService.GetAllProductsByQuery(query);
-                if (productQuery.Count != 0) {
-                    return Ok(new { status = true, message = "Get successed", data = productQuery.Select(s => s.toProduct())});
+                if (productQuery.Count != 0)
+                {
+                    return Ok(new { status = true, message = "Get successed", data = productQuery.Select(s => s.toProduct()) });
                 }
                 return Ok(new { status = false, message = "Get =failed" });
 
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 return Ok(new { status = false, message = e.Message });
             }
         }
 
         [HttpGet("{id:Guid}")]
-        public async Task<IActionResult> GetProductById([FromRoute] Guid id) {
+        public async Task<IActionResult> GetProductById([FromRoute] Guid id)
+        {
             try
             {
                 var Product = _productService.GetProductById(id);
@@ -78,14 +86,22 @@ namespace BACKENDEMO.Controllers
                     var GetListImageProduct = await _productService.GetAllListImageAsyncByProductId(id);
                     if (GetListImageProduct.Count == 0)
                     {
-                        return Ok(new { status = true, message = "not found image" ,data= Product.toProduct() });
+                        return Ok(new { status = true, message = "not found image", data = Product.toProduct() });
                     }
+
+                    var messages = await _productService.GetAllMessageByProduct(id);
                     var GetSizeDetails = await _productService.GetAllSizeByProduct(id);
-                    var result = Product.toProduct(GetListImageProduct, GetSizeDetails);
-                    return Ok(new { status = true, message = "", data = result });
+                    var result = Product.toProduct(GetListImageProduct, GetSizeDetails,messages);
+
+                    
+
+                    return Ok(new { status = true, message = "",data = result });
+
+                    
+
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Ok(new { status = false, message = e.Message });
             }
@@ -93,12 +109,13 @@ namespace BACKENDEMO.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> NewProduct([FromBody] NewProduct newProduct)
         {
             if (!ModelState.IsValid)
             {
-                return Ok(new { status = false, message ="", data = ModelState });
+                return Ok(new { status = false, message = "", data = ModelState });
             }
             try
             {
@@ -128,8 +145,8 @@ namespace BACKENDEMO.Controllers
                     };
                     sizeDetails.Add(SD);
                 }
-                var message =_productService.CreateProduct(product, ListStringImage,sizeDetails);
-                if(message == "Ok")
+                var message = _productService.CreateProduct(product, ListStringImage, sizeDetails);
+                if (message == "Ok")
                 {
                     return RedirectToAction("GetProduct", null);
                 }
@@ -141,9 +158,10 @@ namespace BACKENDEMO.Controllers
             }
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPut]
-        public async Task<IActionResult> UpdateProduct([FromBody] UpdateProduct updateProduct) {
+        public async Task<IActionResult> UpdateProduct([FromBody] UpdateProduct updateProduct)
+        {
             if (!ModelState.IsValid)
             {
                 return Ok(new { status = false, message = "Update product failed by id =" + updateProduct.Id, Data = ModelState }); ;
@@ -151,8 +169,9 @@ namespace BACKENDEMO.Controllers
             try
             {
                 var product = updateProduct.ToUpdateProduct();
-                var category = _productService.GetCategoryById(product.CategoryId); 
-                if (category == null) {
+                var category = _productService.GetCategoryById(product.CategoryId);
+                if (category == null)
+                {
                     return Ok(new { status = false, message = "not found categoy by id =" + product.CategoryId, Data = product });
                 }
                 bool result = await _productService.UpdatePRoduct(product);
@@ -168,8 +187,10 @@ namespace BACKENDEMO.Controllers
             {
                 return Ok(new { status = false, message = e.Message });
             }
-   
+
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("{id:Guid}")]
         public async Task<IActionResult> DeleteProduct([FromRoute] Guid id)
@@ -179,13 +200,14 @@ namespace BACKENDEMO.Controllers
                 _productService.DeleteProduct(id);
                 return Ok(new { status = true, message = "Delete sucessed" });
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Ok(new { status = false, message = e.Message });
             }
 
-    
+
         }
+
 
         [HttpPost("sessions")]
         public IActionResult SaveSessionProduct([FromBody] ItemProduct item)
@@ -204,17 +226,19 @@ namespace BACKENDEMO.Controllers
                 cart = JsonConvert.DeserializeObject<List<ItemProduct>>(cartJson);
                 {
                     var checkExist = cart.SingleOrDefault(p => p.ProductId == item.ProductId);
-                    if (checkExist != null) {
+                    if (checkExist != null)
+                    {
                         checkExist.Quantity += item.Quantity;
 
-                    } else
+                    }
+                    else
                     {
                         cart.Add(item);
                     }
                     var convert = JsonConvert.SerializeObject(cart);
 
                     HttpContext.Session.SetString("Cart", convert);
-                    return Ok(new { status = true, message = "",data= convert });
+                    return Ok(new { status = true, message = "", data = convert });
                 }
             }
             catch (JsonException e)
@@ -236,7 +260,7 @@ namespace BACKENDEMO.Controllers
             {
                 var cart = JsonConvert.DeserializeObject<List<ItemProduct>>(cartJson);
                 var listProduct = new List<ProductOrder>();
-                foreach(var item in cart)
+                foreach (var item in cart)
                 {
 
                     var product = _productService.GetProductById(item.ProductId);
@@ -273,10 +297,11 @@ namespace BACKENDEMO.Controllers
             try
             {
                 var cart = JsonConvert.DeserializeObject<List<ItemProduct>>(cartJson);
-                foreach(var item in cart)
+                foreach (var item in cart)
                 {
-                    if(item.ProductId == id) {
-                        cart.Remove(item); 
+                    if (item.ProductId == id)
+                    {
+                        cart.Remove(item);
                         break;
                     }
                 }
@@ -313,20 +338,22 @@ namespace BACKENDEMO.Controllers
             try
             {
                 var result = await _productService.GetAllSizeByProduct(id);
-                if(result == null)
+                if (result == null)
                 {
                     return Ok(new { Status = false, message = "not found size" });
-                }    
-  
-                return Ok(new { Status = false, message = "", Data = result.Select(s=> s.toSizeDetailUi()) });
-            } catch(Exception ex) {
+                }
+
+                return Ok(new { Status = false, message = "", Data = result.Select(s => s.toSizeDetailUi()) });
+            }
+            catch (Exception ex)
+            {
                 return Ok(new { Status = false, message = ex.Message });
             }
         }
 
         [HttpPost]
         [Route("addMessage/{id:Guid}")]
-        public async Task<IActionResult> AddMessage(Guid id,string message,string Image)
+        public async Task<IActionResult> AddMessage(Guid id, string message, string Image)
         {
             try
             {
@@ -338,7 +365,7 @@ namespace BACKENDEMO.Controllers
                 }
                 var userId = CurrentUser.Id;
                 _productService.AddMessage(message, Image, userId, id);
-                return Ok(new { Status = true, message = "Ok"  });
+                return Ok(new { Status = true, message = "Ok" });
             }
             catch (Exception e)
             {
@@ -347,34 +374,34 @@ namespace BACKENDEMO.Controllers
 
         }
 
-/*        [HttpGet]
-        [Route("AddToCart")]
-        public IActionResult AddToCart()
-        {
-            List<Task<Product>> products = new List<Task<Product>>();   
-            try
-            {
-                string Value = HttpContext.Request.Cookies["Cart"];
-                string[] ListIdProduct = Value.Split(",");
-                foreach(var item in ListIdProduct)
+        /*        [HttpGet]
+                [Route("AddToCart")]
+                public IActionResult AddToCart()
                 {
-                    int id = Int32.Parse(item);
-                    var product = _productService.GetProductById(id);
-                    if(product != null)
+                    List<Task<Product>> products = new List<Task<Product>>();   
+                    try
                     {
-                        products.Add(product); 
+                        string Value = HttpContext.Request.Cookies["Cart"];
+                        string[] ListIdProduct = Value.Split(",");
+                        foreach(var item in ListIdProduct)
+                        {
+                            int id = Int32.Parse(item);
+                            var product = _productService.GetProductById(id);
+                            if(product != null)
+                            {
+                                products.Add(product); 
+                            }
+
+                        }
+
+                        return Ok(new { status = true, message = "GetDataSuccess", Data = products });
+                    } catch(Exception e)
+                    {
+                        return Ok(new { status = false, message = e.Message });
                     }
 
-                }
 
-                return Ok(new { status = true, message = "GetDataSuccess", Data = products });
-            } catch(Exception e)
-            {
-                return Ok(new { status = false, message = e.Message });
-            }
-
-            
-        }*/
+                }*/
     }
-    
+
 }

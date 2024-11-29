@@ -121,7 +121,8 @@ builder.Services.AddAuthentication(Options => {
 builder.Services.AddTransient<SellService>();
 builder.Services.AddTransient<FinanceService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>(); 
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ImessageRepository, MessageRepository>();
 builder.Services.AddScoped<IToken, TokenRepository>(); 
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<TokenService>();
@@ -151,7 +152,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles(); 
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(@"C:\Users\huuth\Desktop\DoAnChuyenNghanh\WebApi\WebApi\images"),
+    FileProvider = new PhysicalFileProvider(@"D:\DACN\DoAnChuyenNghanh\WebApi\WebApi\images"),
     RequestPath = "/images"
 });
 

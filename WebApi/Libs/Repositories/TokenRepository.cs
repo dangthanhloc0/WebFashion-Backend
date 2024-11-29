@@ -1,8 +1,10 @@
 ﻿using Libs.Entity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -18,12 +20,15 @@ namespace Libs.Repositories
     public class TokenRepository : IToken
     {
 
+        private readonly UserManager<AppUser> _userManager;
         public readonly IConfiguration _config;
         private readonly SymmetricSecurityKey _key;
-        public TokenRepository(IConfiguration config)
+        public TokenRepository(IConfiguration config, UserManager<AppUser> userManager)
         {
             _config = config;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Signingkey"]));
+            _userManager = userManager;
+
         }
         public string CreateToken(AppUser user)
         {
@@ -31,6 +36,12 @@ namespace Libs.Repositories
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.GivenName , user.UserName)
             };
+
+            var userRoles = _userManager.GetRolesAsync(user).Result;
+            foreach (var role in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 

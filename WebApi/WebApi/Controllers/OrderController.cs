@@ -75,8 +75,8 @@ namespace WebApi.Controllers
                 }
                 var orderDetails = cart.Select(s => s.ToNewOrderDetail()).ToList();
                 var userId = CurrentUser.Id;
-                float  price = 0;
-                foreach(var item in orderDetails)
+                float price = 0;
+                foreach (var item in orderDetails)
                 {
                     price += item.price;
                 }
@@ -107,7 +107,8 @@ namespace WebApi.Controllers
         public async Task<ActionResult> GetAllOrderByUserIdAsync()
         {
 
-            try {
+            try
+            {
                 // find user 
                 var emailClaim = User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
                 var CurrentUser = await _userManager.FindByEmailAsync(emailClaim);
@@ -123,7 +124,9 @@ namespace WebApi.Controllers
                     return Ok(new { status = true, message = "User don't have any order" });
                 }
                 return Ok(new { status = true, message = "Get all order success", Data = ListOrder.Select(s => s.ToOrderDto()) });
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 return Ok(new { status = false, message = e.Message });
             }
         }
@@ -134,14 +137,15 @@ namespace WebApi.Controllers
         {
             try
             {
-                var result =  _sell.GetAllOrderDetailByOrderId(id);
-                if(result == null) {
-                    return Ok(new { status = true, message = "You don't have any order"});
+                var result = _sell.GetAllOrderDetailByOrderId(id);
+                if (result == null)
+                {
+                    return Ok(new { status = true, message = "You don't have any order" });
                 }
 
                 return Ok(new { status = true, message = "", Data = result.Result.Select(s => s.toOrderDetailsDto()).ToList() });
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Ok(new { status = false, message = e.Message });
             }
@@ -154,22 +158,23 @@ namespace WebApi.Controllers
             try
             {
                 var result = await _sell.getOrderList();
-                if(result == null)
+                if (result == null)
                 {
                     return Ok(new { status = true, message = "not found order" });
                 }
 
                 return Ok(new { status = true, message = "GetAllOrder", data = result.Select(s => s.ToOrderDto()).ToList() });
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
-                return Ok(new { status = false,messgae = e.Message});   
+                return Ok(new { status = false, messgae = e.Message });
             }
         }
 
 
 
 
-    
+
 
     }
 }

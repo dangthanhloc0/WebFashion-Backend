@@ -1,6 +1,7 @@
 
 using Libs.Entity;
 using Libs.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Mappers;
@@ -11,6 +12,7 @@ namespace WebApi.Controllers
 {
     [Route("v4/api/Category")]
     [ApiController]
+    
     public class CategoryController : ControllerBase
     {
 
@@ -59,7 +61,7 @@ namespace WebApi.Controllers
             }
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPut] 
         public  ActionResult UpdateCategory (category category)
         {
@@ -82,6 +84,8 @@ namespace WebApi.Controllers
 
         }
 
+
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
@@ -102,6 +106,8 @@ namespace WebApi.Controllers
 
         }
 
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateCategory([FromBody] NewCategory newCategory)
         {

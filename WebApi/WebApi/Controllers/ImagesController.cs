@@ -10,7 +10,8 @@ public class ImagesController : ControllerBase
 {
     private readonly string _mainImagePath = Path.Combine(Directory.GetCurrentDirectory(), "images", "imgProductMain");
     private readonly string _productImagePath = Path.Combine(Directory.GetCurrentDirectory(), "images", "imgProducts");
-    private readonly string _userAvatarPath = Path.Combine(Directory.GetCurrentDirectory(), "images", "avtUsers"); // Đường dẫn mới
+    private readonly string _userAvatarPath = Path.Combine(Directory.GetCurrentDirectory(), "images", "avtUsers"); 
+    private readonly string _rateProductImagePath = Path.Combine(Directory.GetCurrentDirectory(), "images", "rateProduct"); 
 
     // Hàm upload ảnh
     [HttpPost]
@@ -63,6 +64,46 @@ public class ImagesController : ControllerBase
             return StatusCode(500, new { message = "Lỗi khi upload file", error = ex.Message });
         }
     }
+     [HttpPost("rateProduct")]
+    public async Task<IActionResult> UploadReviewImage([FromForm] IFormFileCollection files)
+    {
+        try
+        {
+            // Kiểm tra và tạo thư mục nếu chưa tồn tại
+            if (!Directory.Exists(_rateProductImagePath))
+            {
+                Directory.CreateDirectory(_rateProductImagePath);
+            }
+
+            var uploadedUrls = new List<string>();
+            foreach (var file in files)
+            {
+                if (file.Length > 0)
+                {
+                    // Lấy tên file gốc
+                    var fileName = Path.GetFileName(file.FileName);
+                    var filePath = Path.Combine(_rateProductImagePath, fileName);
+
+                    // Lưu file vào thư mục rateProduct
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    // Trả về URL của hình ảnh đã tải lên
+                    var url = $"/images/rateProduct/{fileName}";
+                    uploadedUrls.Add(url);
+                }
+            }
+
+            return Ok(new { urls = uploadedUrls });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = "Lỗi khi upload hình ảnh đánh giá", error = ex.Message });
+        }
+    }
+
 
     [HttpDelete]
     public IActionResult DeleteImage([FromQuery] string imageName, [FromQuery] bool isMainImage = false, [FromQuery] bool isUserAvatar = false)

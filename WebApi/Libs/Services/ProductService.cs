@@ -17,16 +17,18 @@ namespace Libs.Services
     public class ProductService
     {
         private ApplicationDbContext _dbContext;
-        private ICategoryRepository  _categoty;
+        private ICategoryRepository _categoty;
         private IProductRepository _product;
-         private IImageRepository _image;
+        private IImageRepository _image;
+        private ImessageRepository _message;
 
-        public ProductService(ApplicationDbContext dbContext, ICategoryRepository categoty,IProductRepository product )
+        public ProductService(ApplicationDbContext dbContext, ICategoryRepository categoty, IProductRepository product, ImessageRepository message)
         {
             this._dbContext = dbContext;
             this._product = new ProductRepository(this._dbContext);
             this._categoty = new CategoryRepository(this._dbContext);
             this._image = new ImageRepository(this._dbContext);
+            this._message = new MessageRepository(this._dbContext); ;
         }
         public void Save()
         {
@@ -51,19 +53,19 @@ namespace Libs.Services
             }
         }
 
-            public bool CheckProductExsitByName(string productName)
+        public bool CheckProductExsitByName(string productName)
         {
-      
-            Expression<Func<Product, bool>> filer = x => x.productName == productName;  
+
+            Expression<Func<Product, bool>> filer = x => x.productName == productName;
             return _product.Any(filer);
         }
 
-        public string CreateProduct(Product product,List<string> imageUrls,List<SizeDetail> sizeDetails)
+        public string CreateProduct(Product product, List<string> imageUrls, List<SizeDetail> sizeDetails)
         {
             try
             {
                 _product.Add(product);
-                if(imageUrls.Count > 0)
+                if (imageUrls.Count > 0)
                 {
                     foreach (var imageUrl in imageUrls)
                     {
@@ -83,27 +85,28 @@ namespace Libs.Services
                         _dbContext.listImages.Add(listImage);
                     }
                 }
-                if(sizeDetails.Count > 0)
+                if (sizeDetails.Count > 0)
                 {
-                    foreach(var item in sizeDetails)
+                    foreach (var item in sizeDetails)
                     {
                         _dbContext.sizeDetails.Add(item);
                     }
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 ClearUnsavedChanges();
                 return e.Message;
             }
             Save();
             return "Ok";
-           
+
         }
 
         public void DeleteProduct(Guid id)
         {
             _product.Delete(_product.GetById(id));
-            Save();;
+            Save(); ;
         }
 
         public async Task<List<Product>> GetAllProductsByQuery(QueryProduct query)
@@ -153,26 +156,26 @@ namespace Libs.Services
 
         }
 
-/*        public async Task<List<ProductOrder>> GetListProductByListId(List<ItemProduct> itemproduct)
-        {
-            var products = new List<ProductOrder>();
-            foreach (var item in itemproduct)
-            {
-                Expression<Func<Product, bool>> filer = p => p.Id == item.ProductId;
-                var product = _product.FindSingOrDefault(filer);
-                if (product != null)
+        /*        public async Task<List<ProductOrder>> GetListProductByListId(List<ItemProduct> itemproduct)
                 {
-                    product.Price = item.price;
-                    products.Add(product.toProductOrder(item.Quantity));
-                }
-            }
+                    var products = new List<ProductOrder>();
+                    foreach (var item in itemproduct)
+                    {
+                        Expression<Func<Product, bool>> filer = p => p.Id == item.ProductId;
+                        var product = _product.FindSingOrDefault(filer);
+                        if (product != null)
+                        {
+                            product.Price = item.price;
+                            products.Add(product.toProductOrder(item.Quantity));
+                        }
+                    }
 
-            return products;
-        }*/
+                    return products;
+                }*/
 
         public Product GetProductById(Guid id)
         {
-            return  _dbContext.products.Include(p => p.category).SingleOrDefault(x => x.Id == id);
+            return _dbContext.products.Include(p => p.category).SingleOrDefault(x => x.Id == id);
         }
 
         public async Task<Boolean> UpdatePRoduct(Product product)
@@ -184,7 +187,7 @@ namespace Libs.Services
                 return false;
             }
             _product.UpdatePRoduct(product, ExsitProduct);
-            Save();;
+            Save(); ;
             return true;
 
         }
@@ -193,7 +196,7 @@ namespace Libs.Services
         public Category CreateCategory(Category Category)
         {
             Expression<Func<Category, bool>> filer = x => x.CategorName == Category.CategorName;
-            var result = _categoty.FindSingOrDefault(filer); 
+            var result = _categoty.FindSingOrDefault(filer);
             if (result == null)
             {
                 _categoty.Add(Category);
@@ -202,7 +205,7 @@ namespace Libs.Services
             }
 
             return null;
-            
+
         }
 
         public bool DeleteCategory(Guid id)
@@ -254,20 +257,23 @@ namespace Libs.Services
 
         public async Task<List<SizeDetail>> GetAllSizeByProduct(Guid productId)
         {
-            return await _dbContext.sizeDetails.Include(x => x.size).ToListAsync();
+            return await _dbContext.sizeDetails
+                .Where(x => x.ProductId == productId)  
+                .Include(x => x.size) 
+                .ToListAsync(); 
         }
 
         public async void AddSizeDetial(SizeDetail sizeDetail)
         {
-            _dbContext.sizeDetails.Add(sizeDetail); 
-            Save(); 
+            _dbContext.sizeDetails.Add(sizeDetail);
+            Save();
         }
 
 
-        public Product calculatorQuantitySuccess(Guid Id,int quantity)
+        public Product calculatorQuantitySuccess(Guid Id, int quantity)
         {
             var product = _dbContext.products.FirstOrDefault(x => x.Id == Id);
-            if(product == null)
+            if (product == null)
             {
                 return null;
             }
@@ -276,7 +282,7 @@ namespace Libs.Services
             return product;
         }
 
-        public async void AddMessage(string message,string url,String userID,Guid productId)
+        public async void AddMessage(string message, string url, String userID, Guid productId)
         {
             var ID = Guid.NewGuid();
             var messageOfCustommer = new MessageOfCustomer
@@ -285,7 +291,6 @@ namespace Libs.Services
                 Image = url,
                 Message = message,
                 UserId = userID
-
             };
             _dbContext.messageOfCustomers.Add(messageOfCustommer);
             var messageDetail = new MessageDetail
@@ -299,6 +304,19 @@ namespace Libs.Services
             _dbContext.SaveChanges();
         }
 
+        public async Task<List<MessageDetail>> GetAllMessageByProduct(Guid productId)
+        {
+            return await _dbContext.messageDetails
+                .Where(md => md.productId == productId) // Lọc theo sản phẩm
+                .OrderByDescending(md => md.Time) // Sắp xếp theo thời gian
+                .Select(md => new MessageDetail
+                {
+                    Time = md.Time,
+                    messageOfCustomer = md.messageOfCustomer, // Lấy nội dung đánh giá từ MessageOfCustomer
+                    productId = md.productId
+                })
+                .ToListAsync();
+        }
     }
 
 }

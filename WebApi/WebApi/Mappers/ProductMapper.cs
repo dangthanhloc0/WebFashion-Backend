@@ -1,4 +1,4 @@
-
+﻿
 using Libs.Entity;
 using WebApi.Model.Product;
 using WebApi.Model.SizeDetail;
@@ -9,7 +9,8 @@ namespace WebApi.Mappers
 {
     public static class ProductMapper
     {
-       public static product toProduct(this Product product, List<string>? listImages,List<SizeDetail> sizeDetails){
+       public static product toProduct(this Product product, List<string>? listImages,List<SizeDetail> sizeDetails, List<MessageDetail> messageDetails)
+        {
             return new product
             {
                 Id = product.Id,
@@ -27,8 +28,9 @@ namespace WebApi.Mappers
                 categoryName = product.category.CategorName,
 
                 ListStringImage = listImages.ToList(),
-                sizeDetails = sizeDetails.Select(s => s.toSizeDetailUi()).ToList(),  
+                sizeDetails = sizeDetails.Select(s => s.toSizeDetailUi()).ToList(),
 
+                messageDetails = messageDetails.Select(m => m.toMessageDetail()).ToList()
             };
         }
 

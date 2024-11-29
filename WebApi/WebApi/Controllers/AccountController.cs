@@ -44,13 +44,15 @@ namespace WebApi.Controllers
             }
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDTo.Password , false);
+            var roles = await _useManager.GetRolesAsync(user);
 
-            if(!result.Succeeded) return Unauthorized("User not found  and/or password incorrect");
+            if (!result.Succeeded) return Unauthorized("User not found  and/or password incorrect");
 
             return Ok(
                 new newUserDto{
                     Username = user.UserName,
                     EmailAddress = user.Email,
+                    Role = roles.FirstOrDefault(),
                     Token = _Ttken.CreateToken(user)
                 }
             );

@@ -9,6 +9,7 @@ namespace WebApi.Mappers
         {
             return new SizeDetailUi
             {
+                sizeId = s.size.Id,
                 sizeName = s.size.sizeName,
                 quantity = s.Quantity,
             };

@@ -1,6 +1,8 @@
 
 
+using Libs.Entity;
 using WebApi.Model.SizeDetail;
+using WebApi.Model.MessageDetail;
 
 namespace WebApi.Model.Product
 {
@@ -26,6 +28,8 @@ namespace WebApi.Model.Product
         public List<string> ListStringImage { get; set; }
 
         public List<SizeDetailUi> sizeDetails { get; set; }
+
+        public List<MessageDetailDto> messageDetails { get; set; }
 
     }
 }
