@@ -178,14 +178,51 @@ namespace Libs.Services
             return _dbContext.products.Include(p => p.category).SingleOrDefault(x => x.Id == id);
         }
 
-        public async Task<Boolean> UpdatePRoduct(Product product)
+        public async Task<Boolean> UpdatePRoduct(Product product, List<Imageupdate> LImages)
         {
             var ExsitProduct = _product.GetById(product.Id);
-
             if (ExsitProduct == null)
             {
                 return false;
             }
+
+            if (LImages.Count >= 0)
+            {
+                var listImage = GetAllListImageAsyncByProductId(product.Id);
+                foreach (var item in LImages)
+                {
+                    {
+                        var result = listImage.Result.FirstOrDefault(x => x == item.value);
+                        if (result == null)
+                        {
+                            if (item.key == 0)
+                            {
+                                var IdImage = _dbContext.images.SingleOrDefault(x => x.ImageUrl == item.value);
+                                var ListImage = _dbContext.listImages.FirstOrDefault(x => x.imageId == IdImage.Id && x.productId == product.Id);
+                                _dbContext.listImages.Remove(ListImage);
+                            };
+                            if(item.key == 1)
+                            {
+                                Image image = new Image
+                                {
+                                    Id = Guid.NewGuid(),
+                                    ImageUrl = item.value
+
+                                };
+                                _dbContext.images.Add(image);
+
+                                listImage listImagesss = new listImage
+                                {
+                                    productId = product.Id,
+                                    imageId = image.Id
+                                };
+                                _dbContext.listImages.Add(listImagesss);
+                            }
+                        }
+                    }
+                }
+            }
+
             _product.UpdatePRoduct(product, ExsitProduct);
             Save(); ;
             return true;

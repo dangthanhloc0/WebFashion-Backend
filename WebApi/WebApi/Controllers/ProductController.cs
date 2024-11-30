@@ -57,10 +57,19 @@ namespace BACKENDEMO.Controllers
         {
             try
             {
+                List<product> listProductResult = new List<product>();
                 var productQuery = await _productService.GetAllProductsByQuery(query);
+                foreach(var item in productQuery) {
+                    var id = item.Id;
+                    var GetListImageProduct = await _productService.GetAllListImageAsyncByProductId(id);
+                    var messages = await _productService.GetAllMessageByProduct(id);
+                    var GetSizeDetails = await _productService.GetAllSizeByProduct(id);
+                    var result = item.toProduct(GetListImageProduct, GetSizeDetails, messages);
+                    listProductResult.Add(result);
+                }
                 if (productQuery.Count != 0)
                 {
-                    return Ok(new { status = true, message = "Get successed", data = productQuery.Select(s => s.toProduct()) });
+                    return Ok(new { status = true, message = "Get successed", data = listProductResult });
                 }
                 return Ok(new { status = false, message = "Get =failed" });
 
@@ -158,7 +167,7 @@ namespace BACKENDEMO.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "User")]
         [HttpPut]
         public async Task<IActionResult> UpdateProduct([FromBody] UpdateProduct updateProduct)
         {
@@ -174,7 +183,7 @@ namespace BACKENDEMO.Controllers
                 {
                     return Ok(new { status = false, message = "not found categoy by id =" + product.CategoryId, Data = product });
                 }
-                bool result = await _productService.UpdatePRoduct(product);
+                bool result = await _productService.UpdatePRoduct(product, updateProduct.imageUrls);
 
                 if (result)
                 {

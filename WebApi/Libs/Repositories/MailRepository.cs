@@ -31,7 +31,7 @@ namespace Libs.Repositories
                 email_Message.To.Add(email_To);
                 email_Message.Subject = "Lấy lại mật khẩu";
                 string randomString = code;
-                String duoi = randomString +" </h2 ></div ><p style = 'font-size: 20px;' > Ngoài ra, bạn có thể thay đổi trực tiếp mật khẩu của mình.</p >                                 <div style = 'background-color: #1877F2; border: 2px #1877F2 solid; border-width: 10px; border-radius:10px; text-align: center;  ' >                                <a style = 'text-decoration: none; font-size: 30px; color: white; font-weight: bold;' href = '' >                                          Đổi mật khẩu                                </a >                           </div>                             <h1 style ='text-align:center;' > Cảm ơn bạn đã ủng hộ chúng tôi </h1 >                       </body>                       </html> ";
+                String duoi = randomString +" </h2 ></div >s                               <div style = 'background-color: #1877F2; border: 2px #1877F2 solid; border-width: 10px; border-radius:10px; text-align: center;  ' >                                <a style = 'text-decoration: none; font-size: 30px; color: white; font-weight: bold;' href = '' >                                          Đổi mật khẩu                                </a >                           </div>                             <h1 style ='text-align:center;' > Cảm ơn bạn đã ủng hộ chúng tôi </h1 >                       </body>                       </html> ";
                 BodyBuilder emailBodyBuilder = new BodyBuilder
                 {
                     HtmlBody = @" 
