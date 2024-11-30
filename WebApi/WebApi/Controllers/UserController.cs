@@ -131,6 +131,8 @@ namespace WebApi.Controllers
 
         }
 
+       
+
         [HttpGet("GetCurrentUser")]
         [Authorize]
         public async Task<IActionResult> GetCurrentUser()

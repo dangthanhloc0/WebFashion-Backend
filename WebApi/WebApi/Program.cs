@@ -13,6 +13,9 @@ using Libs.Entity;
 using Libs.Service;
 using Libs.Repositories;
 using Libs.Repositoory;
+using Libs.Helps;
+using MailKit;
+using Microsoft.Extensions.Options;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -48,6 +51,7 @@ builder.Services.AddAuthentication(options =>
             };*/
 });
 
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -94,6 +98,7 @@ builder.Services.AddIdentity<AppUser , IdentityRole>(Options => {
     Options.Password.RequireNonAlphanumeric =true;
     Options.Password.RequiredLength = 12;
 })
+.AddDefaultTokenProviders()
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddAuthentication(Options => {
@@ -126,6 +131,9 @@ builder.Services.AddScoped<ImessageRepository, MessageRepository>();
 builder.Services.AddScoped<IToken, TokenRepository>(); 
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<TokenService>();
+
+builder.Services.AddTransient<IIMail, MailRepository>();
+builder.Services.AddTransient<MailServices>();
 // build session for website 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -152,7 +160,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles(); 
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(@"D:\DACN\DoAnChuyenNghanh\WebApi\WebApi\images"),
+    FileProvider = new PhysicalFileProvider(@"C:\Users\huuth\Desktop\DoAnChuyenNghanh\WebApi\WebApi\images"),
     RequestPath = "/images"
 });
 
