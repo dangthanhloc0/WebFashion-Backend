@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\WebApi\\Libs\\Libs.csproj": {}
+    "C:\\Users\\huuth\\Desktop\\New folder (2)\\DoAnChuyenNghanh\\WebApi\\Libs\\Libs.csproj": {}
   },
   "projects": {
-    "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\WebApi\\Libs\\Libs.csproj": {
+    "C:\\Users\\huuth\\Desktop\\New folder (2)\\DoAnChuyenNghanh\\WebApi\\Libs\\Libs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\WebApi\\Libs\\Libs.csproj",
+        "projectUniqueName": "C:\\Users\\huuth\\Desktop\\New folder (2)\\DoAnChuyenNghanh\\WebApi\\Libs\\Libs.csproj",
         "projectName": "Libs",
-        "projectPath": "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\WebApi\\Libs\\Libs.csproj",
+        "projectPath": "C:\\Users\\huuth\\Desktop\\New folder (2)\\DoAnChuyenNghanh\\WebApi\\Libs\\Libs.csproj",
         "packagesPath": "C:\\Users\\huuth\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huuth\\Desktop\\DoAnChuyenNghanh\\WebApi\\Libs\\obj\\",
+        "outputPath": "C:\\Users\\huuth\\Desktop\\New folder (2)\\DoAnChuyenNghanh\\WebApi\\Libs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huuth\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -34,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -73,6 +68,10 @@
               "target": "Package",
               "version": "[7.0.20, )"
             },
+            "NETCore.MailKit": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
@@ -98,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
