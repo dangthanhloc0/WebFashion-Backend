@@ -76,7 +76,7 @@ namespace WebApi.Controllers
                 var CheckUserNameExsit = _useManager.FindByNameAsync(appuser.UserName);
                 if (CheckEmailExsit.Result != null)
                 {
-                    return BadRequest("Your eamil exist");
+                    return BadRequest("Your email exist");
                 }
 
                 var createUser = await _useManager.CreateAsync(appuser, registerDto.Password);
@@ -105,45 +105,75 @@ namespace WebApi.Controllers
             }
         }
 
-/*        [HttpGet]
-        [Route("signin-google")]
-        public IActionResult SignInWithGoogle()
+        [HttpPost("check-email")]
+        public async Task<IActionResult> CheckEmail([FromBody] EmailCheckDto emailCheckDto)
         {
-            var redirectUrl = Url.Action("GoogleResponse", "Account");
-            var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
-            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+            var user = await _useManager.FindByEmailAsync(emailCheckDto.Email);
+            return Ok(new { exists = user != null });
         }
-        [HttpGet]
-        [Route("TestAbc")]
-        public ActionResult testAbc()
+
+
+        [HttpPost("google-login")]
+        public async Task<IActionResult> GoogleLogin([FromBody] GoogleLoginDto googleLoginDto)
         {
-            try {
-                List<string> testList = new List<string>();
-                if (testList.Count == 0) {
-                    return Ok(new { status = false, message = "Error" });
+            var user = await _useManager.FindByEmailAsync(googleLoginDto.Email);
+
+            if (user == null)
+            {
+                return Unauthorized("User not found");
+            }
+
+            var roles = await _useManager.GetRolesAsync(user);
+
+            return Ok(new newUserDto
+            {
+                Username = user.UserName,
+                EmailAddress = user.Email,
+                Role = roles.FirstOrDefault(),
+                Token = _Ttken.CreateToken(user)
+            });
+        }
+
+
+        /*        [HttpGet]
+                [Route("signin-google")]
+                public IActionResult SignInWithGoogle()
+                {
+                    var redirectUrl = Url.Action("GoogleResponse", "Account");
+                    var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
+                    return Challenge(properties, GoogleDefaults.AuthenticationScheme);
                 }
-                return Ok(new { status = true, message = "", data = testList });
-            }catch(Exception e)
-            {
-                return Ok(new { status = false, message = e.Message });
-            }
-           
+                [HttpGet]
+                [Route("TestAbc")]
+                public ActionResult testAbc()
+                {
+                    try {
+                        List<string> testList = new List<string>();
+                        if (testList.Count == 0) {
+                            return Ok(new { status = false, message = "Error" });
+                        }
+                        return Ok(new { status = true, message = "", data = testList });
+                    }catch(Exception e)
+                    {
+                        return Ok(new { status = false, message = e.Message });
+                    }
 
-        }
 
-        [HttpGet]
-        public async Task<IActionResult> GoogleResponse()
-        {
-            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            if (!result.Succeeded)
-            {
-                return BadRequest();
-            }
+                }
 
-            var claims = result.Principal.Identities.FirstOrDefault().Claims;
-            // Use claims for login or registration
-            return Ok(claims);
-        }*/
+                [HttpGet]
+                public async Task<IActionResult> GoogleResponse()
+                {
+                    var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                    if (!result.Succeeded)
+                    {
+                        return BadRequest();
+                    }
+
+                    var claims = result.Principal.Identities.FirstOrDefault().Claims;
+                    // Use claims for login or registration
+                    return Ok(claims);
+                }*/
 
     }
 }

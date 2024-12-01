@@ -349,3 +349,7 @@ C:\Users\huuth\Desktop\New folder (2)\DoAnChuyenNghanh\WebApi\WebApi\obj\Debug\n
 C:\Users\huuth\Desktop\New folder (2)\DoAnChuyenNghanh\WebApi\WebApi\obj\Debug\net7.0\WebApi.csproj.CopyComplete
 C:\Users\huuth\Desktop\New folder (2)\DoAnChuyenNghanh\WebApi\WebApi\obj\Debug\net7.0\WebApi.genruntimeconfig.cache
 C:\Users\huuth\Desktop\New folder (2)\DoAnChuyenNghanh\WebApi\WebApi\obj\Debug\net7.0\ref\WebApi.dll
+D:\DACN\DoAnChuyenNghanh\WebApi\WebApi\bin\Debug\net7.0\MailKit.dll
+D:\DACN\DoAnChuyenNghanh\WebApi\WebApi\bin\Debug\net7.0\MimeKit.dll
+D:\DACN\DoAnChuyenNghanh\WebApi\WebApi\bin\Debug\net7.0\NETCore.MailKit.dll
+D:\DACN\DoAnChuyenNghanh\WebApi\WebApi\bin\Debug\net7.0\BouncyCastle.Crypto.dll
