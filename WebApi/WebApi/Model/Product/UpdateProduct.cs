@@ -22,7 +22,7 @@ namespace WebApi.Model.Product
 
         public Guid CategoryId { get; set; }
 
-        public List<Imageupdate>? imageUrls { get; set; }
+        public List<String>? imageUrls { get; set; }
 
      /*   public List<SizeDetailCreate> sizeDetails { get; set; }*/
 

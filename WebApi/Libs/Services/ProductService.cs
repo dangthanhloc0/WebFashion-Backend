@@ -178,7 +178,7 @@ namespace Libs.Services
             return _dbContext.products.Include(p => p.category).SingleOrDefault(x => x.Id == id);
         }
 
-        public async Task<Boolean> UpdatePRoduct(Product product, List<Imageupdate> LImages)
+        public async Task<Boolean> UpdatePRoduct(Product product, List<String> LImages)
         {
             var ExsitProduct = _product.GetById(product.Id);
             if (ExsitProduct == null)
@@ -192,21 +192,13 @@ namespace Libs.Services
                 foreach (var item in LImages)
                 {
                     {
-                        var result = listImage.Result.FirstOrDefault(x => x == item.value);
+                        var result = listImage.Result.FirstOrDefault(x => x == item);
                         if (result == null)
                         {
-                            if (item.key == 0)
-                            {
-                                var IdImage = _dbContext.images.SingleOrDefault(x => x.ImageUrl == item.value);
-                                var ListImage = _dbContext.listImages.FirstOrDefault(x => x.imageId == IdImage.Id && x.productId == product.Id);
-                                _dbContext.listImages.Remove(ListImage);
-                            };
-                            if(item.key == 1)
-                            {
                                 Image image = new Image
                                 {
                                     Id = Guid.NewGuid(),
-                                    ImageUrl = item.value
+                                    ImageUrl = item
 
                                 };
                                 _dbContext.images.Add(image);
@@ -217,7 +209,14 @@ namespace Libs.Services
                                     imageId = image.Id
                                 };
                                 _dbContext.listImages.Add(listImagesss);
-                            }
+                            
+                        } else
+                        {
+
+                                var IdImage = _dbContext.images.SingleOrDefault(x => x.ImageUrl == item);
+                                var ListImage = _dbContext.listImages.FirstOrDefault(x => x.imageId == IdImage.Id && x.productId == product.Id);
+                                _dbContext.listImages.Remove(ListImage);
+                           
                         }
                     }
                 }

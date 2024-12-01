@@ -57,3 +57,18 @@ C:\Users\huuth\Desktop\New folder (2)\DoAnChuyenNghanh\WebApi\Libs\bin\Debug\net
 C:\Users\huuth\Desktop\New folder (2)\DoAnChuyenNghanh\WebApi\Libs\bin\Debug\net7.0\Libs.pdb
 C:\Users\huuth\Desktop\New folder (2)\DoAnChuyenNghanh\WebApi\Libs\obj\Debug\net7.0\Libs.genruntimeconfig.cache
 C:\Users\huuth\Desktop\New folder (2)\DoAnChuyenNghanh\WebApi\Libs\obj\Debug\net7.0\ref\Libs.dll
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\bin\Debug\net7.0\Libs.deps.json
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\bin\Debug\net7.0\Libs.runtimeconfig.json
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\bin\Debug\net7.0\Libs.dll
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\bin\Debug\net7.0\Libs.pdb
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\obj\Debug\net7.0\Libs.csproj.AssemblyReference.cache
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\obj\Debug\net7.0\Libs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\obj\Debug\net7.0\Libs.AssemblyInfoInputs.cache
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\obj\Debug\net7.0\Libs.AssemblyInfo.cs
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\obj\Debug\net7.0\Libs.csproj.CoreCompileInputs.cache
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\obj\Debug\net7.0\Libs.sourcelink.json
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\obj\Debug\net7.0\Libs.dll
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\obj\Debug\net7.0\refint\Libs.dll
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\obj\Debug\net7.0\Libs.pdb
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\obj\Debug\net7.0\Libs.genruntimeconfig.cache
+C:\Users\huuth\Desktop\SourceGoc\DoAnChuyenNghanh\WebApi\Libs\obj\Debug\net7.0\ref\Libs.dll

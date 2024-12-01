@@ -3941,19 +3941,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\trant\\.nuget\\packages\\": {}
+    "C:\\Users\\huuth\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\huuth\\Desktop\\SourceGoc\\DoAnChuyenNghanh\\WebApi\\WebApi\\WebApi.csproj",
       "projectName": "WebApi",
-      "projectPath": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\WebApi.csproj",
-      "packagesPath": "C:\\Users\\trant\\.nuget\\packages\\",
-      "outputPath": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\WebApi\\obj\\",
+      "projectPath": "C:\\Users\\huuth\\Desktop\\SourceGoc\\DoAnChuyenNghanh\\WebApi\\WebApi\\WebApi.csproj",
+      "packagesPath": "C:\\Users\\huuth\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\huuth\\Desktop\\SourceGoc\\DoAnChuyenNghanh\\WebApi\\WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\trant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\huuth\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3967,8 +3967,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Libs.csproj": {
-              "projectPath": "D:\\DACN\\DoAnChuyenNghanh\\WebApi\\Libs\\Libs.csproj"
+            "C:\\Users\\huuth\\Desktop\\SourceGoc\\DoAnChuyenNghanh\\WebApi\\Libs\\Libs.csproj": {
+              "projectPath": "C:\\Users\\huuth\\Desktop\\SourceGoc\\DoAnChuyenNghanh\\WebApi\\Libs\\Libs.csproj"
             }
           }
         }
@@ -3977,11 +3977,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -4048,7 +4043,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

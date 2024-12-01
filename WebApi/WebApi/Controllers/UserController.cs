@@ -122,7 +122,7 @@ namespace WebApi.Controllers
                     return Ok(new { status = true, message = "Update passWord's User Succces" });
                 }
 
-                return Ok(new { status = false, message = "Update passWord's User faild\"" });
+                return Ok(new { status = false, message = "Update passWord's User faild" });
             }
             catch (Exception e)
             {

@@ -764,10 +764,7 @@
           "Swashbuckle.AspNetCore": "6.8.0"
         },
         "runtime": {
-          "Libs.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "Libs.dll": {}
         }
       }
     }
