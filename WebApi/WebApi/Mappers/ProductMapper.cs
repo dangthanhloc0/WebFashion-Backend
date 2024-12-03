@@ -9,7 +9,7 @@ namespace WebApi.Mappers
 {
     public static class ProductMapper
     {
-       public static product toProduct(this Product product, List<string>? listImages,List<SizeDetail> sizeDetails, List<MessageDetail> messageDetails)
+       public static product toProduct(this Product product, List<string>? listImages,List<SizeDetail> sizeDetails, List<MessageOfCustomer> ms)
         {
             return new product
             {
@@ -30,7 +30,7 @@ namespace WebApi.Mappers
                 ListStringImage = listImages.ToList(),
                 sizeDetails = sizeDetails.Select(s => s.toSizeDetailUi()).ToList(),
 
-                messageDetails = messageDetails.Select(m => m.toMessageDetail()).ToList()
+                messageDetails = ms.Select(m => m.toMessageDetail()).ToList()
             };
         }
 

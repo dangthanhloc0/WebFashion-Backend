@@ -39,7 +39,7 @@ namespace Libs
 
         public DbSet<Event> events { get; set; }
 
-        public DbSet<MessageDetail> messageDetails { get; set; }
+   
         public DbSet<NotificationDetail> notificationDetails { get; set; }
 
         public DbSet<Category> categories { get; set; }
@@ -55,11 +55,11 @@ namespace Libs
             builder.Entity<OrderDetail>(x => x.HasKey(p => new { p.Id, p.OrderId, p.productId }));
             // Configures auto-increment
             builder.Entity<OrderDetail>().Property(p => p.Id).ValueGeneratedOnAdd(); 
-            builder.Entity<MessageDetail>(x => x.HasKey(p => new { p.productId, p.messageOfCustomerId }));
+
             builder.Entity<NotificationDetail>(x => x.HasKey(p => new { p.productId, p.notificationId }));
             builder.Entity<Image>().Property(p => p.Id).ValueGeneratedOnAdd();
             builder.Entity<SizeDetail>(x => x.HasKey(p => new { p.sizeId, p.ProductId }));
-            builder.Entity<MessageDetail>(x => x.HasKey(p => new { p.productId, p.messageOfCustomerId }));
+   
 
 
 
@@ -93,15 +93,7 @@ namespace Libs
                 .WithMany(u => u.orderDetails)
                 .HasForeignKey(p => p.productId);
 
-            builder.Entity<MessageDetail>()
-                .HasOne(x => x.product)
-                .WithMany(u => u.messageDetails)
-                .HasForeignKey(p => p.productId);
 
-            builder.Entity<MessageDetail>()
-                .HasOne(x => x.messageOfCustomer)
-                .WithMany(u => u.messageDetails)
-                .HasForeignKey(p => p.messageOfCustomerId);
 
             builder.Entity<NotificationDetail>()
                 .HasOne(x => x.product)
@@ -124,15 +116,7 @@ namespace Libs
                 .WithMany(u => u.sizeDetails)
                 .HasForeignKey(p => p.ProductId);
 
-            builder.Entity<MessageDetail>()
-                .HasOne(x => x.product)
-                .WithMany(u => u.messageDetails)
-                .HasForeignKey(p => p.productId);
 
-            builder.Entity<MessageDetail>()
-                .HasOne(x => x.messageOfCustomer)
-                .WithMany(u => u.messageDetails)
-                .HasForeignKey(p => p.messageOfCustomerId);
 
             List<IdentityRole> roles = new List<IdentityRole>{
                 new IdentityRole{

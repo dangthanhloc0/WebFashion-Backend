@@ -49,7 +49,7 @@ namespace Libs.Entity
         [JsonIgnore]
         public ICollection<OrderDetail> ?  orderDetails { get; set; }
         [JsonIgnore]
-        public  ICollection<MessageDetail> ? messageDetails { get; set; }
+        public  ICollection<MessageOfCustomer> ? messageOfCustomers { get; set; }
         [JsonIgnore]
         public ICollection<NotificationDetail> ? notificationDetails { get; set; }
 

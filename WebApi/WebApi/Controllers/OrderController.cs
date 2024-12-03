@@ -171,6 +171,33 @@ namespace WebApi.Controllers
             }
         }
 
+        [HttpGet("ChangeOrderStatus")]
+        public IActionResult ChangeOrderDetail(Guid Id,int OrderStatusId)
+        {
+            try
+            {
+                return Ok(new { status = false, message = "", data = _productService.ChangeStatusOfOrder(Id, OrderStatusId) });
+            } catch(Exception e)
+            {
+                return Ok(new { status = false, message = e.Message });
+            }
+        }
+
+        [HttpGet("CanCelOrder")]
+        public IActionResult CanCelOrderOrderDetail(Guid Id)
+        {
+            try
+            {
+                // tr??c khi v?n chuy?n cho huy sau khi v?n chuy?n không cho h?y
+                int IdCancel = 100;
+                return Ok(new { status = false, message = "", data = _productService.ChangeStatusOfOrder(Id, IdCancel) });
+            }
+            catch (Exception e)
+            {
+                return Ok(new { status = false, message = e.Message });
+            }
+        }
+
 
 
 

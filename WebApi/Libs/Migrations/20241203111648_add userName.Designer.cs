@@ -4,6 +4,7 @@ using Libs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Libs.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241203111648_add userName")]
+    partial class adduserName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,11 +194,8 @@ namespace Libs.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Image")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Message")
@@ -206,12 +206,19 @@ namespace Libs.Migrations
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("appUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<Guid>("productId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("appUserId");
 
                     b.HasIndex("productId");
 
@@ -498,13 +505,13 @@ namespace Libs.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5c55a4fc-aafd-48f2-8b3f-def6f2cec665",
+                            Id = "10922972-e102-4ac8-b0b9-aeb907427f54",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a4384874-8bdd-493f-8632-68a4d246bee1",
+                            Id = "ffce35fb-96c2-4a9a-a56d-0a1444f4302a",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -648,11 +655,9 @@ namespace Libs.Migrations
 
             modelBuilder.Entity("Libs.Entity.MessageOfCustomer", b =>
                 {
-                    b.HasOne("Libs.Entity.AppUser", "AppUser")
+                    b.HasOne("Libs.Entity.AppUser", "appUser")
                         .WithMany("messageOfCustomers")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("appUserId");
 
                     b.HasOne("Libs.Entity.Product", "product")
                         .WithMany("messageOfCustomers")
@@ -660,7 +665,7 @@ namespace Libs.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
+                    b.Navigation("appUser");
 
                     b.Navigation("product");
                 });

@@ -1,3 +1,4 @@
+using MimeKit.Cryptography;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,7 +17,14 @@ namespace WebApi.Model.User
         public string  EmailAddress {get; set;} 
 
         [Required]
-        public string  Password {get; set;} 
-    
+        public string  Password {get; set; }
+        [Required]
+        public string NameOfUser { get; set;}
+        [Required]
+        public bool ResigterWithgoogle { get; set; } 
+
+
+
+
     }
 }

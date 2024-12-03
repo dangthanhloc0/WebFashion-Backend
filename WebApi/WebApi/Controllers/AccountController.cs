@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
+using WebApi.Mappers;
 using WebApi.Model.User;
 
 namespace WebApi.Controllers
@@ -37,25 +38,36 @@ namespace WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = await _useManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDTo.Username.ToLower());
+            try
+            {
+                var user = await _useManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDTo.Username.ToLower());
 
-            if(user == null){
-                return Unauthorized("Invalid username!");
-            }
+                if (user == null)
+                {
+                    return Unauthorized("Invalid username!");
+                }
 
-            var result = await _signInManager.CheckPasswordSignInAsync(user, loginDTo.Password , false);
-            var roles = await _useManager.GetRolesAsync(user);
+                var result = await _signInManager.CheckPasswordSignInAsync(user, loginDTo.Password, false);
+                var roles = await _useManager.GetRolesAsync(user);
 
-            if (!result.Succeeded) return Unauthorized("User not found  and/or password incorrect");
+                if (!result.Succeeded) return Unauthorized("User not found  and/or password incorrect");
 
-            return Ok(
-                new newUserDto{
-                    Username = user.UserName,
+                return Ok(new newUserDto
+                {
+                    Username = user.NameOfUser,
                     EmailAddress = user.Email,
                     Role = roles.FirstOrDefault(),
                     Token = _Ttken.CreateToken(user)
-                }
-            );
+                });
+
+            }
+            catch(Exception e)
+            {
+                return Ok(new { status = false, message = e.Message });
+
+            }
+
+
         }
 
 
@@ -67,9 +79,16 @@ namespace WebApi.Controllers
                     return BadRequest(ModelState); 
                 }
 
+                if(registerDto.ResigterWithgoogle == true)
+                {
+                   registerDto.Username = Guid.NewGuid().ToString();
+                   registerDto.Password = "ThanhLoc@123";  
+                }
+
                 var appuser = new AppUser{
                     UserName = registerDto.Username,
-                    Email = registerDto.EmailAddress
+                    Email = registerDto.EmailAddress,
+                    NameOfUser = registerDto.NameOfUser,
                 };
                 // check user name exsit 
                 var CheckEmailExsit = _useManager.FindByEmailAsync(appuser.Email);
@@ -116,22 +135,34 @@ namespace WebApi.Controllers
         [HttpPost("google-login")]
         public async Task<IActionResult> GoogleLogin([FromBody] GoogleLoginDto googleLoginDto)
         {
-            var user = await _useManager.FindByEmailAsync(googleLoginDto.Email);
 
-            if (user == null)
+            try
             {
-                return Unauthorized("User not found");
-            }
+                var user = await _useManager.FindByEmailAsync(googleLoginDto.Email);            
+                if (user == null)
+                {
+                    return Ok(new { status = true , message = "User not exsist" });
+                }
 
-            var roles = await _useManager.GetRolesAsync(user);
+                if (user.NameOfUser != googleLoginDto.NameOfUser)
+                {
+                    return Unauthorized("User not found");
+                }
 
-            return Ok(new newUserDto
+                var roles = await _useManager.GetRolesAsync(user);
+
+                return Ok(new newUserDto
+                {
+                    Username = user.NameOfUser,
+                    EmailAddress = user.Email,
+                    Role = roles.FirstOrDefault(),
+                    Token = _Ttken.CreateToken(user)
+                });
+            } catch(Exception e)
             {
-                Username = user.UserName,
-                EmailAddress = user.Email,
-                Role = roles.FirstOrDefault(),
-                Token = _Ttken.CreateToken(user)
-            });
+                return Ok(new { status = false, message = e.Message });
+            } 
+           
         }
 
 

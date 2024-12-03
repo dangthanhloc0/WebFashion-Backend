@@ -4,6 +4,7 @@ using Libs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Libs.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241203110356_db error fix")]
+    partial class dberrorfix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,9 +52,6 @@ namespace Libs.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NameOfUser")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -191,11 +191,8 @@ namespace Libs.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Image")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Message")
@@ -206,12 +203,19 @@ namespace Libs.Migrations
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("appUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<Guid>("productId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("appUserId");
 
                     b.HasIndex("productId");
 
@@ -498,13 +502,13 @@ namespace Libs.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5c55a4fc-aafd-48f2-8b3f-def6f2cec665",
+                            Id = "b2780ed5-942a-4d79-a96a-4565e3143281",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a4384874-8bdd-493f-8632-68a4d246bee1",
+                            Id = "bdb944d3-2f7e-4fc9-bb28-995f1468551a",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -648,11 +652,9 @@ namespace Libs.Migrations
 
             modelBuilder.Entity("Libs.Entity.MessageOfCustomer", b =>
                 {
-                    b.HasOne("Libs.Entity.AppUser", "AppUser")
+                    b.HasOne("Libs.Entity.AppUser", "appUser")
                         .WithMany("messageOfCustomers")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("appUserId");
 
                     b.HasOne("Libs.Entity.Product", "product")
                         .WithMany("messageOfCustomers")
@@ -660,7 +662,7 @@ namespace Libs.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
+                    b.Navigation("appUser");
 
                     b.Navigation("product");
                 });

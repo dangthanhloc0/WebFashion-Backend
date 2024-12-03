@@ -12,6 +12,8 @@ namespace Libs.Entity
         public ICollection<Order> orders { get; set; } 
         public ICollection<MessageOfCustomer> messageOfCustomers { get; set; }
 
+        public string ? NameOfUser { get; set; }    
+
         public string ? Image { get ; set; }  
 
         public DateTime ? birthDay { get; set; }

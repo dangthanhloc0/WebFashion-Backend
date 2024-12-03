@@ -14,5 +14,14 @@ namespace WebApi.Mappers
                 quantity = s.Quantity,
             };
         }
+
+        public static SizeDetail toSizeDetail(this SizeDetailUpdate s)
+        {
+            return new SizeDetail
+            {
+                sizeId = s.sizeId,
+                Quantity = s.quantity,
+            };
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace WebApi.Mappers
         {
             return new UserDto
             {
-                Username = AppUser.UserName,    
+                Username = AppUser.NameOfUser,    
                 Password = AppUser.PasswordHash,
                 EmailAddress = AppUser.Email,
                 Image = AppUser.Image,

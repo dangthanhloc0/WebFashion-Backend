@@ -62,8 +62,8 @@ namespace BACKENDEMO.Controllers
                 foreach(var item in productQuery) {
                     var id = item.Id;
                     var GetListImageProduct = await _productService.GetAllListImageAsyncByProductId(id);
-                    var messages = await _productService.GetAllMessageByProduct(id);
                     var GetSizeDetails = await _productService.GetAllSizeByProduct(id);
+                    var messages = await _productService.GetAllMessageByProduct(id);
                     var result = item.toProduct(GetListImageProduct, GetSizeDetails, messages);
                     listProductResult.Add(result);
                 }
@@ -166,8 +166,8 @@ namespace BACKENDEMO.Controllers
                 return Ok(new { status = false, message = e.Message });
             }
         }
-
-        [Authorize(Roles = "User")]
+/*
+        [Authorize(Roles = "User")]*/
         [HttpPut]
         public async Task<IActionResult> UpdateProduct([FromBody] UpdateProduct updateProduct)
         {
@@ -183,7 +183,7 @@ namespace BACKENDEMO.Controllers
                 {
                     return Ok(new { status = false, message = "not found categoy by id =" + product.CategoryId, Data = product });
                 }
-                bool result = await _productService.UpdatePRoduct(product, updateProduct.imageUrls);
+                bool result = await _productService.UpdatePRoduct(product, updateProduct.imageUrls,updateProduct.sizes.Select(x => x.toSizeDetail()).ToList());
 
                 if (result)
                 {

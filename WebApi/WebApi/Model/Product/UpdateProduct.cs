@@ -1,9 +1,11 @@
+using Libs.Entity;
 using Libs.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApi.Model.SizeDetail;
+
 
 namespace WebApi.Model.Product
 {
@@ -24,7 +26,7 @@ namespace WebApi.Model.Product
 
         public List<String>? imageUrls { get; set; }
 
-     /*   public List<SizeDetailCreate> sizeDetails { get; set; }*/
+       public List<SizeDetailUpdate> sizes { get; set; }
 
     }
 }

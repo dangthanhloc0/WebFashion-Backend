@@ -1,4 +1,4 @@
-using Libs;
+﻿using Libs;
 using Libs.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.FileProviders;
@@ -127,7 +127,8 @@ builder.Services.AddTransient<SellService>();
 builder.Services.AddTransient<FinanceService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<ImessageRepository, MessageRepository>();
+
+
 builder.Services.AddScoped<IToken, TokenRepository>(); 
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<TokenService>();

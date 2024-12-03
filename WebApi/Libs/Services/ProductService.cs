@@ -20,15 +20,15 @@ namespace Libs.Services
         private ICategoryRepository _categoty;
         private IProductRepository _product;
         private IImageRepository _image;
-        private ImessageRepository _message;
 
-        public ProductService(ApplicationDbContext dbContext, ICategoryRepository categoty, IProductRepository product, ImessageRepository message)
+
+        public ProductService(ApplicationDbContext dbContext, ICategoryRepository categoty, IProductRepository product)
         {
             this._dbContext = dbContext;
             this._product = new ProductRepository(this._dbContext);
             this._categoty = new CategoryRepository(this._dbContext);
             this._image = new ImageRepository(this._dbContext);
-            this._message = new MessageRepository(this._dbContext); ;
+
         }
         public void Save()
         {
@@ -175,10 +175,10 @@ namespace Libs.Services
 
         public Product GetProductById(Guid id)
         {
-            return _dbContext.products.Include(p => p.category).SingleOrDefault(x => x.Id == id);
+            return _dbContext.products.Include(p => p.category).Include(x => x.messageOfCustomers).SingleOrDefault(x => x.Id == id);
         }
 
-        public async Task<Boolean> UpdatePRoduct(Product product, List<String> LImages)
+        public async Task<Boolean> UpdatePRoduct(Product product, List<String> LImages, List<SizeDetail> sizes)
         {
             var ExsitProduct = _product.GetById(product.Id);
             if (ExsitProduct == null)
@@ -186,7 +186,7 @@ namespace Libs.Services
                 return false;
             }
 
-            if (LImages.Count >= 0)
+            if (LImages.Count > 0)
             {
                 var listImage = GetAllListImageAsyncByProductId(product.Id);
                 foreach (var item in LImages)
@@ -220,6 +220,22 @@ namespace Libs.Services
                         }
                     }
                 }
+            }
+            if(sizes.Count > 0)
+            {
+                foreach(var item in sizes)
+                {
+                    item.ProductId = product.Id;
+                    var sizeDetail = _dbContext.sizeDetails.SingleOrDefault(x => x.ProductId == product.Id && x.sizeId == item.sizeId);
+                    if(sizeDetail == null)
+                    {
+                        _dbContext.sizeDetails.Add(item);
+                    } else
+                    {
+                        sizeDetail.Quantity = item.Quantity;
+                    }
+                } 
+                
             }
 
             _product.UpdatePRoduct(product, ExsitProduct);
@@ -318,7 +334,7 @@ namespace Libs.Services
             return product;
         }
 
-        public async void AddMessage(string message, string url, String userID, Guid productId)
+        public async void AddMessage(string message, string url, String userID, Guid productId )
         {
             var ID = Guid.NewGuid();
             var messageOfCustommer = new MessageOfCustomer
@@ -326,33 +342,37 @@ namespace Libs.Services
                 Id = ID,
                 Image = url,
                 Message = message,
-                UserId = userID
+               AppUserId =userID,
+                Time = DateTime.Now,
+                productId = productId,
+             
             };
             _dbContext.messageOfCustomers.Add(messageOfCustommer);
-            var messageDetail = new MessageDetail
-            {
-                messageOfCustomerId = ID,
-                productId = productId,
-                Time = DateTime.Now,
-
-            };
-            _dbContext.messageDetails.Add(messageDetail);
             _dbContext.SaveChanges();
         }
 
-        public async Task<List<MessageDetail>> GetAllMessageByProduct(Guid productId)
+
+        // get all messag of customer
+        public async Task<List<MessageOfCustomer>> GetAllMessageByProduct(Guid productId)
         {
-            return await _dbContext.messageDetails
-                .Where(md => md.productId == productId) // Lọc theo sản phẩm
-                .OrderByDescending(md => md.Time) // Sắp xếp theo thời gian
-                .Select(md => new MessageDetail
-                {
-                    Time = md.Time,
-                    messageOfCustomer = md.messageOfCustomer, // Lấy nội dung đánh giá từ MessageOfCustomer
-                    productId = md.productId
-                })
-                .ToListAsync();
+            return await _dbContext.messageOfCustomers.Include(x => x.AppUser).Include(p => p.product)
+                .Where(x => x.productId == productId).ToListAsync();
         }
+
+        // change order service
+        public async Task<Order> ChangeStatusOfOrder(Guid Id,int stateOfOrderId)
+        {
+            var order = _dbContext.orders.SingleOrDefault(x => x.Id == Id);
+            if(order != null)
+            {
+                order.stateOrderId = stateOfOrderId;
+                _dbContext.SaveChanges();
+                return order;
+            }
+            return null;
+        }
+
     }
+
 
 }

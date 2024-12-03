@@ -5,14 +5,14 @@ namespace WebApi.Mappers
 {
     public static class MessageDetailMapper
     {
-        public static MessageDetailDto toMessageDetail(this MessageDetail s)
+        public static MessageDetailDto toMessageDetail(this MessageOfCustomer s)
         {
             return new MessageDetailDto
             {
-                UserName = s.messageOfCustomer.UserId,
+                UserName = s.AppUser.UserName,
                 Time = s.Time,
-                Image = s.messageOfCustomer.Image,
-                Message = s.messageOfCustomer.Message,
+                Image = s.Image,
+                Message = s.Message,
             };
         }
     }

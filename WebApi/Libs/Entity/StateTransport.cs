@@ -15,5 +15,6 @@ namespace Libs.Entity
 
 
         public ICollection<Order> orders { get; set; }
+
     }
 }
