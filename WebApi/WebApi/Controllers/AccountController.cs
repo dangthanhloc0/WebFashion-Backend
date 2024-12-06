@@ -82,7 +82,7 @@ namespace WebApi.Controllers
                 if(registerDto.ResigterWithgoogle == true)
                 {
                    registerDto.Username = Guid.NewGuid().ToString();
-                   registerDto.Password = "ThanhLoc@123";  
+                   registerDto.Password = "G"+ Guid.NewGuid().ToString()+"@Google";  
                 }
 
                 var appuser = new AppUser{

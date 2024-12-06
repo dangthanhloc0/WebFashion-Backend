@@ -183,7 +183,7 @@ namespace BACKENDEMO.Controllers
                 {
                     return Ok(new { status = false, message = "not found categoy by id =" + product.CategoryId, Data = product });
                 }
-                bool result = await _productService.UpdatePRoduct(product, updateProduct.imageUrls,updateProduct.sizes.Select(x => x.toSizeDetail()).ToList());
+                bool result = await _productService.UpdatePRoduct(product, updateProduct.imageUrls,updateProduct.sizeDetails.Select(x => x.toSizeDetail()).ToList());
 
                 if (result)
                 {
