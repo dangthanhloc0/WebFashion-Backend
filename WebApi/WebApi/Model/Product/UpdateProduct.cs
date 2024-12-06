@@ -26,7 +26,7 @@ namespace WebApi.Model.Product
 
         public List<String>? imageUrls { get; set; }
 
-       public List<SizeDetailUpdate> sizes { get; set; }
+       public List<SizeDetailUpdate> sizeDetails { get; set; }
 
     }
 }

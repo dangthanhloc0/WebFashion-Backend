@@ -21,7 +21,7 @@ namespace WebApi.Model.Product
         [StringLength(200 ,MinimumLength =0)]
         public string Description {get; set;} =  string.Empty;
         [Required]
-        public string Image {get; set;} = string.Empty;
+        public IFormFile Image {get; set;} 
 
         public int quantityStock { get; set; } = 0;
         [Required]
