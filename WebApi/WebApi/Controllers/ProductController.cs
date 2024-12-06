@@ -52,6 +52,7 @@ namespace BACKENDEMO.Controllers
             _userManager = userManager;
         }
 
+
         [HttpGet]
         public async Task<IActionResult> GetProduct([FromQuery] QueryProduct query)
         {
@@ -120,12 +121,14 @@ namespace BACKENDEMO.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> NewProduct([FromBody] NewProduct newProduct)
+        public async Task<IActionResult> NewProduct([FromForm] NewProduct newProduct)
         {
             if (!ModelState.IsValid)
             {
                 return Ok(new { status = false, message = "", data = ModelState });
             }
+            if (newProduct.Image == null || newProduct.Image.Length == 0)
+                return Ok(new { status = false, message = "File không hợp lệ." });
             try
             {
                 var ExsitProduct = _productService.CheckProductExsitByName(newProduct.productName);
@@ -141,7 +144,30 @@ namespace BACKENDEMO.Controllers
                 {
                     return Ok(new { status = false, message = "Category not found by id =" + newProduct.CategoryId });
                 }
+
                 var product = newProduct.ToCreateNewProductDto();
+                ///. save image
+                // Đường dẫn thư mục lưu ảnh
+                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "images", "imgProducts");
+
+                // Tạo thư mục nếu chưa tồn tại
+                if (!Directory.Exists(folderPath))
+                    Directory.CreateDirectory(folderPath);
+
+                // Tạo tên file duy nhất
+                var fileName = product.Id.ToString()+".webp";
+
+                // Đường dẫn đầy đủ
+                var filePath = Path.Combine(folderPath, fileName);
+
+                product.Image = "/images/imgProductMain/" + fileName;
+                
+                // Lưu file vào thư mục
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await newProduct.Image.CopyToAsync(stream);
+                }
+                // saveimage
                 var ListStringImage = newProduct.imageUrls;
                 List<SizeDetail> sizeDetails = new List<SizeDetail>();
                 foreach (var item in newProduct.sizeDetails)

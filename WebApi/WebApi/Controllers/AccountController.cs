@@ -89,6 +89,8 @@ namespace WebApi.Controllers
                     UserName = registerDto.Username,
                     Email = registerDto.EmailAddress,
                     NameOfUser = registerDto.NameOfUser,
+
+
                 };
                 // check user name exsit 
                 var CheckEmailExsit = _useManager.FindByEmailAsync(appuser.Email);
