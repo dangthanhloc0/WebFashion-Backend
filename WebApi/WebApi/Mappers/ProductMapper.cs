@@ -62,7 +62,7 @@ namespace WebApi.Mappers
         
                 Description = newproduct.Description,
 
-                Image       = newproduct.Image,
+             /*   Image       = newproduct.Image,*/
 
                 quantityStock = newproduct.quantityStock,
 

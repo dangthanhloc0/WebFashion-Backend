@@ -18,6 +18,8 @@ namespace WebApi.Mappers
                 EmailAddress = AppUser.Email,
                 Image = AppUser.Image,
                 birthDay = AppUser.birthDay,
+                Address = AppUser.Address,
+                Phone = AppUser.Phone,
                 
             };
         }
