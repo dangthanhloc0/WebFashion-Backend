@@ -8,7 +8,9 @@ namespace WebApi.Model.User
 {
     public class newUserDto
     {
-        public string ? Username {get; set;}      
+        public string ? Username {get; set;} 
+
+        public string ? nameOfUser {get;set;}     
         public string ? EmailAddress {get; set;} 
         public string ? Role { get; set; }
         public string ? Token {get; set;} 

@@ -54,7 +54,7 @@ namespace WebApi.Controllers
 
                 return Ok(new newUserDto
                 {
-                    Username = user.NameOfUser,
+                    nameOfUser = user.NameOfUser,
                     EmailAddress = user.Email,
                     Role = roles.FirstOrDefault(),
                     Token = _Ttken.CreateToken(user)
@@ -155,7 +155,7 @@ namespace WebApi.Controllers
 
                 return Ok(new newUserDto
                 {
-                    Username = user.NameOfUser,
+                    nameOfUser = user.NameOfUser,
                     EmailAddress = user.Email,
                     Role = roles.FirstOrDefault(),
                     Token = _Ttken.CreateToken(user)
