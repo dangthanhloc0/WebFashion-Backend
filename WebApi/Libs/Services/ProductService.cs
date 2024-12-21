@@ -342,7 +342,7 @@ namespace Libs.Services
                 Id = ID,
                 Image = url,
                 Message = message,
-               AppUserId =userID,
+                AppUserId =userID,
                 Time = DateTime.Now,
                 productId = productId,
              

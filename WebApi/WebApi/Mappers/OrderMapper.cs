@@ -17,6 +17,7 @@ namespace WebApi.Mappers
                 Date = order.Date,
                 totalPrice = order.totalPrice,
                 Address = order.Address,
+                Phone = order.Phone,
                 stateOrder = order.stateOrder.State,
                 stateTransport = order.stateTransport.state,
                 methodOfPayment = order.methodOfPayment.MethodName,
@@ -34,6 +35,7 @@ namespace WebApi.Mappers
                 methodOfPaymentId = newOrder.methodOfPaymentId,
                 stateOrderId = newOrder.stateOrderId,
                 stateTransportId = newOrder.stateTransportId,
+                Phone = newOrder.Phone,
 
 
             };

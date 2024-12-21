@@ -9,7 +9,7 @@ namespace WebApi.Mappers
         {
             return new MessageDetailDto
             {
-                UserName = s.AppUser.UserName,
+                UserName = s.AppUser.NameOfUser,
                 Time = s.Time,
                 Image = s.Image,
                 Message = s.Message,

@@ -388,7 +388,7 @@ namespace BACKENDEMO.Controllers
 
         [HttpPost]
         [Route("addMessage/{id:Guid}")]
-        public async Task<IActionResult> AddMessage(Guid id, string message, string Image)
+        public async Task<IActionResult> AddMessage(Guid id, string  message, string ? Image)
         {
             try
             {

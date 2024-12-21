@@ -88,6 +88,16 @@ namespace WebApi.Controllers
                 {
                     CurrentUser.birthDay = userInformation.BirthDay;
                 }
+
+                if(userInformation.Phone != null) {
+                    CurrentUser.Phone = userInformation.Phone;
+                }
+
+                if (userInformation.Address != null)
+                {
+                    CurrentUser.Address = userInformation.Address;
+                }
+
                 var result = await _userManager.UpdateAsync(CurrentUser);
                 return Ok(new { status = true, message = "Update Success", data = CurrentUser.ToUserDto() });
           

@@ -14,8 +14,8 @@ namespace WebApi.Mappers
             return new UserDto
             {
                 Username = AppUser.NameOfUser,    
-                Password = AppUser.PasswordHash,
-                EmailAddress = AppUser.Email,
+               /* Password = AppUser.PasswordHash,*/
+                /*EmailAddress = AppUser.Email,*/
                 Image = AppUser.Image,
                 birthDay = AppUser.birthDay,
                 Address = AppUser.Address,

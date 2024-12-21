@@ -9,6 +9,7 @@ namespace WebApi.Model.User
 
       [Required]
       public string Address { get; set; } = string.Empty;
+      public string Phone { get; set; }
       public int  methodOfPaymentId { get; set; }   
       public int  stateOrderId { get; set; }
       public int stateTransportId { get; set; }
