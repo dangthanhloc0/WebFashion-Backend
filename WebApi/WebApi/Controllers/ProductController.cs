@@ -409,6 +409,34 @@ namespace BACKENDEMO.Controllers
 
         }
 
+
+        [HttpPost]
+        [Route("GetListSameProduct")]
+        public async Task<IActionResult> GetListSameProduct(List<Guid> ListId)
+        {
+            try
+            {
+                List<Product> result = new List<Product>();
+                foreach(var item in ListId)
+                {
+                    var product = new Product();
+                    product = _productService.GetProductById(item);
+                    
+                    if(product != null)
+                    {
+                        result.Add(product);
+                    }
+                }
+                if(result.Count > 0)
+                {
+                    return Ok(new { Status = true, message = "Ok", data = result.Select(s => s.toProduct()).ToList() });
+                }
+                return Ok(new { Status = false, message = "Not found any product", data = result });
+            } catch (Exception e)
+            {
+                return Ok(new {status = 500, message = e.Message});
+            }
+        }
         /*        [HttpGet]
                 [Route("AddToCart")]
                 public IActionResult AddToCart()
